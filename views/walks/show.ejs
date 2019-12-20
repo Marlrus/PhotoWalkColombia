@@ -1,7 +1,23 @@
 <%- include("../partials/header") -%>
 
-    
-<h1>SHOW PAGE FOR: <%=walk.name%></h1>
+<div class="container">
+    <div class="card mb-3">
+        <img class="card-img-top" src="<%=walk.image%>" alt="Card image cap">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <h5 class="card-title"><%=walk.name%></h5>
+                </div>
+                <div class="col-6 text-right">
+                    <strong>Price: $<%=walk.price%></strong>
+                </div>
+            </div>
+                <p class="card-text"><%=walk.description%></p>
+                <p class="card-text"><small class="text-muted">Next Walk <%=walk.nextDate%></small></p>
+        </div>
+    </div>
+</div>
+
 
 
 <%- include("../partials/footer") -%>

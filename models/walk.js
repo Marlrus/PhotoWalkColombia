@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const walkSchema = new mongoose.Schema({
     name: String,
+    image: String,
     description: String,
     dateCreated: {
         type: Date, 

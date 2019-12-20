@@ -58,7 +58,7 @@ app.get("/walks/:_id", async(req,res)=>{
         walk = await Walk.findById(req.params._id)
         res.render("walks/show", {walk,})
     } catch (err) {
-        console.log(err)
+        console.log(err || !walk)
         res.redirect("/walks")
     }
 })
