@@ -63,6 +63,12 @@ app.get("/walks/:_id", async(req,res)=>{
     }
 })
 
+//walks bookingcode view
+app.get("/walks/:_id/book",async (req,res)=>{
+    walk = await Walk.findById(req.params._id)
+    res.render("walks/book",{walk,})
+})
+
 
 app.get("/faq",(req,res)=>{
     res.render("faq")
