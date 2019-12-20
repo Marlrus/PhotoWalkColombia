@@ -6,8 +6,10 @@ const   express         = require("express"),
         expSanitizer    = require("express-sanitizer")
 
 const   Walk            = require("./models/walk")
+        
     
 require("dotenv").config()
+
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(expSanitizer())
@@ -20,6 +22,10 @@ mongoose.connect(process.env.DB_URI, {
     console.log(`Mongoose Connected to: ${mongoose.connection.name}`)
 }).catch(err =>{
     console.log(`ERROR: ${err.message}`)
+})
+
+app.use((req,res,next)=>{
+    next()
 })
 
 app.get("/",(req,res)=>{

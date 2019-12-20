@@ -16,12 +16,12 @@
         <%}else{%>
             <%i++%>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 order-2 order-md-1">
                     <h1><%=walk.name%></h1>
                     <p><%=walk.description%></p> 
                     <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
                 </div>
-                <img class="col-md-6" src="<%=walk.image%>" alt="">
+                <img class="col-md-6 order-1 order-md-2" src="<%=walk.image%>" alt="">
             </div>
         <%}%>
     <%})%>
