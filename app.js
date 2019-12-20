@@ -32,8 +32,9 @@ app.get("/about",(req,res)=>{
 
 //walks routes CRUD
 //Index
-app.get("/walks",(req,res)=>{
-    res.render("walks/index")
+app.get("/walks",async(req,res)=>{
+    walks= await Walk.find({})
+    res.render("walks/index", {walks,})
 })
 
 //walks new
