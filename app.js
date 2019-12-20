@@ -2,11 +2,15 @@ const   express         = require("express"),
         app             = express(),
         bodyParser      = require("body-parser"),
         methodOverride  = require("method-override"),
-        mongoose        = require("mongoose")
+        mongoose        = require("mongoose"),
+        expSanitizer    = require("express-sanitizer")
+
+const   Walk            = require("./models/walk")
     
 require("dotenv").config()
 app.set("view engine","ejs")
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(expSanitizer())
 
 mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
@@ -38,12 +42,15 @@ app.get("/walks/new",(req,res)=>{
 })
 
 //walks create POST
-app.post("/walks",(req,res)=>{
-    let walk = req.body.walk
+//WORKING
+app.post("/walks",async(req,res)=>{
+    req.body.walk.description = req.sanitize(req.body.walk.description)
+    if(req.body.walk.visible === "true"){req.body.walk.visible = true}
+    else{req.body.walk.visible = false}
+    walk = Walk.create(req.body.walk)
     console.log(walk)
     res.redirect("/walks")
 })
-
 
 //walks show
 

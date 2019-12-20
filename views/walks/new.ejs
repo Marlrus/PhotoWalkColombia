@@ -1,20 +1,54 @@
 <%- include("../partials/header") -%>
 
+   
 
 <div class="container ">
     <h1 class="display-3 text-center">Create your Walk!</h1>
 
     <form action="/walks" method="POST">
         <div class="form-group">
-          <label for="formGroupExampleInput">Walk Name</label>
+          <label>Walk Name</label>
           <input name="walk[name]" type="text" class="form-control" placeholder="name">
         </div>
         <div class="form-group">
-          <label for="formGroupExampleInput2">Walk Description</label>
+          <label>Walk Description</label>
           <textarea name="walk[description]" type="text" class="form-control" placeholder="description" cols="30" rows="10"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Price in USD$ </label>
+                <input type="number" name="walk[price]" min="0" step="0.1">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Next walk Date</label> 
+                <input type="date" id="datePicker" name="walk[nextDate]">
+            </div>
+            <div class="form-group col-md-4">
+                <div class="row">
+                    <div class="form-check col-3 col-md-4">
+                        <label for="visibility">Visibility</label>
+                    </div>
+                    <div class="form-check col-3 col-md-4">
+                        <input class="form-check-input" type="radio" name="walk[visible]"  value="true" checked>
+                        <label class="form-check-label">
+                            Visible
+                        </label>
+                    </div>
+                    <div class="form-check col-3 col-md-4">
+                        <input class="form-check-input" type="radio" name="walk[visible]"  value="false">
+                        <label class="form-check-label">
+                            Hidden
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
         <button class="btn btn-lg btn-light">Submit</button>
       </form>
 </div>
+<script>document.getElementById('datePicker').valueAsDate = new Date();</script>
+<!-- converts new Date into ISO String which is what the date input takes, however Date has a Time value T after what we need for date "2019-12-20T13:44:00.839Z " we use .split to split the value a T and make them into an array with [0] as everything before "T" and [1] everythign after "T". We use [0] to get the value we need "2019-12-20" -->
+<script>document.getElementById('datePicker').setAttribute('min', new Date().toISOString().split('T')[0]);</script>
+
 
 <%- include("../partials/footer") -%>
