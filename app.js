@@ -47,12 +47,21 @@ app.post("/walks",async(req,res)=>{
     req.body.walk.description = req.sanitize(req.body.walk.description)
     if(req.body.walk.visible === "true"){req.body.walk.visible = true}
     else{req.body.walk.visible = false}
-    walk = Walk.create(req.body.walk)
-    console.log(walk)
-    res.redirect("/walks")
+    walk = await Walk.create(req.body.walk)
+    // console.log(walk)
+    res.redirect(`/walks/${walk._id}`)
 })
 
 //walks show
+app.get("/walks/:_id", async(req,res)=>{
+    try {
+        walk = await Walk.findById(req.params._id)
+        res.render("walks/show", {walk,})
+    } catch (err) {
+        console.log(err)
+        res.redirect("/walks")
+    }
+})
 
 
 app.get("/faq",(req,res)=>{
