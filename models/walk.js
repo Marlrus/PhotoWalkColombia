@@ -11,8 +11,14 @@ const walkSchema = new mongoose.Schema({
     //Create dateEdited apart from dateCreated
     visible: Boolean,
     price: String,
-    nextDate: String,
-
+    nextDate: Date,
+    spots: String,
+    startTime: String,
+    endTime: String,
+    meetingPoint: {
+        name: String,
+        description: String
+    }
 })
 
 module.exports = mongoose.model("Walk",walkSchema)

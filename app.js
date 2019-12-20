@@ -42,13 +42,18 @@ app.get("/walks/new",(req,res)=>{
 })
 
 //walks create POST
-//WORKING
+//WORKING MUST CLEAN WITH MODEL MIDDLEWARE
 app.post("/walks",async(req,res)=>{
     req.body.walk.description = req.sanitize(req.body.walk.description)
     if(req.body.walk.visible === "true"){req.body.walk.visible = true}
     else{req.body.walk.visible = false}
+    isoDate = `${req.body.walk.nextDate}T00:00:00`
+    req.body.walk.nextDate = new Date(isoDate)
     walk = await Walk.create(req.body.walk)
-    // console.log(walk)
+    walk.meetingPoint.name = req.body.meetingPoint.name
+    walk.meetingPoint.description = req.body.meetingPoint.description
+    walk.save()
+    console.log(walk)
     res.redirect(`/walks/${walk._id}`)
 })
 
@@ -68,6 +73,13 @@ app.get("/walks/:_id/book",async (req,res)=>{
     walk = await Walk.findById(req.params._id)
     res.render("walks/book",{walk,})
 })
+
+//book post
+app.post("/walks/:_id",(req,res)=>{
+    console.log(req.body.user)
+    res.redirect("/walks")
+})
+
 
 
 app.get("/faq",(req,res)=>{

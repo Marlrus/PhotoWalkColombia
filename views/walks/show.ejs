@@ -6,15 +6,21 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-6">
-                    <h5 class="card-title"><%=walk.name%></h5>
+                    <h3 class="card-title"><%=walk.name%></h3>
                 </div>
                 <div class="col-6 text-right">
                     <strong>Price: $<%=walk.price%></strong>
                 </div>
             </div>
-                <p class="card-text"><%=walk.description%></p>
-                <p class="card-text"><small class="text-muted">Next Walk <%=walk.nextDate%></small></p>
-                <button class="btn btn-info"><a href="/walks/<%=walk._id%>/book">Book your spot now!</a></button>
+            <p class="card-text"><%-walk.description%></p>
+            <p class="card-text"><small class="text-muted">Next Walk <%=walk.nextDate.toDateString()%> starting at <%=walk.startTime%> to <%=walk.endTime%></small></p>
+            <a class="btn btn-info" href="/walks/<%=walk._id%>/book">Book your spot now!</a>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h5 class="card-title">Punto de encuentro: <%=walk.meetingPoint.name%></h5>
+                    <p><%=walk.meetingPoint.description%></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
