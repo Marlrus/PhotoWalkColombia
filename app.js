@@ -52,8 +52,12 @@ app.get("/walks/new",(req,res)=>{
 //WORKING MUST CLEAN WITH MODEL MIDDLEWARE
 app.post("/walks",async(req,res)=>{
     req.body.walk.description = req.sanitize(req.body.walk.description)
-    if(req.body.walk.visible === "true"){req.body.walk.visible = true}
-    else{req.body.walk.visible = false}
+    if(req.body.walk.visible === "true"){
+        req.body.walk.visible = true
+    }
+    else{
+        req.body.walk.visible = false
+    }
     isoDate = `${req.body.walk.nextDate}T00:00:00`
     req.body.walk.nextDate = new Date(isoDate)
     walk = await Walk.create(req.body.walk)
