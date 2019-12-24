@@ -7,12 +7,12 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Photo Walk Colombia</title>
+    <title>Photo Walks Colombia</title>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
-        <a class="navbar-brand" href="/">Photo Walk Colombia</a>
+        <a class="navbar-brand" href="/">Photo Walks Colombia</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,11 +32,12 @@
                         BOOKINGS
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Candelaria</a>
-                        <a class="dropdown-item" href="#">Palo Quemao</a>
-                        <a class="dropdown-item" href="#">Personalized Walk</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/walks">All Walks</a>
+                        <div class="dropdown-divider"></div>
+                        <%for(let walk of walkName){%>
+                            <a class="dropdown-item" href="/walks/<%=walk._id%>"><%=walk.name%></a>
+                        <%}%>
+                        <a class="dropdown-item" href="#">Personalized Walk</a>
                     </div>
                 </li>
                 <li class="nav-item">

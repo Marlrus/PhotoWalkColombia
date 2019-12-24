@@ -6,8 +6,8 @@
         <%if(i%2){%>
             <%i++%>
             <div class="row">
-                <img class="col-md-6" src="<%=walk.image%>" alt="">
-                <div class="col-md-6">
+                <img class="col-lg-6 p-0" src="<%=walk.image%>" alt="">
+                <div class="col-lg-6 p-4">
                     <h1><%=walk.name%></h1>
                     <p><%=walk.description%></p> 
                     <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
@@ -16,12 +16,12 @@
         <%}else{%>
             <%i++%>
             <div class="row">
-                <div class="col-md-6 order-2 order-md-1">
+                <div class="col-lg-6 order-2 order-lg-1 p-4">
                     <h1><%=walk.name%></h1>
                     <p><%=walk.description%></p> 
                     <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
                 </div>
-                <img class="col-md-6 order-1 order-md-2" src="<%=walk.image%>" alt="">
+                <img class="col-lg-6 order-1 order-lg-2 p-0" src="<%=walk.image%>" alt="">
             </div>
         <%}%>
     <%})%>

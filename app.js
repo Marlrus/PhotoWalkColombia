@@ -1,3 +1,9 @@
+//===========================================
+//  WIP Next steps
+//  1 Current Walk Names on the dropdown (res.locals) DONE AND ADDED PATH TO WALK
+//  2 Time and date together?
+//  3 About Layout
+
 const   express         = require("express"),
         app             = express(),
         bodyParser      = require("body-parser"),
@@ -23,10 +29,20 @@ mongoose.connect(process.env.DB_URI, {
 }).catch(err =>{
     console.log(`ERROR: ${err.message}`)
 })
+//Get Walk names
 
-app.use((req,res,next)=>{
+//Locals
+app.use(async (req,res,next)=>{
+    //finds visible walks and only gets name ;D
+    const walkName = await Walk.find({'visible' : true},{name: 1})
+    res.locals.walkName = walkName
+    // console.log(res.locals.walkName)
     next()
 })
+
+//===================================
+//Index Routes
+//===================================
 
 app.get("/",(req,res)=>{
     res.render("landing")
@@ -36,10 +52,21 @@ app.get("/about",(req,res)=>{
     res.render("about")
 })
 
+
+app.get("/faq",(req,res)=>{
+    res.render("faq")
+})
+app.get("/contact",(req,res)=>{
+    res.render("contact")
+})
+
+//============================
 //walks routes CRUD
+//============================
+
 //Index
 app.get("/walks",async(req,res)=>{
-    walks= await Walk.find({})
+    walks= await Walk.find({'visible': true})
     res.render("walks/index", {walks,})
 })
 
@@ -58,6 +85,7 @@ app.post("/walks",async(req,res)=>{
     else{
         req.body.walk.visible = false
     }
+    //See if T00... can be taken from the time input
     isoDate = `${req.body.walk.nextDate}T00:00:00`
     req.body.walk.nextDate = new Date(isoDate)
     walk = await Walk.create(req.body.walk)
@@ -79,6 +107,10 @@ app.get("/walks/:_id", async(req,res)=>{
     }
 })
 
+//=======================
+//Booking VIths
+//=======================
+
 //walks bookingcode view
 app.get("/walks/:_id/book",async (req,res)=>{
     walk = await Walk.findById(req.params._id)
@@ -92,13 +124,6 @@ app.post("/walks/:_id",(req,res)=>{
 })
 
 
-
-app.get("/faq",(req,res)=>{
-    res.render("faq")
-})
-app.get("/contact",(req,res)=>{
-    res.render("contact")
-})
 
 const port = process.env.PORT || 3000
 
