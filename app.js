@@ -1,9 +1,3 @@
-//===========================================
-//  WIP Next steps
-//  1 Current Walk Names on the dropdown (res.locals) DONE AND ADDED PATH TO WALK
-//  2 Time and date together?
-//  3 About Layout
-
 const   express         = require("express"),
         app             = express(),
         bodyParser      = require("body-parser"),
@@ -36,7 +30,6 @@ app.use(async (req,res,next)=>{
     //finds visible walks and only gets name ;D
     const walkName = await Walk.find({'visible' : true},{name: 1})
     res.locals.walkName = walkName
-    // console.log(res.locals.walkName)
     next()
 })
 
