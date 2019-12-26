@@ -10,11 +10,6 @@ const walkSchema = new mongoose.Schema({
     },
     //Create dateEdited apart from dateCreated
     visible: Boolean,
-    price: String,
-    nextDate: Date,
-    spots: String,
-    startTime: String,
-    endTime: String,
     meetingPoint: {
         name: String,
         description: String

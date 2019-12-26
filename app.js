@@ -5,7 +5,8 @@ const   express         = require("express"),
         mongoose        = require("mongoose"),
         expSanitizer    = require("express-sanitizer")
 
-const   Walk            = require("./models/walk")
+const   Walk            = require("./models/walk"),
+        Booking         = require('./models/booking')
         
 app.use(bodyParser.urlencoded({extended:true}))    
 
@@ -80,13 +81,19 @@ app.post("/walks",async(req,res)=>{
         req.body.walk.visible = false
     }
     //See if T00... can be taken from the time input
-    isoDate = `${req.body.walk.nextDate}T00:00:00`
-    req.body.walk.nextDate = new Date(isoDate)
-    walk = await Walk.create(req.body.walk)
+    isoDate = `${req.body.booking.date}T${req.body.booking.startTime}:00`
+    req.body.booking.date = new Date(isoDate)
+    let [walk,booking] = await Promise.all([
+        Walk.create(req.body.walk),
+        Booking.create(req.body.booking)
+    ]) 
     walk.meetingPoint.name = req.body.meetingPoint.name
     walk.meetingPoint.description = req.body.meetingPoint.description
     walk.save()
+    booking.walk._id = walk._id
+    booking.save()
     console.log(walk)
+    console.log(booking)
     res.redirect(`/walks/${walk._id}`)
 })
 
