@@ -67,15 +67,24 @@ app.get("/contact",(req,res)=>{
 //Index
 app.get("/walks",async(req,res)=>{
     try {
-        booking = await Booking.find({}).populate('walk').execPopulate();
-        console.log(booking)
+        let date = new Date()
+        let endDate = new Date().setMonth(date.getMonth()+1)
+        // console.log(date)
+        // console.log(new Date(endDate))
+        bookings = await Booking.find({
+            date: {
+                $gte: date,
+                $lte: endDate
+            }
+        }).sort({date: 'asc'}).populate('walk')
+        console.log(bookings)
         //_id is good
     } catch (err) {
         console.log(err)
         res.send('Error')
     }
-    res.send('Index Render')
-    // res.render("walks/index", {booking,})
+    // res.send('Index Render')
+    res.render("walks/index", {bookings,})
 })
 
 //walks new
@@ -106,6 +115,7 @@ app.post("/walks",async(req,res)=>{
     booking.walk.push(walk._id)
     booking.meetingPoint.push(meetingPoint._id)
     booking.save()
+    console.log(booking)
     // res.send('Walk Show')
     res.redirect(`/walks/${booking._id}`)
 })

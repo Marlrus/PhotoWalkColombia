@@ -1,27 +1,28 @@
 <%- include("../partials/header") -%>
 
 <div class="container-fluid">
+    
     <%let i = 1%>
-    <%walks.forEach(walk=>{%>
+    <%bookings.forEach(booking=>{%>
         <%if(i%2){%>
             <%i++%>
             <div class="row">
-                <img class="col-lg-6 p-4" src="<%=walk.image%>" alt="">
+                <img class="col-lg-6 p-4" src="<%=booking.walk[0].image%>" alt="">
                 <div class="col-lg-6 p-0">
                     <div class="card m-0 h-100">
                         <div class="card-header">
-                            <h5 class="display-4"><%=walk.name%></h5>
+                            <h5 class="display-4"><%=booking.walk[0].name%></h5>
                         </div>
                         <div class="card-body h-100">
-                            <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=walk.nextDate.toDateString()%></h6>
-                            <p class="card-text"><%=walk.description%></p>
-                            <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
-                            <a class="btn btn-info" href="walks/<%=walk._id%>/book">Book spot <%=walk.name%></a>   
+                            <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
+                            <p class="card-text"><%=booking.walk[0].shortDescription%></p>
+                            <a class="btn btn-info" href="walks/<%=booking._id%>">More info on <%=booking.walk[0].name%></a>   
+                            <a class="btn btn-info" href="walks/<%=booking._id%>/book">Book spot <%=booking.walk[0].name%></a>   
                         </div>
                     </div>
-                    <!-- <h1><%=walk.name%></h1>
-                    <p><%=walk.description%></p> 
-                    <a class="btn btn-info" href="walks/<%=walk._id%>/book">Book your spot for <%=walk.name%></a>    -->
+                    <!-- <h1><%=booking.name%></h1>
+                    <p><%=booking.description%></p> 
+                    <a class="btn btn-info" href="walks/<%=booking._id%>/book">Book your spot for <%=booking.name%></a>    -->
                 </div>
             </div>
         <%}else{%>
@@ -30,17 +31,17 @@
                 <div class="col-lg-6 order-2 order-lg-1 p-0">
                     <div class="card m-0 h-100">
                         <div class="card-header">
-                            <h5 class="display-4"><%=walk.name%></h5>
+                            <h5 class="display-4"><%=booking.walk[0].name%></h5>
                         </div>
                         <div class="card-body h-100">
-                            <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=walk.nextDate.toDateString()%></h6>
-                            <p class="card-text"><%=walk.description%></p>
-                            <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
-                            <a class="btn btn-info" href="walks/<%=walk._id%>/book">Book spot <%=walk.name%></a>   
+                            <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
+                            <p class="card-text"><%=booking.walk[0].shortDescription%></p>
+                            <a class="btn btn-info" href="walks/<%=booking._id%>">More info on <%=booking.walk[0].name%></a>   
+                            <a class="btn btn-info" href="walks/<%=booking._id%>/book">Book spot <%=booking.walk[0].name%></a>   
                         </div>
                     </div>
                 </div>
-                <img class="col-lg-6 order-1 order-lg-2 p-4" src="<%=walk.image%>" alt="">
+                <img class="col-lg-6 order-1 order-lg-2 p-4" src="<%=booking.walk[0].image%>" alt="">
             </div>
         <%}%>
     <%})%>
