@@ -33,7 +33,7 @@ mongoose.connect(process.env.DB_URI, {
 //Locals
 app.use(async (req,res,next)=>{
     //finds visible walks and only gets name ;D
-    const walkName = await Walk.find({'visible' : true},{name: 1})
+    const walkName = await Booking.find({'visible' : true},{name: 1})
     res.locals.walkName = walkName
     // res.locals.error = req.flash('error')
     // res.locals.error = req.flash('success')
@@ -77,7 +77,7 @@ app.get("/walks",async(req,res)=>{
                 $lte: endDate
             }
         }).sort({date: 'asc'}).populate('walk')
-        console.log(bookings)
+        // console.log(bookings)
         //_id is good
     } catch (err) {
         console.log(err)
@@ -100,6 +100,13 @@ app.post("/walks",async(req,res)=>{
     //     // req.flash('error', `Error: A walk for ${req.body.walk.name} already exists.`)
     //     res.redirect('back')
     // }
+    console.log(req.body.booking.pickup)
+    if(req.body.booking.pickup==='true'){
+        req.body.booking.pickup = true
+    }else{
+        req.body.booking.pickup = false
+    }
+    req.body.walk.currentVersion = true
     req.body.walk.description = req.sanitize(req.body.walk.description)
     isoDate = `${req.body.booking.date}T${req.body.booking.startTime}:00`
     req.body.booking.date = new Date(isoDate)
@@ -108,8 +115,8 @@ app.post("/walks",async(req,res)=>{
         Booking.create(req.body.booking),
         MeetingPoint.create(req.body.meetingPoint)
     ]) 
-    walk.currentVersion = true
-    walk.save()
+    // walk.currentVersion = true
+    // walk.save()
     meetingPoint.save()
     //added name to model change header to refer to bookings instead of walk themselves
     booking.walk.push(walk._id)
@@ -123,7 +130,7 @@ app.post("/walks",async(req,res)=>{
 //walks show
 app.get("/walks/:_id", async(req,res)=>{
     try {
-        booking = await (await Booking.findById(req.params._id)).populate('walk').populate('meetingPoint').execPopulate()
+        booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
         res.render("walks/show", {booking,})
     } catch (err) {
         console.log(err || !booking)
@@ -137,8 +144,8 @@ app.get("/walks/:_id", async(req,res)=>{
 
 //walks bookingcode view
 app.get("/walks/:_id/book",async (req,res)=>{
-    walk = await Walk.findById(req.params._id)
-    res.render("walks/book",{walk,})
+    booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
+    res.render("walks/book",{booking,})
 })
 
 //book post

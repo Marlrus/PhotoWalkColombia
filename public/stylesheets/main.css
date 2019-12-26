@@ -1,3 +1,13 @@
 body{
     background-color:#FFFFF6 !important;
 }
+
+img{
+    align-self: center;
+}
+.fill{
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    min-height: 30rem !important;
+}

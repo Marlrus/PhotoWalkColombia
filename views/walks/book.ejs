@@ -1,29 +1,49 @@
 <%- include("../partials/header") -%>
+<h1 class="display-4 text-center">Book <%=booking.walk[0].name%>!</h1>
 
-<div class="container mt-2 p-3 border border-info rounded">
-    <div class="row">
-        <img class="col-lg-6" src="<%=walk.image%>" alt="Card image cap">
-        <div class="col-lg-6">
+<div class="container-fluid p-4 border border-info rounded">
+    <div class="row justify-content-center">
+        <div class="col-xl-5 fill" style="background-image: url(<%=booking.walk[0].image%>);">
+
+        </div>
+        
+        <!-- <img class="col-lg-6" src="<%=booking.walk[0].image%>" alt="Card image cap"> -->
+        <div class="col-xl-5">
             <div class="row">
                 <div class="col-6">
-                    <h5 class="card-title">Booking form for <%=walk.name%> on <%=walk.nextDate.toDateString()%> from <%=walk.startTime%> to <%=walk.endTime%> </h5>
+                    <h5 class="card-title">Booking form for <%=booking.walk[0].name%> on <%=booking.date.toDateString()%> from <%=booking.startTime%> to <%=booking.endTime%> </h5>
                 </div>
                 <div class="col-6 text-right">
-                    <strong>Price: $<%=walk.price%></strong>
-                    <p class="card-text">Total spots: <%=walk.spots%></p>
+                    <strong>Price: $<%=booking.price%></strong>
+                    <p class="card-text">Spots left: <%=booking.spots-booking.bookedSpots%> | Total spots: <%=booking.spots%></p>
                 </div>
             </div>
-            <h5 class="card-title">Meeting Point: <%=walk.meetingPoint.name%></h5>
-            <p><%=walk.meetingPoint.description%></p>
-            <form action="/walks/<%=walk._id%>" method="POST">
+            <h5 class="card-title">Meeting Point: <%=booking.meetingPoint[0].name%></h5>
+            <p><%=booking.meetingPoint[0].description%></p>
+            <form action="/walks/<%=booking._id%>" method="POST">
                 <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" class="form-control" name="user[name]" id="" required>
+                    <input type="text" class="form-control" name="customer[name]" placeholder="Full Name" id="" required>
                 </div>
                 <div class="form-group">
                     <label for="">Email</label>
-                    <input type="email" class="form-control" name="user[email]" id="" required>
+                    <input type="email" class="form-control" name="customer[email]" id="" placeholder="Your email" required>
                 </div>
+                <div class="form-group">
+                    <label>Special Needs</label>
+                    <textarea name="customer[specialNeeds]" type="text" class="form-control" placeholder="Anything you need us to know (i.e. Health condtitions, injuries, concerns, dietary restrictions, allergies.)" cols="30" rows="5" ></textarea>
+                </div>
+                <%if(booking.pickup===true){%>
+                    <div class="form-group">
+                        <p><strong>This walk includes a pick-up service, please include the following:</strong></p>
+                        <label>Accomodation Name</label>
+                        <input type="text" class="form-control" name="meetingPoint[name]" id="" placeholder="Hotel/Hostel/BnB Name" required>
+                    </div>    
+                    <div class="form-group">
+                        <label>Address (Preferred but optional)</label>
+                        <textarea name="meetingPoint[description]" type="text" class="form-control" placeholder="Address for your acommodation to arrange the pickup service (Please include if the address is an airBnB or unlisted BnB)" cols="30" rows="5" required></textarea>
+                    </div>
+                <%}%>    
                 <button class="btn btn-info">Book your spot now!</button>
             </form>
         </div>
