@@ -6,13 +6,14 @@
         <%if(i%2){%>
             <%i++%>
             <div class="row">
-                <img class="col-lg-6 p-0" src="<%=walk.image%>" alt="">
+                <img class="col-lg-6 p-4" src="<%=walk.image%>" alt="">
                 <div class="col-lg-6 p-0">
                     <div class="card m-0 h-100">
                         <div class="card-header">
                             <h5 class="display-4"><%=walk.name%></h5>
                         </div>
                         <div class="card-body h-100">
+                            <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=walk.nextDate.toDateString()%></h6>
                             <p class="card-text"><%=walk.description%></p>
                             <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
                             <a class="btn btn-info" href="walks/<%=walk._id%>/book">Book spot <%=walk.name%></a>   
@@ -32,13 +33,14 @@
                             <h5 class="display-4"><%=walk.name%></h5>
                         </div>
                         <div class="card-body h-100">
+                            <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=walk.nextDate.toDateString()%></h6>
                             <p class="card-text"><%=walk.description%></p>
                             <a class="btn btn-info" href="walks/<%=walk._id%>">More info on <%=walk.name%></a>   
                             <a class="btn btn-info" href="walks/<%=walk._id%>/book">Book spot <%=walk.name%></a>   
                         </div>
                     </div>
                 </div>
-                <img class="col-lg-6 order-1 order-lg-2 p-0" src="<%=walk.image%>" alt="">
+                <img class="col-lg-6 order-1 order-lg-2 p-4" src="<%=walk.image%>" alt="">
             </div>
         <%}%>
     <%})%>

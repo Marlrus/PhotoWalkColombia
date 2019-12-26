@@ -7,11 +7,12 @@ const   express         = require("express"),
 
 const   Walk            = require("./models/walk")
         
-    
-require("dotenv").config()
+app.use(bodyParser.urlencoded({extended:true}))    
 
+require("dotenv").config()
 app.set("view engine","ejs")
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.static(`${__dirname}/public`))
+app.use(methodOverride("_method"))
 app.use(expSanitizer())
 
 mongoose.connect(process.env.DB_URI, {
