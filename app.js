@@ -3,7 +3,8 @@ const   express         = require("express"),
         bodyParser      = require("body-parser"),
         methodOverride  = require("method-override"),
         mongoose        = require("mongoose"),
-        expSanitizer    = require("express-sanitizer")
+        expSanitizer    = require("express-sanitizer"),
+        flash           = require("connect-flash")
 
 const   Walk            = require("./models/walk"),
         Booking         = require('./models/booking'),
@@ -16,6 +17,7 @@ app.set("view engine","ejs")
 app.use(express.static(`${__dirname}/public`))
 app.use(methodOverride("_method"))
 app.use(expSanitizer())
+app.use(flash())
 
 mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
@@ -33,6 +35,8 @@ app.use(async (req,res,next)=>{
     //finds visible walks and only gets name ;D
     const walkName = await Walk.find({'visible' : true},{name: 1})
     res.locals.walkName = walkName
+    // res.locals.error = req.flash('error')
+    // res.locals.error = req.flash('success')
     next()
 })
 
@@ -63,10 +67,9 @@ app.get("/contact",(req,res)=>{
 //Index
 app.get("/walks",async(req,res)=>{
     try {
-        booking = await Booking.find({}).populate('walk');
+        booking = await Booking.find({}).populate('walk').execPopulate();
         console.log(booking)
         //_id is good
-        console.log(`This booking is for ${booking[0].walk[0].name}`)
     } catch (err) {
         console.log(err)
         res.send('Error')
@@ -83,15 +86,12 @@ app.get("/walks/new",(req,res)=>{
 //walks create POST
 //WORKING MUST CLEAN WITH MODEL MIDDLEWARE
 app.post("/walks",async(req,res)=>{
+    //ONLY 1 WALK PER NAME! 
+    // if(Walk.find({name:req.body.walk.name})){
+    //     // req.flash('error', `Error: A walk for ${req.body.walk.name} already exists.`)
+    //     res.redirect('back')
+    // }
     req.body.walk.description = req.sanitize(req.body.walk.description)
-    //Boolean removed
-    // if(req.body.walk.visible === "true"){
-    //     req.body.walk.visible = true
-    // }
-    // else{
-    //     req.body.walk.visible = false
-    // }
-    //See if T00... can be taken from the time input
     isoDate = `${req.body.booking.date}T${req.body.booking.startTime}:00`
     req.body.booking.date = new Date(isoDate)
     let [walk,booking,meetingPoint] = await Promise.all([
@@ -99,27 +99,24 @@ app.post("/walks",async(req,res)=>{
         Booking.create(req.body.booking),
         MeetingPoint.create(req.body.meetingPoint)
     ]) 
+    walk.currentVersion = true
     walk.save()
     meetingPoint.save()
     //added name to model change header to refer to bookings instead of walk themselves
-    booking.walk.push(walk)
-    booking.meetingPoint.push(meetingPoint)
+    booking.walk.push(walk._id)
+    booking.meetingPoint.push(meetingPoint._id)
     booking.save()
-    console.log(`WALK DATA: ${walk}`)
-    console.log(`MEETINGPOINT DATA: ${meetingPoint}`)
-    console.log(`BOOKING DATA: ${booking}`)
-    console.log(booking)
-    res.send('Walk Show')
-    // res.redirect(`/walks/${walk._id}`)
+    // res.send('Walk Show')
+    res.redirect(`/walks/${booking._id}`)
 })
 
 //walks show
 app.get("/walks/:_id", async(req,res)=>{
     try {
-        walk = await Walk.findById(req.params._id)
-        res.render("walks/show", {walk,})
+        booking = await (await Booking.findById(req.params._id)).populate('walk').populate('meetingPoint').execPopulate()
+        res.render("walks/show", {booking,})
     } catch (err) {
-        console.log(err || !walk)
+        console.log(err || !booking)
         res.redirect("/walks")
     }
 })
