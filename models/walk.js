@@ -9,7 +9,7 @@ const walkSchema = new mongoose.Schema({
         default:Date.now
     },
     //Create dateEdited apart from dateCreated
-    visible: Boolean,
+    // visible: Boolean,
     meetingPoint: {
         name: String,
         description: String

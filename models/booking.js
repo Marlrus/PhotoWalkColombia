@@ -6,12 +6,18 @@ const bookingSchema = new mongoose.Schema({
     spots: Number,
     startTime: String,
     endTime: String,
-    walk: {
-        _id: {
+    walk: [
+        {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Walk'
         }
-    }
+    ],
+    meetingPoint: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "MeetingPoint"
+        }
+    ]
 })
 
 module.exports = mongoose.model('Booking',bookingSchema)

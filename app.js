@@ -6,7 +6,8 @@ const   express         = require("express"),
         expSanitizer    = require("express-sanitizer")
 
 const   Walk            = require("./models/walk"),
-        Booking         = require('./models/booking')
+        Booking         = require('./models/booking'),
+        MeetingPoint    = require('./models/meetingPoint')
         
 app.use(bodyParser.urlencoded({extended:true}))    
 
@@ -61,8 +62,17 @@ app.get("/contact",(req,res)=>{
 
 //Index
 app.get("/walks",async(req,res)=>{
-    walks= await Walk.find({'visible': true})
-    res.render("walks/index", {walks,})
+    try {
+        booking = await Booking.find({}).populate('walk');
+        console.log(booking)
+        //_id is good
+        console.log(`This booking is for ${booking[0].walk[0].name}`)
+    } catch (err) {
+        console.log(err)
+        res.send('Error')
+    }
+    res.send('Index Render')
+    // res.render("walks/index", {booking,})
 })
 
 //walks new
@@ -74,27 +84,33 @@ app.get("/walks/new",(req,res)=>{
 //WORKING MUST CLEAN WITH MODEL MIDDLEWARE
 app.post("/walks",async(req,res)=>{
     req.body.walk.description = req.sanitize(req.body.walk.description)
-    if(req.body.walk.visible === "true"){
-        req.body.walk.visible = true
-    }
-    else{
-        req.body.walk.visible = false
-    }
+    //Boolean removed
+    // if(req.body.walk.visible === "true"){
+    //     req.body.walk.visible = true
+    // }
+    // else{
+    //     req.body.walk.visible = false
+    // }
     //See if T00... can be taken from the time input
     isoDate = `${req.body.booking.date}T${req.body.booking.startTime}:00`
     req.body.booking.date = new Date(isoDate)
-    let [walk,booking] = await Promise.all([
+    let [walk,booking,meetingPoint] = await Promise.all([
         Walk.create(req.body.walk),
-        Booking.create(req.body.booking)
+        Booking.create(req.body.booking),
+        MeetingPoint.create(req.body.meetingPoint)
     ]) 
-    walk.meetingPoint.name = req.body.meetingPoint.name
-    walk.meetingPoint.description = req.body.meetingPoint.description
     walk.save()
-    booking.walk._id = walk._id
+    meetingPoint.save()
+    //added name to model change header to refer to bookings instead of walk themselves
+    booking.walk.push(walk)
+    booking.meetingPoint.push(meetingPoint)
     booking.save()
-    console.log(walk)
+    console.log(`WALK DATA: ${walk}`)
+    console.log(`MEETINGPOINT DATA: ${meetingPoint}`)
+    console.log(`BOOKING DATA: ${booking}`)
     console.log(booking)
-    res.redirect(`/walks/${walk._id}`)
+    res.send('Walk Show')
+    // res.redirect(`/walks/${walk._id}`)
 })
 
 //walks show
