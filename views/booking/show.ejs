@@ -9,7 +9,7 @@
                     <h3 class="card-title"><%=booking.walk[0].name%></h3>
                 </div>
                 <div class="col-6 text-right">
-                    <strong>Price: $<%=booking.price%></strong>
+                    <%=booking.spots-booking.bookedSpots%> Spots Left! &emsp; <strong>Price: $<%=booking.price%></strong>
                 </div>
             </div>
             <p class="card-text"><%-booking.walk[0].shortDescription%></p>

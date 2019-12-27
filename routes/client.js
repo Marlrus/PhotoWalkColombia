@@ -1,6 +1,8 @@
 const   express         = require("express"),
         router          = express.Router({mergeParams: true}),
-        Booking         = require('../models/booking')
+        Booking         = require('../models/booking'),
+        Client          = require('../models/client'),
+        MeetingPoint    = require('../models/meetingPoint')
 
 //=======================
 //Booking VIths
@@ -13,9 +15,28 @@ router.get("/new",async (req,res)=>{
 })
 
 //book post
-router.post("/",(req,res)=>{
-    console.log(req.body.client)
-    res.redirect("/booking")
+router.post("/", async(req,res)=>{
+    try {
+        req.body.client.confirmation = true
+        const client = await Client.create(req.body.client)
+        const booking = await Booking.findById(req.params._id)
+        booking.clients.push(client)
+        booking.bookedSpots++
+        booking.save()
+        client.booking.push(booking)
+        if(booking.pickup === true){
+            const meetingPoint = await MeetingPoint.create(req.body.meetingPoint)
+            meetingPoint.usedInBooking.push(booking)
+            meetingPoint.save()
+            client.meetingPoint.push(meetingPoint)
+        }
+        client.save()
+        console.log(booking)
+        res.redirect(`/booking/${req.params._id}`)
+    } catch (err) {
+        console.log(err)
+        res.redirect('back')
+    }
 })
 
 module.exports = router

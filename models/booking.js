@@ -8,6 +8,10 @@ const bookingSchema = new mongoose.Schema({
     startTime: String,
     endTime: String,
     pickup: Boolean,
+    dateCreated: {
+        type: Date, 
+        default:Date.now
+    },
     walk: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -20,7 +24,7 @@ const bookingSchema = new mongoose.Schema({
             ref: "MeetingPoint"
         }
     ],
-    customers: [
+    clients: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Customer"

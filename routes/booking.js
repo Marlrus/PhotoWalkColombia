@@ -12,7 +12,7 @@ const   express         = require("express"),
 router.get('/new',async(req,res)=>{
     const [walks,meetingPoints] = await Promise.all ([
         Walk.find({currentVersion:true}).sort({dateCreated: 'desc'}),
-        MeetingPoint.find({currentVersion:true}).sort({dateCreated: 'desc'})
+        MeetingPoint.find({currentVersion:true, name:{$ne: 'Pickup'}}).sort({dateCreated: 'desc'})
     ])
     // console.log(walks)
     // console.log(meetingPoints)
@@ -22,20 +22,27 @@ router.get('/new',async(req,res)=>{
 //POST Booking
 router.post('/',async(req,res)=>{
     try {
+        if (req.body.booking.pickup === 'true' || req.body.booking.meetingPoint === 'true'){
+            req.body.booking.pickup = true
+            const meetingPoint = await MeetingPoint.findOne({name: 'Pickup', currentVersion: true})
+            req.body.booking.meetingPoint = meetingPoint
+        } else {
+            req.body.booking.pickup = false
+            const meetingPoint = await MeetingPoint.findById(req.body.booking.meetingPoint)
+            req.body.booking.meetingPoint = meetingPoint
+        }
+        console.log(req.body.booking.meetingPoint)
         const [booking,walk,meetingPoint] = await Promise.all ([
             Booking.create(req.body.booking),
             Walk.findById(req.body.booking.walk),
-            MeetingPoint.findById(req.body.booking.meetingPoint),
+            MeetingPoint.findById(req.body.booking.meetingPoint)
         ])
-        console.log(booking)
-        console.log(walk)
+        console.log(meetingPoint)
         walk.usedInBooking.push(booking)
         walk.save()
-        console.log(walk)
-        console.log(meetingPoint)
         meetingPoint.usedInBooking.push(booking)
         meetingPoint.save()
-        console.log(meetingPoint)
+        console.log(booking)
         // res.send('Booking POST')
         res.redirect(`/booking/${booking._id}`)
     } catch (err) {

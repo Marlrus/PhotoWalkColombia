@@ -36,7 +36,7 @@ router.get("/user", async(req,res)=>{
                 }
             }).sort({ date: 'asc' }).populate('walk'),
             Walk.find({}).sort({dateCreated: 'desc'}),
-            MeetingPoint.find({}).sort({dateCreated: 'desc'}),
+            MeetingPoint.find({name:{$ne: 'Pickup'}}).sort({dateCreated: 'desc'}),
         ])
         // console.log(booking)
         // console.log(walk)
