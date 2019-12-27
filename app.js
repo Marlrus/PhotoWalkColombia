@@ -1,17 +1,18 @@
-const   express         = require("express"),
-        app             = express(),
-        bodyParser      = require("body-parser"),
-        methodOverride  = require("method-override"),
-        mongoose        = require("mongoose"),
-        expSanitizer    = require("express-sanitizer"),
-        flash           = require("connect-flash")
+const   express             = require("express"),
+        app                 = express(),
+        bodyParser          = require("body-parser"),
+        methodOverride      = require("method-override"),
+        mongoose            = require("mongoose"),
+        expSanitizer        = require("express-sanitizer"),
+        flash               = require("connect-flash")
 
 
 //ROUTE REQUIRING
-const   indexRoutes     = require('./routes/index'),
-        bookingRoutes   = require('./routes/booking'),
-        clientRoutes    = require('./routes/client'),
-        userRoutes      = require('./routes/user')
+const   indexRoutes         = require('./routes/index'),
+        bookingRoutes       = require('./routes/booking'),
+        clientRoutes        = require('./routes/client'),
+        walkRoutes          = require('./routes/walk'),
+        meetingPointRoutes  = require('./routes/meetingPoint')
                 
 
 
@@ -60,9 +61,10 @@ app.use(async (req,res,next)=>{
 
 
 app.use("/", indexRoutes)
-app.use("/booking", bookingRoutes)
 app.use("/booking/:_id/client", clientRoutes)
-app.use("/user", userRoutes)
+app.use("/user/booking", bookingRoutes)
+app.use("/user/walk", walkRoutes)
+app.use("/user/meetingPoint", meetingPointRoutes)
 
 const port = process.env.PORT || 3000
 
