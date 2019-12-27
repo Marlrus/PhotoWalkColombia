@@ -1,0 +1,24 @@
+<%- include("../partials/header") -%>
+
+   
+
+<div class="container ">
+    <h1 class="display-3 text-center">Create your Walk!</h1>
+
+    <form action="/user/meetingPoint" method="POST">
+        <div class="form-group">
+            <label>Meeting Point</label>
+            <input name="meetingPoint[name]" type="text" class="form-control" placeholder="Meeting point name" required>
+        </div>
+        <div class="form-group">
+            <label>Meeting Point Description</label>
+            <textarea name="meetingPoint[description]" type="text" class="form-control" placeholder="description" rows="5"
+                required></textarea>
+        </div>
+        <button class="btn btn-lg btn-light">Submit</button>
+      </form>
+</div>
+
+
+
+<%- include("../partials/footer") -%>

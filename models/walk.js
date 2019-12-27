@@ -11,10 +11,18 @@ const walkSchema = new mongoose.Schema({
     },
     //Create dateEdited apart from dateCreated
     currentVersion: Boolean,
-    meetingPoint: {
-        name: String,
-        description: String
-    }
+    used: [
+        {
+            booking: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Booking'
+            }
+        }
+    ]
+    // meetingPoint: {
+    //     name: String,
+    //     description: String
+    // }
 })
 
 module.exports = mongoose.model("Walk",walkSchema)

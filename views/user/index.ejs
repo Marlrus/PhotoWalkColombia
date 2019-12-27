@@ -1,8 +1,38 @@
 <%- include("../partials/header") -%>
 <h1 class="display-4 text-center">User Panel</h1>
 
-<h2><%=booking[0]._id%></h2>
-<h2><%=walk[0]._id%></h2>
-<h2><%=meetingPoint[0]._id%></h2>
+<div class="container p-4 text-center">
+    <a href="/user/booking/new" class="btn btn-lg btn-success">Create a new Booking</a>
+    <a href="/user/walk/new" class="btn btn-lg btn-success">Create a new Walk</a>
+    <a href="/user/meetingPoint/new" class="btn btn-lg btn-success">Create a new Meeting Point</a>
+</div>
+
+<div class="container">
+    <div class="list-group">
+        <h2 class="list-group-item list-group-item-action active">Currently Running Bookings</h2>
+        <%bookings.forEach(booking=>{%>
+        <a href="#" class="list-group-item list-group-item-action">
+            <%=booking.date.toDateString()%> booking for <%=booking.walk[0].name%>
+        </a>
+        <%})%>
+    </div>
+    <div class="list-group">
+        <h2 class="list-group-item list-group-item-action active">Your 5 most recently used walks</h2>
+        <%for(let i = 0; i < 5; i++){%>
+        <a href="#" class="list-group-item list-group-item-action">
+            <%=walks[i].name%> last edited <%=walks[i].dateCreated.toDateString()%>
+        </a>
+        <%}%>
+    </div>
+    <div class="list-group">
+        <h2 class="list-group-item list-group-item-action active">Your 5 most recently used Meeting Points</h2>
+        <%for(let i = 0; i < 5; i++){%>
+            <a href="#" class="list-group-item list-group-item-action">
+                <%=meetingPoints[i].name%> last edited <%=meetingPoints[i].dateCreated.toDateString()%>
+            </a>
+        <%}%>
+    </div>
+</div>
+
 
 <%- include("../partials/footer") -%>

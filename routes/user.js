@@ -4,18 +4,110 @@ const   express         = require("express"),
         Booking         = require('../models/booking'),
         MeetingPoint    = require('../models/meetingPoint')
 
+
+//USER PANEL
 router.get("/", async(req,res)=>{
     try {
-        let [booking,walk,meetingPoint] = await Promise.all([
-            Booking.find({}),
-            Walk.find({}),
-            MeetingPoint.find({}),
+        let date = new Date()
+        let endDate = new Date().setMonth(date.getMonth() + 1)
+        let [bookings,walks,meetingPoints] = await Promise.all([
+            Booking.find({
+                date: {
+                    $gte: date,
+                    $lte: endDate
+                }
+            }).sort({ date: 'asc' }).populate('walk'),
+            Walk.find({}).sort({dateCreated: 'desc'}),
+            MeetingPoint.find({}).sort({dateCreated: 'desc'}),
         ])
-        res.render('user/index',{booking, walk, meetingPoint,})
+        // console.log(booking)
+        // console.log(walk)
+        // console.log(meetingPoint)
+        res.render('user/index',{bookings, walks, meetingPoints,})
     } catch (err) {
         console.log(err)
         res.redirect('back')
     }
+})
+
+//NEW BOOKING
+router.get("/booking/new",(req,res)=>{
+    res.render("booking/new")
+})
+
+//NEW WALK
+router.get("/walk/new",(req,res)=>{
+    res.render("walk/new")
+})
+
+//WALK POST
+router.post("/walk",async(req,res)=>{
+    try {
+        req.body.walk.currentVersion = true
+        req.body.walk.shortDescription = req.sanitize(req.body.walk.shortDescription)
+        req.body.walk.description = req.sanitize(req.body.walk.description)
+        console.log(req.body.walk)
+        const walk = await Walk.create(req.body.walk)
+        console.log(walk)
+        res.redirect('/user')
+    } catch (err) {
+        console.log(err)
+        res.redirect('back')
+    }
+})
+
+//NEW Meeting Point
+router.get('/meetingPoint/new',(req,res)=>{
+    res.render("meetingPoint/new")
+})
+
+//CREATE Meeting Poing
+router.post('/meetingPoint',async(req,res)=>{
+    try {
+        req.body.meetingPoint.description = req.sanitize(req.body.meetingPoint.description)
+        console.log(req.body.meetingPoint)
+        const meetingPoint = await MeetingPoint.create(req.body.meetingPoint)
+        console.log(meetingPoint)
+        res.redirect('/user')
+    } catch (err) {
+        console.log(err)
+        res.send('error')
+    }
+})
+
+//walks create POST
+//WORKING MUST CLEAN WITH MODEL MIDDLEWARE
+router.post("/booking",async(req,res)=>{
+    //ONLY 1 WALK PER NAME! 
+    // if(Walk.find({name:req.body.walk.name})){
+    //     // req.flash('error', `Error: A walk for ${req.body.walk.name} already exists.`)
+    //     res.redirect('back')
+    // }
+    console.log(req.body.booking.pickup)
+    if(req.body.booking.pickup==='true'){
+        req.body.booking.pickup = true
+    }else{
+        req.body.booking.pickup = false
+    }
+    req.body.walk.currentVersion = true
+    req.body.walk.description = req.sanitize(req.body.walk.description)
+    isoDate = `${req.body.booking.date}T${req.body.booking.startTime}:00`
+    req.body.booking.date = new Date(isoDate)
+    let [walk,booking,meetingPoint] = await Promise.all([
+        Walk.create(req.body.walk),
+        Booking.create(req.body.booking),
+        MeetingPoint.create(req.body.meetingPoint)
+    ]) 
+    // walk.currentVersion = true
+    // walk.save()
+    meetingPoint.save()
+    //added name to model change header to refer to bookings instead of walk themselves
+    booking.walk.push(walk._id)
+    booking.meetingPoint.push(meetingPoint._id)
+    booking.save()
+    console.log(booking)
+    // res.send('Walk Show')
+    res.redirect(`/booking/${booking._id}`)
 })
 
 module.exports = router
