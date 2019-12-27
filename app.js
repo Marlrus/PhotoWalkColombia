@@ -33,8 +33,17 @@ mongoose.connect(process.env.DB_URI, {
 //Locals
 app.use(async (req,res,next)=>{
     //finds visible walks and only gets name ;D
-    const walkName = await Booking.find({'visible' : true},{name: 1})
-    res.locals.walkName = walkName
+    let date = new Date()
+    let endDate = new Date().setMonth(date.getMonth()+1)
+    const bookingDropdown = await Booking.find({
+        date: {
+            $gte: date,
+            $lte: endDate
+        }
+    }).sort({date: 'asc'}).populate('walk')
+    // Being Called Twice
+    // console.log(bookingDropdown)
+    res.locals.bookingDropdown = bookingDropdown
     // res.locals.error = req.flash('error')
     // res.locals.error = req.flash('success')
     next()

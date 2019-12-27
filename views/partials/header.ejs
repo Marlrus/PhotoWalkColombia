@@ -35,8 +35,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/walks">All Walks</a>
                         <div class="dropdown-divider"></div>
-                        <%for(let walk of walkName){%>
-                            <a class="dropdown-item" href="/walks/<%=walk._id%>"><%=walk.name%></a>
+                        <%for(let booking of bookingDropdown){%>
+                            <a class="dropdown-item" href="/walks/<%=booking._id%>"><%=booking.walk[0].name%></a>
                         <%}%>
                         <a class="dropdown-item" href="#">Personalized Walk</a>
                     </div>
