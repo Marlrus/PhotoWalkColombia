@@ -83,9 +83,27 @@ router.get('/booking/new',async(req,res)=>{
 
 //POST Booking
 router.post('/booking',async(req,res)=>{
-    const booking = await Booking.create(req.body.booking)
-    console.log(booking)
-    res.redirect(`/booking/${booking._id}`)
+    try {
+        const [booking,walk,meetingPoint] = await Promise.all ([
+            Booking.create(req.body.booking),
+            Walk.findById(req.body.booking.walk),
+            MeetingPoint.findById(req.body.booking.meetingPoint),
+        ])
+        console.log(booking)
+        console.log(walk)
+        walk.usedInBooking.push(booking)
+        walk.save()
+        console.log(walk)
+        console.log(meetingPoint)
+        meetingPoint.usedInBooking.push(booking)
+        meetingPoint.save()
+        console.log(meetingPoint)
+        // res.send('Booking POST')
+        res.redirect(`/booking/${booking._id}`)
+    } catch (err) {
+        console.log(err)
+        res.send('ERROR')
+    }
 })
 
 //OLD CODE

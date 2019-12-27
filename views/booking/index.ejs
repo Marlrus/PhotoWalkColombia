@@ -1,7 +1,7 @@
 <%- include("../partials/header") -%>
 
 <div class="container-fluid">
-    <h1 class="display-2 text-center">Available walks for the next month</h1>
+    <h1 class="display-3 text-center">All walks from today to <%=endDate.toDateString()%></h1>
     <%let i = 1%>
     <%bookings.forEach(booking=>{%>
         <%if(i%2){%>

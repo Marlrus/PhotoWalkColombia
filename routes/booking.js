@@ -23,12 +23,13 @@ router.get("/",async(req,res)=>{
         }).sort({date: 'asc'}).populate('walk')
         // console.log(bookings)
         //_id is good
+        // res.send('Index Render')
+        res.render("booking/index", {bookings, endDate: new Date(endDate)})
     } catch (err) {
         console.log(err)
         res.send('Error')
     }
-    // res.send('Index Render')
-    res.render("booking/index", {bookings,})
+    
 })
 
 //walks show

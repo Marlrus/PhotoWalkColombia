@@ -9,17 +9,11 @@ const meetingPointSchema = new mongoose.Schema({
     },
     //Create dateEdited apart from dateCreated
     currentVersion: Boolean,
-    used:[
+    usedInBooking:[
         {
-            booking: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Booking'
-            },
-            walk: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Walk'
-            }
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Booking'
+        },
     ] 
 })
 
