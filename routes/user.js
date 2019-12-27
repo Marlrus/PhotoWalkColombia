@@ -59,6 +59,7 @@ router.get('/meetingPoint/new',(req,res)=>{
 //CREATE Meeting Point
 router.post('/meetingPoint',async(req,res)=>{
     try {
+        req.body.meetingPoint.currentVersion = true
         req.body.meetingPoint.description = req.sanitize(req.body.meetingPoint.description)
         console.log(req.body.meetingPoint)
         const meetingPoint = await MeetingPoint.create(req.body.meetingPoint)

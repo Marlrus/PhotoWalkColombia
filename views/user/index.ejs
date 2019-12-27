@@ -18,19 +18,25 @@
     </div>
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Your 5 most recently used walks</h2>
-        <%for(let i = 0; i < 5; i++){%>
-        <a href="#" class="list-group-item list-group-item-action">
-            <%=walks[i].name%> last edited <%=walks[i].dateCreated.toDateString()%>
-        </a>
-        <%}%>
+        <%let i = 0%>
+        <%walks.forEach(walk=>{%>
+            <%if (i < 5){%>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <%=walk.name%> last edited <%=walk.dateCreated.toDateString()%>
+                </a>
+            <%i++ }%>
+        <%})%>
     </div>
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Your 5 most recently used Meeting Points</h2>
-        <%for(let i = 0; i < 5; i++){%>
-            <a href="#" class="list-group-item list-group-item-action">
-                <%=meetingPoints[i].name%> last edited <%=meetingPoints[i].dateCreated.toDateString()%>
-            </a>
-        <%}%>
+        <%i = 0%>
+        <%meetingPoints.forEach(meetingPoint=>{%>
+            <%if (i < 5){%>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <%=meetingPoint.name%> last edited <%=meetingPoint.dateCreated.toDateString()%>
+                </a>
+            <%i++ }%>
+        <%})%>
     </div>
 </div>
 
