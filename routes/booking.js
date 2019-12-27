@@ -5,7 +5,7 @@ const   express         = require("express"),
         MeetingPoint    = require('../models/meetingPoint')
 
 //============================
-//walks routes CRUD
+//Booking routes
 //============================
 
 //Index
@@ -28,12 +28,12 @@ router.get("/",async(req,res)=>{
         res.send('Error')
     }
     // res.send('Index Render')
-    res.render("walks/index", {bookings,})
+    res.render("booking/index", {bookings,})
 })
 
 //walks new
 router.get("/new",(req,res)=>{
-    res.render("walks/new")
+    res.render("booking/new")
 })
 
 //walks create POST
@@ -68,17 +68,17 @@ router.post("/",async(req,res)=>{
     booking.save()
     console.log(booking)
     // res.send('Walk Show')
-    res.redirect(`/walks/${booking._id}`)
+    res.redirect(`/booking/${booking._id}`)
 })
 
 //walks show
 router.get("/:_id", async(req,res)=>{
     try {
         booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
-        res.render("walks/show", {booking,})
+        res.render("booking/show", {booking,})
     } catch (err) {
         console.log(err || !booking)
-        res.redirect("/walks")
+        res.redirect("/booking")
     }
 })
 

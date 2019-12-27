@@ -9,13 +9,13 @@ const   express         = require("express"),
 //walks bookingcode view
 router.get("/new",async (req,res)=>{
     booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
-    res.render("walks/book",{booking,})
+    res.render("client/new",{booking,})
 })
 
 //book post
 router.post("/",(req,res)=>{
-    console.log(req.body.user)
-    res.redirect("/walks")
+    console.log(req.body.client)
+    res.redirect("/booking")
 })
 
 module.exports = router

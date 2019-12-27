@@ -28,15 +28,15 @@
                     <a class="nav-link" href="/about">ABOUT</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/walks" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="/booking" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         BOOKINGS
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/walks">All Walks</a>
+                        <a class="dropdown-item" href="/booking">All Walks</a>
                         <div class="dropdown-divider"></div>
                         <%for(let booking of bookingDropdown){%>
-                            <a class="dropdown-item" href="/walks/<%=booking._id%>"><%=booking.walk[0].name%></a>
+                            <a class="dropdown-item" href="/booking/<%=booking._id%>"><%=booking.walk[0].name%></a>
                         <%}%>
                         <a class="dropdown-item" href="#">Personalized Walk</a>
                     </div>

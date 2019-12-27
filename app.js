@@ -9,9 +9,9 @@ const   express         = require("express"),
 
 //ROUTE REQUIRING
 const   indexRoutes     = require('./routes/index'),
-        walkRoutes      = require('./routes/walks'),
-        bookRoutes      = require('./routes/book'),
-        adminRoutes     = require('./routes/admin')
+        bookingRoutes   = require('./routes/booking'),
+        clientRoutes    = require('./routes/client'),
+        userRoutes      = require('./routes/user')
                 
 
 
@@ -60,9 +60,9 @@ app.use(async (req,res,next)=>{
 
 
 app.use("/", indexRoutes)
-app.use("/walks", walkRoutes)
-app.use("/walks/:_id/book", bookRoutes)
-app.use("/admin", adminRoutes)
+app.use("/booking", bookingRoutes)
+app.use("/booking/:_id/client", clientRoutes)
+app.use("/user", userRoutes)
 
 const port = process.env.PORT || 3000
 
