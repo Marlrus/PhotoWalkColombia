@@ -20,7 +20,7 @@
             </div>
             <h5 class="card-title">Meeting Point: <%=booking.meetingPoint[0].name%></h5>
             <p><%=booking.meetingPoint[0].description%></p>
-            <form action="/walks/<%=booking._id%>" method="POST">
+            <form action="/walks/<%=booking._id%>/book" method="POST">
                 <div class="form-group">
                     <label for="">Name</label>
                     <input type="text" class="form-control" name="customer[name]" placeholder="Full Name" id="" required>
