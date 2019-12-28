@@ -4,6 +4,19 @@ const   express         = require("express"),
         Booking         = require('../models/booking'),
         MeetingPoint    = require('../models/meetingPoint')
 
+//SHOW
+router.get('/:walk_id',async(req,res)=>{
+    const walk = await Walk.findById(req.params.walk_id)
+    // const bookings = []
+    // walk.usedInBooking.forEach(_id => {
+        const bookings = await Booking.find({_id: walk.usedInBooking}).sort({date: 'asc'})
+    // });
+    console.log(walk)
+    console.log('==============BOOKINGS===========')
+    console.log(bookings)
+    res.render('walk/show',{walk, bookings,})
+})
+
 //NEW WALK
 router.get("/new",(req,res)=>{
     res.render("walk/new")

@@ -1,0 +1,84 @@
+<%- include("../partials/header") -%>
+
+<h1 class="text-center">Details for <%=walk.name%></h1>
+
+<div class="container">
+    <div class="card" >
+        <img src="<%=walk.image%>" class="card-img-top" alt="...">
+        
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h5 class="card-title">
+                    Details
+                </h5>
+                <p class="card-text">
+                    <%if(walk.currentVersion===true){%>This is the latest Version of this walk<%}else{%>This is an older version of this walk<%}%> created on <%=walk.dateCreated.toDateString()%> 
+                </p> 
+            </li>
+            <li class="list-group-item">
+                <h5 class="card-title">
+                    Short description
+                </h5>
+                <p class="card-text">
+                    <%=walk.shortDescription%>
+                </p> 
+            </li>
+            <li class="list-group-item">
+                <h5 class="card-title">
+                    Description
+                </h5>
+                <p class="card-text">
+                    <%=walk.description%>
+                </p> 
+            </li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+        <div class="card-body p-0">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="bookings">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#bookingList"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                Booking Details
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="bookingList" class="collapse" aria-labelledby="bookings" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <%bookings.forEach(booking=>{%>
+                                <p class="card-text">Used <%=booking.date.toDateString()%> <a href="/booking/<%=booking._id%>">Details</a></p>
+                            <%})%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="edits">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#editList"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                Edit History
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="editList" class="collapse" aria-labelledby="edits" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <%bookings.forEach(booking=>{%>
+                                <p class="card-text">Used <%=booking.date.toDateString()%> <a href="/booking/<%=booking._id%>">Details</a></p>
+                            <%})%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") -%>

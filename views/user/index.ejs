@@ -21,7 +21,7 @@
         <%let i = 0%>
         <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="/user/walk/<%=booking.walk[0]._id%>" class="list-group-item list-group-item-action">
                     <%=booking.walk[0].name%> last used <%=booking.dateCreated.toDateString()%> last edited <%=booking.walk[0].dateCreated.toDateString()%>
                 </a>
             <%i++ }%>

@@ -28,10 +28,6 @@ router.get("/user", async(req,res)=>{
     try {
         let date = new Date()
         let endDate = new Date().setMonth(date.getMonth() + 1)
-        // let filter = await MeetingPoint.findOne({name: 'Pickup'})
-        console.log('===============NEW RELOAD TRY=================')
-        // filter = filter._id
-        // console.log(filter)
         let [runningBookings,recentBookings] = await Promise.all([
             Booking.find({
                 date: {
@@ -39,13 +35,8 @@ router.get("/user", async(req,res)=>{
                     $lte: endDate
                 }
             }).sort({ date: 'asc' }).populate('walk'),
-            //NOT INCLUDE $ne not working
             Booking.find({pickup : false}).populate({path: 'walk',}).populate('meetingPoint').sort({dateCreated: 'desc'}).limit(5)
         ])
-        console.log(runningBookings)
-        console.log(recentBookings)
-        // console.log(meetingPoint)
-        // res.send('USER PANEL')
         res.render('user/index',{runningBookings, recentBookings,})
     } catch (err) {
         console.log(err)

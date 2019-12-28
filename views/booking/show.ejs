@@ -14,7 +14,7 @@
             </div>
             <p class="card-text"><%-booking.walk[0].shortDescription%></p>
             <p class="card-text"><%-booking.walk[0].description%></p>
-            <p class="card-text"><small class="text-muted">Next Walk <%=booking.date.toDateString()%> starting at <%=booking.startTime%> to <%=booking.endTime%></small></p>
+            <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.startTime%> to <%=booking.endTime%></small></p>
             <a class="btn btn-info" href="/booking/<%=booking._id%>/client/new">Book your spot now!</a>
             <div class="row mt-4">
                 <div class="col-12">
