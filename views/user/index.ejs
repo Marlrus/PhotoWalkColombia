@@ -10,7 +10,7 @@
 <div class="container">
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Currently Running Bookings</h2>
-        <%bookings.forEach(booking=>{%>
+        <%runningBookings.forEach(booking=>{%>
         <a href="#" class="list-group-item list-group-item-action">
             <%=booking.date.toDateString()%> booking for <%=booking.walk[0].name%>
         </a>
@@ -19,10 +19,10 @@
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Your 5 most recently used walks</h2>
         <%let i = 0%>
-        <%walks.forEach(walk=>{%>
+        <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <%=walk.name%> last edited <%=walk.dateCreated.toDateString()%>
+                    <%=booking.walk[0].name%> last used <%=booking.dateCreated.toDateString()%> last edited <%=booking.walk[0].dateCreated.toDateString()%>
                 </a>
             <%i++ }%>
         <%})%>
@@ -30,10 +30,10 @@
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Your 5 most recently used Meeting Points</h2>
         <%i = 0%>
-        <%meetingPoints.forEach(meetingPoint=>{%>
+        <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <%=meetingPoint.name%> last edited <%=meetingPoint.dateCreated.toDateString()%>
+                    <%=booking.meetingPoint[0].name%> last used <%=booking.dateCreated.toDateString()%> last edited <%=booking.meetingPoint[0].dateCreated.toDateString()%>
                 </a>
             <%i++ }%>
         <%})%>

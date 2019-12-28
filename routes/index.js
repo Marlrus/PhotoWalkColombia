@@ -23,30 +23,55 @@ router.get("/contact",(req,res)=>{
     res.render("contact")
 })
 
-//USER PANEL
+//USER PANEL WORKING CODE
 router.get("/user", async(req,res)=>{
     try {
         let date = new Date()
         let endDate = new Date().setMonth(date.getMonth() + 1)
-        let [bookings,walks,meetingPoints] = await Promise.all([
+        let [runningBookings,recentBookings] = await Promise.all([
             Booking.find({
                 date: {
                     $gte: date,
                     $lte: endDate
                 }
             }).sort({ date: 'asc' }).populate('walk'),
-            Walk.find({}).sort({dateCreated: 'desc'}),
-            MeetingPoint.find({name:{$ne: 'Pickup'}}).sort({dateCreated: 'desc'}),
+            Booking.find({}).sort({dateCreated: 'desc'}).populate('walk').populate('meetingPoint')
         ])
-        // console.log(booking)
-        // console.log(walk)
+        console.log(runningBookings)
+        console.log(recentBookings)
         // console.log(meetingPoint)
-        res.render('user/index',{bookings, walks, meetingPoints,})
+        // res.send('USER PANEL')
+        res.render('user/index',{runningBookings, recentBookings,})
     } catch (err) {
         console.log(err)
         res.redirect('back')
     }
 })
+
+// //USER PANEL WORKING CODE
+// router.get("/user", async(req,res)=>{
+//     try {
+//         let date = new Date()
+//         let endDate = new Date().setMonth(date.getMonth() + 1)
+//         let [bookings,walks,meetingPoints] = await Promise.all([
+//             Booking.find({
+//                 date: {
+//                     $gte: date,
+//                     $lte: endDate
+//                 }
+//             }).sort({ date: 'asc' }).populate('walk'),
+//             Walk.find({}).sort({dateCreated: 'desc'}),
+//             MeetingPoint.find({name:{$ne: 'Pickup'}}).sort({dateCreated: 'desc'}),
+//         ])
+//         // console.log(booking)
+//         // console.log(walk)
+//         // console.log(meetingPoint)
+//         res.render('user/index',{bookings, walks, meetingPoints,})
+//     } catch (err) {
+//         console.log(err)
+//         res.redirect('back')
+//     }
+// })
 
 //Index
 router.get("/booking",async(req,res)=>{
