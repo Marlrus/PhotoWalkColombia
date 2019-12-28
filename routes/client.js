@@ -39,4 +39,6 @@ router.post("/", async(req,res)=>{
     }
 })
 
+//ROUTE FOR CONFIRMATION FUTURE FEATURE EMAIL SENDS TO THIS PATH
+
 module.exports = router

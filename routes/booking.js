@@ -31,13 +31,13 @@ router.post('/',async(req,res)=>{
             const meetingPoint = await MeetingPoint.findById(req.body.booking.meetingPoint)
             req.body.booking.meetingPoint = meetingPoint
         }
-        console.log(req.body.booking.meetingPoint)
+        // console.log(req.body.booking.meetingPoint)
         const [booking,walk,meetingPoint] = await Promise.all ([
             Booking.create(req.body.booking),
             Walk.findById(req.body.booking.walk),
             MeetingPoint.findById(req.body.booking.meetingPoint)
         ])
-        console.log(meetingPoint)
+        // console.log(meetingPoint)
         walk.usedInBooking.push(booking)
         walk.save()
         meetingPoint.usedInBooking.push(booking)
