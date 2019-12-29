@@ -35,7 +35,7 @@ router.get("/user", async(req,res)=>{
                     $lte: endDate
                 }
             }).sort({ date: 'asc' }).populate('walk'),
-            Booking.find({pickup : false}).populate({path: 'walk',}).populate('meetingPoint').sort({dateCreated: 'desc'}).limit(5)
+            Booking.find({pickup : false}).limit(5).populate({path: 'walk',}).populate('meetingPoint').sort({dateCreated: 'desc'})
         ])
         res.render('user/index',{runningBookings, recentBookings,})
     } catch (err) {

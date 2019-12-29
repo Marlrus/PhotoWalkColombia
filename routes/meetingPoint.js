@@ -4,6 +4,16 @@ const   express         = require("express"),
         Booking         = require('../models/booking'),
         MeetingPoint    = require('../models/meetingPoint')
 
+//SHOW
+
+router.get('/:meetingPoint_id',async(req,res)=>{
+    const meetingPoint = await MeetingPoint.findById(req.params.meetingPoint_id)
+    const bookings = await Booking.find({_id: meetingPoint.usedInBooking}).sort({date: 'asc'})
+    const edits = await MeetingPoint.find({currentVersion : false})
+    console.log('==============REFRESH===========')
+    console.log(edits)
+    res.render('meetingPoint/show', {meetingPoint, bookings, edits,})
+})
 
 //NEW Meeting Point
 router.get('/new',(req,res)=>{

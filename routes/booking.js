@@ -8,6 +8,8 @@ const   express         = require("express"),
 //Booking routes
 //============================
 
+//SHOW
+
 //NEW Booking
 router.get('/new',async(req,res)=>{
     const [walks,meetingPoints] = await Promise.all ([
