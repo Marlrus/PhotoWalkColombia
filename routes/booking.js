@@ -23,8 +23,14 @@ router.get('/new',async(req,res)=>{
 
 //SHOW
 router.get('/:_id',async(req,res)=>{
-    const booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint').populate('clients')
-    console.log(booking)
+    const booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint').populate({
+        path: 'clients',
+        populate: [{
+            path: 'meetingPoint',
+            model: 'MeetingPoint'
+        }]
+    })
+    //FUCKING MADE ITTT!!!!
     res.render('booking/show', {booking,})
     // res.send('Booking SHow')
 })

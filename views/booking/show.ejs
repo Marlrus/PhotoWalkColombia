@@ -46,13 +46,23 @@
                                 <%if(booking.pickup === false){%>
                                     <%booking.clients.forEach(client=>{%>
                                         <p class="card-text">
-                                            <a href="/user/client/<%=client._id%>"><%=client.name%></a> booked on <%=client.dateCreated.toDateString()%>
+                                            <a href="/user/client/<%=client._id%>"><%=client.name%></a> Booking Status: 
+                                            <%if(client.confirmation === true){%>
+                                                Confirmed
+                                            <%}else{%>
+                                                Confirmation Pending
+                                            <%}%> || Booked on <%=client.dateCreated.toDateString()%>
                                         </p>
                                     <%})%>
                                 <%}else{%>
                                     <%booking.clients.forEach(client=>{%>
                                         <p class="card-text">
-                                            <a href="/user/client/<%=client._id%>"><%=client.name%></a> booked on <%=client.dateCreated.toDateString()%> pickup point: <%=client.meetingPoint[0]._id%>: <%=client.meetingPoint[0].description%>
+                                            <a href="/user/client/<%=client._id%>"><%=client.name%></a>  Booking Status: 
+                                            <%if(client.confirmation === true){%>
+                                                Confirmed
+                                            <%}else{%>
+                                                Confirmation Pending
+                                            <%}%> || Pickup point: <%=client.meetingPoint[0].name%>: <%=client.meetingPoint[0].description%> || Booked on <%=client.dateCreated.toDateString()%>
                                         </p>
                                     <%})%>    
                                 <%}%>
@@ -61,22 +71,6 @@
                     </div>
                 </div>
             </div>
-            <li class="list-group-item">
-                <h5 class="card-title">
-                    Short description
-                </h5>
-                <p class="card-text">
-                    
-                </p> 
-            </li>
-            <li class="list-group-item">
-                <h5 class="card-title">
-                    Description
-                </h5>
-                <p class="card-text">
-                    
-                </p> 
-            </li>
         </ul>
         <div class="card-body">
             <a href="#" class="card-link">Card link</a>

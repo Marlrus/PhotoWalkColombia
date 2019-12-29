@@ -50,7 +50,7 @@
                     <div id="bookingList" class="collapse" aria-labelledby="bookings" data-parent="#accordionExample">
                         <div class="card-body">
                             <%bookings.forEach(booking=>{%>
-                                <p class="card-text">Used <%=booking.date.toDateString()%> <a href="/booking/<%=booking._id%>">Details</a></p>
+                                <p class="card-text">Used <%=booking.date.toDateString()%> <a href="/user/booking/<%=booking._id%>">Details</a></p>
                             <%})%>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                     <div id="editList" class="collapse" aria-labelledby="edits" data-parent="#accordionExample">
                         <div class="card-body">
                             <%edits.forEach(edit=>{%>
-                                <p class="card-text">Used <%=edit.date.toDateString()%> <a href="/booking/<%=booking._id%>">Details</a></p>
+                                <p class="card-text">Used <%=edit.date.toDateString()%> <a href="/user/walk/<%=edit._id%>">Details</a></p>
                             <%})%>
                         </div>
                     </div>
