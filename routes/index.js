@@ -93,11 +93,11 @@ router.get("/booking",async(req,res)=>{
     
 })
 
-//booking show
+//booking show (CLIENT)
 router.get("/booking/:_id", async(req,res)=>{
     try {
         booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
-        res.render("booking/show", {booking,})
+        res.render("booking/view", {booking,})
     } catch (err) {
         console.log(err || !booking)
         res.redirect("/booking")

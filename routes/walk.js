@@ -3,6 +3,16 @@ const   express         = require("express"),
         Walk            = require("../models/walk"),
         Booking         = require('../models/booking'),
         MeetingPoint    = require('../models/meetingPoint')
+        
+//NEW WALK
+router.get("/new",async(req,res)=>{
+    try {
+        res.render("walk/new")
+    } catch (err) {
+        console.log(err)
+        res.send('ERROR')
+    }
+})
 
 //SHOW
 router.get('/:walk_id',async(req,res)=>{
@@ -12,11 +22,6 @@ router.get('/:walk_id',async(req,res)=>{
     console.log('==============REFRESH===========')
     console.log(edits)
     res.render('walk/show',{walk, bookings, edits,})
-})
-
-//NEW WALK
-router.get("/new",(req,res)=>{
-    res.render("walk/new")
 })
 
 //WALK POST

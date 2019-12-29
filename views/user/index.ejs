@@ -11,7 +11,7 @@
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Currently Running Bookings</h2>
         <%runningBookings.forEach(booking=>{%>
-        <a href="#" class="list-group-item list-group-item-action">
+        <a href="/user/booking/<%=booking._id%>" class="list-group-item list-group-item-action">
             <%=booking.date.toDateString()%> booking for <%=booking.walk[0].name%>
         </a>
         <%})%>

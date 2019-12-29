@@ -8,7 +8,7 @@ const   express         = require("express"),
 //Booking routes
 //============================
 
-//SHOW
+
 
 //NEW Booking
 router.get('/new',async(req,res)=>{
@@ -19,6 +19,14 @@ router.get('/new',async(req,res)=>{
     // console.log(walks)
     // console.log(meetingPoints)
     res.render('booking/new',{walks,meetingPoints,})
+})
+
+//SHOW
+router.get('/:_id',async(req,res)=>{
+    const booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint').populate('clients')
+    console.log(booking)
+    res.render('booking/show', {booking,})
+    // res.send('Booking SHow')
 })
 
 //POST Booking

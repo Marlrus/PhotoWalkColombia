@@ -1,31 +1,88 @@
 <%- include("../partials/header") -%>
 
+<h1 class="text-center">Details for Booking: <%=booking.walk[0].name%> on <%=booking.date.toDateString()%></h1>
+
 <div class="container">
-    <div class="card mb-3">
-        <img class="card-img-top" src="<%=booking.walk[0].image%>" alt="Card image cap">
+    <div class="card" >
+        <img src="<%=booking.walk[0].image%>" class="card-img-top" alt="...">
+        
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h5 class="card-title">
+                    Details for Booking: <a href="/user/walk/<%=booking.walk[0]._id%>"><%=booking.walk[0].name%></a> on <%=booking.date.toDateString()%>
+                </h5>
+                <div class="row">
+                    <div class="col-lg-6">
+                        Created on: <%=booking.dateCreated.toDateString()%> 
+                        <br>Max spots: <%=booking.spots%>
+                        <br>Booked Spots: <%=booking.bookedSpots%>
+                        <br>Spot Price: <%=booking.price%> USD
+                    </div>
+                    <div class="col-lg-6">
+                        Income: <%=booking.bookedSpots*booking.price%> USD
+                        <%if(booking.pickup === false){%>
+                            <br>Meeting Point: <a href="/user/meetingPoint/<%=booking.meetingPoint[0]._id%>"><%=booking.meetingPoint[0].name%></a>
+                        <%}else{%>
+                            <br>Meeting Point: Pickup
+                        <%}%>
+                        <br>Walk Start: <%=booking.startTime%>
+                        <br>Walk End: <%=booking.endTime%>
+                    </div>
+                </div>
+            </li>
+            <div class="card-body p-0">
+                <div class="accordion" id="clientAccordion">
+                    <div class="card">
+                        <div class="card-header" id="clients">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#clientList"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    Client Details
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="clientList" class="collapse" aria-labelledby="clients" data-parent="#clientAccordion">
+                            <div class="card-body">
+                                <%if(booking.pickup === false){%>
+                                    <%booking.clients.forEach(client=>{%>
+                                        <p class="card-text">
+                                            <a href="/user/client/<%=client._id%>"><%=client.name%></a> booked on <%=client.dateCreated.toDateString()%>
+                                        </p>
+                                    <%})%>
+                                <%}else{%>
+                                    <%booking.clients.forEach(client=>{%>
+                                        <p class="card-text">
+                                            <a href="/user/client/<%=client._id%>"><%=client.name%></a> booked on <%=client.dateCreated.toDateString()%> pickup point: <%=client.meetingPoint[0]._id%>: <%=client.meetingPoint[0].description%>
+                                        </p>
+                                    <%})%>    
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <li class="list-group-item">
+                <h5 class="card-title">
+                    Short description
+                </h5>
+                <p class="card-text">
+                    
+                </p> 
+            </li>
+            <li class="list-group-item">
+                <h5 class="card-title">
+                    Description
+                </h5>
+                <p class="card-text">
+                    
+                </p> 
+            </li>
+        </ul>
         <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <h3 class="card-title"><%=booking.walk[0].name%></h3>
-                </div>
-                <div class="col-6 text-right">
-                    <%=booking.spots-booking.bookedSpots%> Spots Left! &emsp; <strong>Price: $<%=booking.price%></strong>
-                </div>
-            </div>
-            <p class="card-text"><%-booking.walk[0].shortDescription%></p>
-            <p class="card-text"><%-booking.walk[0].description%></p>
-            <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.startTime%> to <%=booking.endTime%></small></p>
-            <a class="btn btn-info" href="/booking/<%=booking._id%>/client/new">Book your spot now!</a>
-            <div class="row mt-4">
-                <div class="col-12">
-                    <h5 class="card-title">Punto de encuentro: <strong><%=booking.meetingPoint[0].name%></strong> </h5>
-                    <p><%=booking.meetingPoint[0].description%></p>
-                </div>
-            </div>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
         </div>
     </div>
 </div>
-
-
 
 <%- include("../partials/footer") -%>

@@ -51,6 +51,13 @@ app.use(async (req,res,next)=>{
             $lte: endDate
         }
     }).sort({date: 'asc'}).populate('walk')
+    console.log('===================middleware====================================')
+    console.log('===================middleware====================================')
+    console.log('===================middleware====================================')
+    console.log(bookingDropdown)
+    console.log('===================middleware====================================')
+    console.log('===================middleware====================================')
+    console.log('===================middleware====================================')
     // Being Called Twice
     // console.log(bookingDropdown)
     res.locals.bookingDropdown = bookingDropdown

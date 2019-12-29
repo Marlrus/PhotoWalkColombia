@@ -4,6 +4,13 @@ const   express         = require("express"),
         Booking         = require('../models/booking'),
         MeetingPoint    = require('../models/meetingPoint')
 
+
+
+//NEW Meeting Point
+router.get('/new',(req,res)=>{
+    res.render("meetingPoint/new")
+})
+
 //SHOW
 
 router.get('/:meetingPoint_id',async(req,res)=>{
@@ -13,11 +20,6 @@ router.get('/:meetingPoint_id',async(req,res)=>{
     console.log('==============REFRESH===========')
     console.log(edits)
     res.render('meetingPoint/show', {meetingPoint, bookings, edits,})
-})
-
-//NEW Meeting Point
-router.get('/new',(req,res)=>{
-    res.render("meetingPoint/new")
 })
 
 //CREATE Meeting Point
