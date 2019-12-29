@@ -62,7 +62,7 @@
                                                 Confirmed
                                             <%}else{%>
                                                 Confirmation Pending
-                                            <%}%> || Pickup point: <%=client.meetingPoint[0].name%>: <%=client.meetingPoint[0].description%> || Booked on <%=client.dateCreated.toDateString()%>
+                                            <%}%> || Pickup point: <a href="https://www.google.com/maps/search/<%=client.meetingPoint[0].name%>/@4.6964071,-74.055839,17z" target="_blank"><%=client.meetingPoint[0].name%></a> : <a href="https://www.google.com/maps/search/<%=client.meetingPoint[0].description.replace(/ /g, '+').replace('#', '%23')%> /@4.6964071,-74.055839,17z" target="_blank"><%=client.meetingPoint[0].description%> </a> || Booked on <%=client.dateCreated.toDateString()%>
                                         </p>
                                     <%})%>    
                                 <%}%>
