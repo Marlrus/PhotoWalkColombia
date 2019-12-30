@@ -22,8 +22,8 @@ router.get('/:walk_id',async(req,res)=>{
     } else {
         const bookings = await Booking.find({_id: walk.usedInBooking}).sort({date: 'asc'})
         const edits = await Walk.find({currentVersion : false})
-        console.log('==============REFRESH===========')
-        console.log(edits)
+        // console.log('==============REFRESH===========')
+        // console.log(edits)
         res.render('walk/show',{walk, bookings, edits,})
     }
 })

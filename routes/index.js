@@ -76,7 +76,7 @@ router.get("/booking",async(req,res)=>{
         let endDate = new Date().setMonth(date.getMonth()+1)
         // console.log(date)
         // console.log(new Date(endDate))
-        bookings = await Booking.find({
+        bookings = await Booking.find({closed: {$ne:true},
             date: {
                 $gte: date,
                 $lte: endDate

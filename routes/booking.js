@@ -48,6 +48,9 @@ router.post('/',async(req,res)=>{
     try {
         // TEMP APPROVAL ADDED
         req.body.booking.approved = true
+        // Set up for date to be created using endTime hour. For Cron to close properly
+        req.body.booking.date=`${req.body.booking.date} ${req.body.booking.endTime}`
+        console.log(req.body.booking.date)
         if (req.body.booking.pickup === 'true' || req.body.booking.meetingPoint === 'true'){
             req.body.booking.pickup = true
             const meetingPoint = await MeetingPoint.findOne({name: 'Pickup', currentVersion: true})
@@ -63,11 +66,11 @@ router.post('/',async(req,res)=>{
             Walk.findById(req.body.booking.walk),
             MeetingPoint.findById(req.body.booking.meetingPoint)
         ])
-        walk.usedInBooking.push(booking)
+        walk.usedInBooking.push(booking._id)
         walk.save()
-        meetingPoint.usedInBooking.push(booking)
+        meetingPoint.usedInBooking.push(booking._id)
         meetingPoint.save()
-        // console.log(booking)
+        console.log(booking)
         // res.send('Booking POST')
         res.redirect(`/booking/${booking._id}`)
     } catch (err) {

@@ -60,14 +60,16 @@ app.use(async (req,res,next)=>{
     next()
 })
 
-//RUN EVERY 10s (Future = run at midnight)
-new CronJob('*/10 * * * * *', async ()=> {
+//RUN EVERY 1minutes (Future = run at midnight)
+new CronJob('0 */1 * * * *', async ()=> {
     //Find OPEN Bookings, check if they should be closed, close them
+    console.log(`=====Running every minute======== ${new Date(Date.now())}`)
     const bookings = await Booking.find({closed : {$ne:true}})
     let today = new Date()
     bookings.forEach(booking=>{
         if (today>booking.date){
             booking.closed = true
+            console.log('Closing Booking')
             booking.save()
         }else{
             console.log('Still open')
