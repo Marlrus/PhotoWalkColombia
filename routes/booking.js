@@ -21,6 +21,41 @@ router.get('/new',async(req,res)=>{
     res.render('booking/new',{walks,meetingPoints,})
 })
 
+//NEW PERSONALIZED
+router.get('/new/personalized',async(req,res)=>{
+    res.render('booking/newPersonalized')
+})
+
+//POST PERSONALIZED
+router.post('/personalized',async(req,res)=>{
+    req.body.booking.personalized = true
+    const [booking,walk,meetingPoint] = await Promise.all([
+        Booking.create(req.body.booking),
+        Walk.create(req.body.walk),
+        MeetingPoint.create(req.body.meetingPoint)
+    ])
+    await Promise.all ([
+        booking.walk.push(walk._id),
+        booking.meetingPoint.push(meetingPoint._id),
+        walk.usedInBooking.push(booking._id),
+        meetingPoint.usedInBooking.push(booking._id)
+    ])
+    await Promise.all ([
+        booking.save(),
+        walk.save(),
+        meetingPoint.save()
+    ])
+    console.log(booking)
+    console.log(walk)
+    console.log(meetingPoint)
+    res.redirect(`/booking/${booking._id}`)
+})
+
+//NEW SEASONAL
+router.get('/new/seasonal',async(req,res)=>{
+    res.send('Seasonal Form')
+})
+
 //SHOW
 router.get('/:_id',async(req,res)=>{
     try {

@@ -3,6 +3,7 @@ const mongoose  = require('mongoose')
 const meetingPointSchema = new mongoose.Schema({
     name: String,
     description: String,
+    location: String,
     dateCreated: {
         type: Date, 
         default:Date.now

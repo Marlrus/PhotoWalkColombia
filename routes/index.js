@@ -44,31 +44,6 @@ router.get("/user", async(req,res)=>{
     }
 })
 
-// //USER PANEL WORKING CODE
-// router.get("/user", async(req,res)=>{
-//     try {
-//         let date = new Date()
-//         let endDate = new Date().setMonth(date.getMonth() + 1)
-//         let [bookings,walks,meetingPoints] = await Promise.all([
-//             Booking.find({
-//                 date: {
-//                     $gte: date,
-//                     $lte: endDate
-//                 }
-//             }).sort({ date: 'asc' }).populate('walk'),
-//             Walk.find({}).sort({dateCreated: 'desc'}),
-//             MeetingPoint.find({name:{$ne: 'Pickup'}}).sort({dateCreated: 'desc'}),
-//         ])
-//         // console.log(booking)
-//         // console.log(walk)
-//         // console.log(meetingPoint)
-//         res.render('user/index',{bookings, walks, meetingPoints,})
-//     } catch (err) {
-//         console.log(err)
-//         res.redirect('back')
-//     }
-// })
-
 //Index
 router.get("/booking",async(req,res)=>{
     try {

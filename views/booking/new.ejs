@@ -65,8 +65,13 @@
                 <input type="time" id="appt" name="booking[endTime]" value="12:00" required>
             </div>
         </div>
-        <button class="btn btn-lg btn-light">Submit</button>
-      </form>
+            <button class="btn btn-lg btn-info">Submit</button>
+        </form>
+        <div>
+            <strong>Special Booking:</strong> &emsp;
+            <a href="/user/booking/new/personalized" class="btn btn-lg btn-success">Personalized</a>
+            <a href="/user/booking/new/seasonal" class="btn btn-lg btn-success">Seasonal</a>
+        </div>
 </div>
 <script>
     document.querySelector('input[id="pickup"]').addEventListener('RadioStateChange',()=>{
