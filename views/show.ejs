@@ -1,4 +1,4 @@
-<%- include("../partials/header") -%>
+<%- include("./partials/header") -%>
 
 <div class="container">
     <div class="card mb-3">
@@ -15,7 +15,11 @@
             <p class="card-text"><%-booking.walk[0].shortDescription%></p>
             <p class="card-text"><%-booking.walk[0].description%></p>
             <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.startTime%> to <%=booking.endTime%></small></p>
-            <a class="btn btn-info" href="/booking/<%=booking._id%>/client/new">Book your spot now!</a>
+            <%if(!booking.closed || booking.closed === false){%>
+                <a class="btn btn-info" href="/booking/<%=booking._id%>/client/new">Book your spot now!</a>
+            <%}else{%>
+                <strong>Sorry This Booking is full!</strong> Please  look at <a href="/booking">other bookings</a>, book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
+            <%}%>    
             <div class="row mt-4">
                 <div class="col-12">
                     <h5 class="card-title">Punto de encuentro: <strong><%=booking.meetingPoint[0].name%></strong> </h5>
@@ -28,4 +32,4 @@
 
 
 
-<%- include("../partials/footer") -%>
+<%- include("./partials/footer") -%>

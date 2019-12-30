@@ -5,6 +5,7 @@ const clientSchema = new mongoose.Schema({
     email: String,
     specialNeeds: String,
     confirmation: Boolean,
+    specialCode: String,
     dateCreated: {
         type: Date, 
         default:Date.now

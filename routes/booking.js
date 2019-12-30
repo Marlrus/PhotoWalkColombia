@@ -46,6 +46,8 @@ router.get('/:_id',async(req,res)=>{
 //POST Booking
 router.post('/',async(req,res)=>{
     try {
+        // TEMP APPROVAL ADDED
+        req.body.booking.approved = true
         if (req.body.booking.pickup === 'true' || req.body.booking.meetingPoint === 'true'){
             req.body.booking.pickup = true
             const meetingPoint = await MeetingPoint.findOne({name: 'Pickup', currentVersion: true})
@@ -61,7 +63,6 @@ router.post('/',async(req,res)=>{
             Walk.findById(req.body.booking.walk),
             MeetingPoint.findById(req.body.booking.meetingPoint)
         ])
-        // console.log(meetingPoint)
         walk.usedInBooking.push(booking)
         walk.save()
         meetingPoint.usedInBooking.push(booking)

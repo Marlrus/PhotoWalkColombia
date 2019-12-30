@@ -22,6 +22,9 @@ router.post("/", async(req,res)=>{
         const booking = await Booking.findById(req.params._id)
         booking.clients.push(client)
         booking.bookedSpots++
+        if(booking.bookedSpots === booking.spots){
+            booking.closed = true
+        }
         booking.save()
         client.booking.push(booking)
         if(booking.pickup === true){

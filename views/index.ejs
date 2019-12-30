@@ -1,4 +1,4 @@
-<%- include("../partials/header") -%>
+<%- include("./partials/header") -%>
 
 <div class="container-fluid">
     <h1 class="display-3 text-center">All walks from today to <%=endDate.toDateString()%></h1>
@@ -12,7 +12,11 @@
                     <div class="card m-0 h-100">
                         <div class="card-header">
                             <h5 class="display-4"><%=booking.walk[0].name%></h5>
-                            <h6 class="card-subtitle mb-2 text-muted"><%=booking.spots-booking.bookedSpots%> spots Left!</h6>
+                            <%if(booking.closed){%>
+                                <h6 class="card-subtitle mb-2 text-muted"> Fully booked!</h6>
+                            <%}else{%>
+                                <h6 class="card-subtitle mb-2 text-muted"><%=booking.spots-booking.bookedSpots%> spots Left!</h6>
+                            <%}%>
                         </div>
                         <div class="card-body h-100">
                             <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
@@ -33,10 +37,10 @@
                     <div class="card m-0 h-100">
                         <div class="card-header">
                             <h5 class="display-4"><%=booking.walk[0].name%></h5>
-                            <%if(booking.spots-booking.bookedSpots>0){%>
-                                <h6 class="card-subtitle mb-2 text-muted"><%=booking.spots-booking.bookedSpots%> spots Left!</h6>
-                            <%}else{%>
+                            <%if(booking.closed){%>
                                 <h6 class="card-subtitle mb-2 text-muted"> Fully booked!</h6>
+                            <%}else{%>
+                                <h6 class="card-subtitle mb-2 text-muted"><%=booking.spots-booking.bookedSpots%> spots Left!</h6>
                             <%}%>
                         </div>
                         <div class="card-body h-100">
@@ -54,4 +58,4 @@
     
 </div>
 
-<%- include("../partials/footer") -%>
+<%- include("./partials/footer") -%>

@@ -85,7 +85,8 @@ router.get("/booking",async(req,res)=>{
         // console.log(bookings)
         //_id is good
         // res.send('Index Render')
-        res.render("booking/index", {bookings, endDate: new Date(endDate)})
+        console.log(bookings)
+        res.render("index", {bookings, endDate: new Date(endDate)})
     } catch (err) {
         console.log(err)
         res.send('Error')
@@ -99,7 +100,7 @@ router.get("/booking/:_id", async(req,res)=>{
         booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
         // console.log(booking)
 
-        res.render("booking/view", {booking,})
+        res.render("show", {booking,})
     } catch (err) {
         console.log(err || !booking)
         res.redirect("/booking")

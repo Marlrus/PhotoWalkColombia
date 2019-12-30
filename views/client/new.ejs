@@ -43,8 +43,15 @@
                         <label>Address (Preferred but optional)</label>
                         <textarea name="meetingPoint[description]" type="text" class="form-control" placeholder="Address for your acommodation to arrange the pickup service (Please include if the address is an airBnB or unlisted BnB)" cols="30" rows="5" required></textarea>
                     </div>
-                <%}%>    
-                <button class="btn btn-info">Book your spot now!</button>
+                <%}%> 
+                <div class="row">
+                    <div class="col-xl-6">
+                        <button class="btn btn-info">Book your spot now!</button>
+                    </div>
+                    <div class="col-xl-6 form-group">
+                        <input type="text" class="form-control" name="client[specialCode]" placeholder="Referral Code" id="">
+                    </div>
+                </div>   
             </form>
         </div>
     </div>
