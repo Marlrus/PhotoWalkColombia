@@ -20,7 +20,7 @@ router.post("/", async(req,res)=>{
         req.body.client.confirmation = true
         const client = await Client.create(req.body.client)
         const booking = await Booking.findById(req.params._id)
-        booking.clients.push(client)
+        booking.clients.push(client._id)
         booking.bookedSpots++
         if(booking.bookedSpots === booking.spots){
             booking.closed = true
@@ -29,9 +29,9 @@ router.post("/", async(req,res)=>{
         client.booking.push(booking)
         if(booking.pickup === true){
             const meetingPoint = await MeetingPoint.create(req.body.meetingPoint)
-            meetingPoint.usedInBooking.push(booking)
+            meetingPoint.usedInBooking.push(booking._id)
             meetingPoint.save()
-            client.meetingPoint.push(meetingPoint)
+            client.meetingPoint.push(meetingPoint._id)
         }
         client.save()
         // console.log(booking)

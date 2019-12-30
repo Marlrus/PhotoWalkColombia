@@ -76,16 +76,16 @@ router.get("/booking",async(req,res)=>{
         let endDate = new Date().setMonth(date.getMonth()+1)
         // console.log(date)
         // console.log(new Date(endDate))
-        bookings = await Booking.find({closed: {$ne:true},
+        bookings = await Booking.find({
             date: {
                 $gte: date,
                 $lte: endDate
-            }
+            },
+            personalized : {$ne: true}
         }).sort({date: 'asc'}).populate('walk')
         // console.log(bookings)
         //_id is good
         // res.send('Index Render')
-        console.log(bookings)
         res.render("index", {bookings, endDate: new Date(endDate)})
     } catch (err) {
         console.log(err)

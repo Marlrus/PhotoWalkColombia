@@ -75,7 +75,7 @@ new CronJob('0 */1 * * * *', async ()=> {
             console.log('Still open')
         }
     })
-}, null, true, 'America/Los_Angeles');
+}, null, true, 'America/Bogota');
 
 app.use("/", indexRoutes)
 app.use("/booking/:_id/client", clientRoutes)

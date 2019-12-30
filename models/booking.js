@@ -8,7 +8,10 @@ const bookingSchema = new mongoose.Schema({
     startTime: String,
     endTime: String,
     closed: Boolean,
+    //create a specialStatus object?
     approved: Boolean,
+    personalized: Boolean,
+    seasonal: Boolean,
     pickup: Boolean,
     dateCreated: {
         type: Date, 

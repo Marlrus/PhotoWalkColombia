@@ -56,7 +56,7 @@ router.post('/',async(req,res)=>{
             const meetingPoint = await MeetingPoint.findOne({name: 'Pickup', currentVersion: true})
             req.body.booking.meetingPoint = meetingPoint
         } else {
-            req.body.booking.pickup = false
+            // req.body.booking.pickup = false
             const meetingPoint = await MeetingPoint.findById(req.body.booking.meetingPoint)
             req.body.booking.meetingPoint = meetingPoint
         }
