@@ -18,11 +18,11 @@
             <label>Select a Meeting Point for this Booking</label>
             <select class="form-control" name="booking[meetingPoint]" required>
                 <option value="">-- Please select a meetingPoint --</option>
-                <option value="true">Pickup</option>
                 <%meetingPoints.forEach(meetingPoint=>{%>
                     <option value="<%=meetingPoint._id%>"><%=meetingPoint.name%></option>
                 <%})%> 
             </select>
+            
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -45,7 +45,7 @@
                         </label>
                     </div>
                     <div class="form-check col-3 col-md-4">
-                        <input class="form-check-input" type="radio" name="booking[pickup]"  value="true">
+                        <input id="pickup" class="form-check-input" type="radio" name="booking[pickup]"  value="true">
                         <label class="form-check-label">
                             Required
                         </label>
@@ -68,6 +68,17 @@
         <button class="btn btn-lg btn-light">Submit</button>
       </form>
 </div>
+<script>
+    document.querySelector('input[id="pickup"]').addEventListener('RadioStateChange',()=>{
+        if(event.target.checked){
+            document.querySelector('select[name="booking[meetingPoint]"]').disabled=true
+            document.querySelector('select[name="booking[meetingPoint]"]').required=false
+        } else {
+            document.querySelector('select[name="booking[meetingPoint]"]').disabled=false
+            document.querySelector('select[name="booking[meetingPoint]"]').required=true
+        }
+    })
+</script>
 <script>document.getElementById('datePicker').valueAsDate = new Date();</script>
 <!-- converts new Date into ISO String which is what the date input takes, however Date has a Time value T after what we need for date "2019-12-20T13:44:00.839Z " we use .split to split the value a T and make them into an array with [0] as everything before "T" and [1] everythign after "T". We use [0] to get the value we need "2019-12-20" -->
 <script>document.getElementById('datePicker').setAttribute('min', new Date().toISOString().split('T')[0]);</script>
