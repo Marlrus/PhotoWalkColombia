@@ -4,7 +4,8 @@ const   express             = require("express"),
         methodOverride      = require("method-override"),
         mongoose            = require("mongoose"),
         expSanitizer        = require("express-sanitizer"),
-        flash               = require("connect-flash")
+        flash               = require("connect-flash"),
+        CronJob             = require('cron').CronJob
 
 
 //ROUTE REQUIRING
@@ -59,6 +60,20 @@ app.use(async (req,res,next)=>{
     next()
 })
 
+//RUN EVERY 10s (Future = run at midnight)
+new CronJob('*/10 * * * * *', async ()=> {
+    //Find OPEN Bookings, check if they should be closed, close them
+    const bookings = await Booking.find({closed : {$ne:true}})
+    let today = new Date()
+    bookings.forEach(booking=>{
+        if (today>booking.date){
+            booking.closed = true
+            booking.save()
+        }else{
+            console.log('Still open')
+        }
+    })
+}, null, true, 'America/Los_Angeles');
 
 app.use("/", indexRoutes)
 app.use("/booking/:_id/client", clientRoutes)
