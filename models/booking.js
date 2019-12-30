@@ -7,7 +7,9 @@ const bookingSchema = new mongoose.Schema({
     bookedSpots: {type: Number, default: 0},
     startTime: String,
     endTime: String,
+    specialCode: String,
     closed: Boolean,
+    approved: Boolean,
     pickup: Boolean,
     dateCreated: {
         type: Date, 

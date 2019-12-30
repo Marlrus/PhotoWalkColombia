@@ -23,16 +23,24 @@ router.get('/new',async(req,res)=>{
 
 //SHOW
 router.get('/:_id',async(req,res)=>{
-    const booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint').populate({
-        path: 'clients',
-        populate: [{
-            path: 'meetingPoint',
-            model: 'MeetingPoint'
-        }]
-    })
-    //FUCKING MADE ITTT!!!!
-    res.render('booking/show', {booking,})
-    // res.send('Booking SHow')
+    try {
+        //FUCKING MADE ITTT!!!!
+        const booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint').populate({
+            path: 'clients',
+            populate: [{
+                path: 'meetingPoint',
+                model: 'MeetingPoint'
+            }]
+        })
+        if (!booking){
+            res.status(404).send(`Path not found`)
+        } else {
+        res.render('booking/show', {booking,})
+        }
+    } catch (err) {
+        console.log(err)
+        res.send(`ERROR: ${err}`)
+    }
 })
 
 //POST Booking
@@ -58,7 +66,7 @@ router.post('/',async(req,res)=>{
         walk.save()
         meetingPoint.usedInBooking.push(booking)
         meetingPoint.save()
-        console.log(booking)
+        // console.log(booking)
         // res.send('Booking POST')
         res.redirect(`/booking/${booking._id}`)
     } catch (err) {

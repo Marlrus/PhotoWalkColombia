@@ -97,7 +97,7 @@ router.get("/booking",async(req,res)=>{
 router.get("/booking/:_id", async(req,res)=>{
     try {
         booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
-        console.log(booking)
+        // console.log(booking)
 
         res.render("booking/view", {booking,})
     } catch (err) {

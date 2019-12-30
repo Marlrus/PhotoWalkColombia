@@ -17,11 +17,15 @@ router.get("/new",async(req,res)=>{
 //SHOW
 router.get('/:walk_id',async(req,res)=>{
     const walk = await Walk.findById(req.params.walk_id)
-    const bookings = await Booking.find({_id: walk.usedInBooking}).sort({date: 'asc'})
-    const edits = await Walk.find({currentVersion : false})
-    console.log('==============REFRESH===========')
-    console.log(edits)
-    res.render('walk/show',{walk, bookings, edits,})
+    if (!walk){
+        res.status(404).send(`Path not found`)
+    } else {
+        const bookings = await Booking.find({_id: walk.usedInBooking}).sort({date: 'asc'})
+        const edits = await Walk.find({currentVersion : false})
+        console.log('==============REFRESH===========')
+        console.log(edits)
+        res.render('walk/show',{walk, bookings, edits,})
+    }
 })
 
 //WALK POST

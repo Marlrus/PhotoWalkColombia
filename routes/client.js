@@ -31,7 +31,7 @@ router.post("/", async(req,res)=>{
             client.meetingPoint.push(meetingPoint)
         }
         client.save()
-        console.log(booking)
+        // console.log(booking)
         res.redirect(`/booking/${req.params._id}`)
     } catch (err) {
         console.log(err)

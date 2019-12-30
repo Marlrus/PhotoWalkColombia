@@ -15,11 +15,15 @@ router.get('/new',(req,res)=>{
 
 router.get('/:meetingPoint_id',async(req,res)=>{
     const meetingPoint = await MeetingPoint.findById(req.params.meetingPoint_id)
-    const bookings = await Booking.find({_id: meetingPoint.usedInBooking}).sort({date: 'asc'})
-    const edits = await MeetingPoint.find({currentVersion : false})
-    console.log('==============REFRESH===========')
-    console.log(edits)
-    res.render('meetingPoint/show', {meetingPoint, bookings, edits,})
+    if (!meetingPoint){
+        res.status(404).send(`Path not found`)
+    } else {
+        const bookings = await Booking.find({_id: meetingPoint.usedInBooking}).sort({date: 'asc'})
+        const edits = await MeetingPoint.find({currentVersion : false})
+        console.log('==============REFRESH===========')
+        console.log(edits)
+        res.render('meetingPoint/show', {meetingPoint, bookings, edits,})
+    }
 })
 
 //CREATE Meeting Point
