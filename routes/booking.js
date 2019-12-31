@@ -23,7 +23,7 @@ router.get('/new',async(req,res)=>{
 
 //NEW PERSONALIZED
 router.get('/new/personalized',async(req,res)=>{
-    res.render('booking/newPersonalized')
+    res.render('booking/personalizedNew')
 })
 
 //POST PERSONALIZED
