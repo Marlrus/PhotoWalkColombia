@@ -12,9 +12,13 @@
                 </div>
                 <div class="col-6 text-right">
                     <%if(!booking.personalized){%>
-                        Spots Left: <%=booking.spots-booking.bookedSpots%> ! 
+                        <%if(booking.spots-booking.bookedSpots>1){%>
+                            <%=booking.spots-booking.bookedSpots%> spots Left! 
+                        <%}else{%>
+                            1 spot Left!
+                        <%}%>
                     <%}%>    
-                        &emsp; <strong>Price: $<%=booking.price%></strong>
+                    &emsp; <strong>Price: $<%=booking.price%></strong>
                 </div>
             </div>
             <p class="card-text"><%-booking.walk[0].shortDescription%></p>

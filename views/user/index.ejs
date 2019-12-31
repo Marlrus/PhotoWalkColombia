@@ -12,7 +12,7 @@
         <h2 class="list-group-item list-group-item-action active">Currently Running Bookings</h2>
         <%runningBookings.forEach(booking=>{%>
         <a href="/user/booking/<%=booking._id%>" class="list-group-item list-group-item-action">
-            <%=booking.date.toDateString()%> booking for <%=booking.walk[0].name%>
+            <%=booking.date.toDateString()%> <%if(booking.closed){%><strong>[FULL]</strong><%}%> booking for <%=booking.walk[0].name%> <%if(booking.pickup){%><em><strong>*Pickup</strong></em><%}%><%if(booking.personalized){%><em><strong>*Personalized</strong></em><%}%>
         </a>
         <%})%>
     </div>

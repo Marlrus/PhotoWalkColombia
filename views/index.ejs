@@ -15,7 +15,15 @@
                             <%if(booking.closed){%>
                                 <h6 class="card-subtitle mb-2 text-muted"> Fully booked!</h6>
                             <%}else{%>
-                                <h6 class="card-subtitle mb-2 text-muted"><%=booking.spots-booking.bookedSpots%> spots Left!</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%if(!booking.personalized){%>
+                                        <%if(booking.spots-booking.bookedSpots>1){%>
+                                            <%=booking.spots-booking.bookedSpots%> spots Left! 
+                                        <%}else{%>
+                                            1 spot Left!
+                                        <%}%>
+                                    <%}%> 
+                                </h6>
                             <%}%>
                         </div>
                         <div class="card-body h-100">
@@ -47,7 +55,15 @@
                             <%if(booking.closed){%>
                                 <h6 class="card-subtitle mb-2 text-muted"> Fully booked!</h6>
                             <%}else{%>
-                                <h6 class="card-subtitle mb-2 text-muted"><%=booking.spots-booking.bookedSpots%> spots Left!</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%if(!booking.personalized){%>
+                                        <%if(booking.spots-booking.bookedSpots>1){%>
+                                            <%=booking.spots-booking.bookedSpots%> spots Left! 
+                                        <%}else{%>
+                                            1 spot Left!
+                                        <%}%>
+                                    <%}%> 
+                                </h6>
                             <%}%>
                         </div>
                         <div class="card-body h-100">
