@@ -1,25 +1,46 @@
 <%- include("../partials/header") -%>
 
-<h1 class="text-center">Details for Booking: <%=booking.walk[0].name%> on <%=booking.date.toDateString()%></h1>
+<h1 class="text-center">Details for Booking:
+<%if(booking.closed){%>
+    <strong>[Closed]</strong>
+<%}%> 
+<%=booking.walk[0].name%> on <%=booking.date.toDateString()%></h1>
 
+<!-- Calcualtions -->
+<%let pending = 0%>
+<%let confirmations = 0%>
+<%booking.clients.forEach(client=>{%>
+    <%if(!client.confirmation){pending++}%>
+    <%if(client.confirmation){confirmations++}%>
+<%})%>    
 <div class="container">
     <div class="card" >
-        <img src="<%=booking.walk[0].image%>" class="card-img-top" alt="...">
-        
+        <%if(booking.walk[0].image){%>
+            <img src="<%=booking.walk[0].image%>" class="card-img-top" alt="...">
+        <%}%>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <h5 class="card-title">
-                    Details for Booking: <a href="/user/walk/<%=booking.walk[0]._id%>"><%=booking.walk[0].name%></a> on <%=booking.date.toDateString()%>
+                    Details for Booking: <a href="/user/walk/<%=booking.walk[0]._id%>"><%=booking.walk[0].name%></a> 
+                    <%if(booking.pickup){%> <strong>*pickup</strong> <%}%> <%if(booking.personalized){%> <strong>*personalized</strong> <%}%> 
+                    on <%=booking.date.toDateString()%>
                 </h5>
+                <%if(!booking.closed){%>
+                    <strong>Spots left:</strong> <%=booking.spots-booking.bookedSpots%>
+                <%}%>
                 <div class="row">
                     <div class="col-lg-6">
                         Created on: <%=booking.dateCreated.toDateString()%> 
                         <br>Max spots: <%=booking.spots%>
                         <br>Booked Spots: <%=booking.bookedSpots%>
-                        <br>Spot Price: <%=booking.price%> USD
+                        <%if(pending>0){%> 
+                            <br>Pending Confirmations: <%=pending%>
+                        <%}%>
+                        <br>Confirmed Spots: <%=confirmations%>
                     </div>
                     <div class="col-lg-6">
-                        Income: <%=booking.bookedSpots*booking.price%> USD
+                        Spot Price: <%=booking.price%> USD
+                        <br>Income: <%=booking.bookedSpots*booking.price%> USD
                         <%if(booking.pickup === false){%>
                             <br>Meeting Point: <a href="/user/meetingPoint/<%=booking.meetingPoint[0]._id%>"><%=booking.meetingPoint[0].name%></a>
                         <%}else{%>
@@ -51,6 +72,7 @@
                                                 Confirmed
                                             <%}else{%>
                                                 Confirmation Pending
+                                                <%pending++ %>
                                             <%}%> || Booked on <%=client.dateCreated.toDateString()%>
                                         </p>
                                     <%})%>

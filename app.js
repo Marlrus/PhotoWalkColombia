@@ -47,6 +47,7 @@ app.use(async (req,res,next)=>{
     let date = new Date()
     let endDate = new Date().setMonth(date.getMonth()+1)
     const bookingDropdown = await Booking.find({
+        personalized: {$ne: true},
         date: {
             $gte: date,
             $lte: endDate

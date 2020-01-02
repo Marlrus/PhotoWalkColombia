@@ -4,53 +4,42 @@
     <p>
         In this page you can find answers to the most common questions people have about our walks. Take a look to see if you can find the answer to your question, if not please submit one and we will get back to you as soon as possible!
     </p>
-
+    <%let questionNumber = 1%>
     <div class="accordion" id="accordionExample">
         <div class="card">
-            <div class="card-header" id="question1">
+            <div class="card-header" id="question<%=questionNumber%>">
                 <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#answer1"
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#answer<%=questionNumber%>"
                         aria-expanded="true" aria-controls="collapseOne">
                         Question 1
                     </button>
                 </h2>
             </div>
     
-            <div id="answer1" class="collapse" aria-labelledby="question1" data-parent="#accordionExample">
+            <div id="answer<%=questionNumber%>" class="collapse" aria-labelledby="question<%=questionNumber%>" data-parent="#accordionExample">
                 <div class="card-body">
                     Answer 1: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ducimus quaerat aperiam sunt illum unde perferendis iure eius quibusdam id odit voluptatibus cumque, blanditiis tenetur hic dolor veritatis sed vel ea maxime numquam! Assumenda, enim obcaecati aspernatur atque alias minus asperiores quae! Quia soluta labore exercitationem dolore fugiat, laboriosam porro totam hic perferendis quod voluptas beatae aspernatur, eligendi nostrum. Quod repellat perferendis veritatis repudiandae. Facilis doloribus assumenda, quia recusandae error eaque laborum accusantium optio non ipsum modi obcaecati est perferendis expedita voluptas iure delectus. Reiciendis accusantium, fugit quaerat fugiat molestias tenetur recusandae provident cumque. Omnis ut voluptate molestias dicta porro.
                 </div>
             </div>
         </div>
+        <%questionNumber++%>
         <div class="card">
-            <div class="card-header" id="question2">
+            <div class="card-header" id="question<%=questionNumber%>">
                 <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#answer2"
-                        aria-expanded="false" aria-controls="collapseTwo">
-                        Question 2
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#answer<%=questionNumber%>"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        Question 1
                     </button>
                 </h2>
             </div>
-            <div id="answer2" class="collapse" aria-labelledby="question2" data-parent="#accordionExample">
+    
+            <div id="answer<%=questionNumber%>" class="collapse" aria-labelledby="question<%=questionNumber%>" data-parent="#accordionExample">
                 <div class="card-body">
-                    Answer 2: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam ut quas placeat labore, enim aspernatur excepturi eveniet? Similique adipisci, aperiam delectus nostrum voluptatibus ratione natus! Aliquam corporis, quia quaerat atque inventore ratione fugiat beatae voluptatem odit, alias dolorum rem porro numquam adipisci vel. Natus architecto nemo voluptatem pariatur suscipit vitae quasi neque! Necessitatibus voluptas odit fugiat! Dolorum suscipit non reprehenderit fuga quam! Saepe iste reprehenderit autem magnam voluptatum consectetur officiis, at, molestias optio exercitationem iusto consequuntur dolorem suscipit facilis est aliquid animi asperiores iure voluptatem ex pariatur reiciendis eaque! Possimus tempore quaerat explicabo dolorem quia accusantium debitis quibusdam eveniet voluptas.
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header" id="question3">
-                <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#answer3"
-                        aria-expanded="false" aria-controls="collapseThree">
-                        Question 3
-                    </button>
-                </h2>
-            </div>
-            <div id="answer3" class="collapse" aria-labelledby="question3" data-parent="#accordionExample">
-                <div class="card-body">
-                    Answer 3 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat inventore consectetur esse architecto modi quam minus, animi et autem error, atque aut quibusdam harum? Nulla ipsum dolor necessitatibus, illo autem a harum iure porro! Hic fugiat cumque, in error eos necessitatibus tenetur distinctio exercitationem dolor, harum ullam minus id eligendi odit laboriosam, iste similique architecto consequatur veritatis neque tempore quaerat earum! Commodi natus ducimus expedita quo, dolorum accusamus eaque error quibusdam sunt voluptas quam officia delectus cum unde ex illum libero necessitatibus eos labore est incidunt atque perferendis. Cum officiis saepe, itaque optio aspernatur fuga corrupti labore quia omnis iste?
+                    Answer 1: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ducimus quaerat aperiam sunt illum unde perferendis iure eius quibusdam id odit voluptatibus cumque, blanditiis tenetur hic dolor veritatis sed vel ea maxime numquam! Assumenda, enim obcaecati aspernatur atque alias minus asperiores quae! Quia soluta labore exercitationem dolore fugiat, laboriosam porro totam hic perferendis quod voluptas beatae aspernatur, eligendi nostrum. Quod repellat perferendis veritatis repudiandae. Facilis doloribus assumenda, quia recusandae error eaque laborum accusantium optio non ipsum modi obcaecati est perferendis expedita voluptas iure delectus. Reiciendis accusantium, fugit quaerat fugiat molestias tenetur recusandae provident cumque. Omnis ut voluptate molestias dicta porro.
                 </div>
             </div>
         </div>
+        <%questionNumber++%>
     </div>
 </div>
 

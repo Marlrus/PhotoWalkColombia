@@ -27,7 +27,7 @@ router.post("/", async(req,res)=>{
         }
         booking.save()
         client.booking.push(booking)
-        if(booking.pickup === true){
+        if(booking.pickup === true || booking.personalized === true){
             const meetingPoint = await MeetingPoint.create(req.body.meetingPoint)
             meetingPoint.usedInBooking.push(booking._id)
             meetingPoint.save()

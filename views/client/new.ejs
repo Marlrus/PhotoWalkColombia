@@ -3,10 +3,9 @@
 
 <div class="container-fluid p-4 border border-info rounded">
     <div class="row justify-content-center">
-        <div class="col-xl-5 fill" style="background-image: url(<%=booking.walk[0].image%>);">
-
-        </div>
-        
+        <%if(booking.walk[0].image){%>
+            <div class="col-xl-5 fill" style="background-image: url(<%=booking.walk[0].image%>);"></div>
+        <%}%>
         <!-- <img class="col-lg-6" src="<%=booking.walk[0].image%>" alt="Card image cap"> -->
         <div class="col-xl-5">
             <div class="row">
@@ -33,14 +32,18 @@
                     <label>Special Needs</label>
                     <textarea name="client[specialNeeds]" type="text" class="form-control" placeholder="Anything you need us to know (i.e. Health condtitions, injuries, concerns, dietary restrictions, allergies.)" cols="30" rows="5" ></textarea>
                 </div>
-                <%if(booking.pickup===true){%>
+                <%if(booking.pickup===true || booking.personalized===true){%>
                     <div class="form-group">
-                        <p><strong>This walk includes a pick-up service, please include the following:</strong></p>
+                        <%if(booking.pickup){%>
+                            <p><strong>This walk includes a pick-up service, please include the following:</strong></p>
+                        <%}else{%>
+                            <p><strong>Please include your location to coordinate a Meeting Point:</strong></p>
+                        <%}%>
                         <label>Accomodation Name</label>
                         <input type="text" class="form-control" name="meetingPoint[name]" id="" placeholder="Hotel/Hostel/BnB Name" required>
                     </div>    
                     <div class="form-group">
-                        <label>Address (Preferred but optional)</label>
+                        <label>Address</label>
                         <textarea name="meetingPoint[description]" type="text" class="form-control" placeholder="Address for your acommodation to arrange the pickup service (Please include if the address is an airBnB or unlisted BnB)" cols="30" rows="5" required></textarea>
                     </div>
                 <%}%> 
