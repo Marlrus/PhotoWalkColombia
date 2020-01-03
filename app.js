@@ -9,9 +9,9 @@ const   express             = require("express"),
 
 
 //ROUTE REQUIRING
-const   indexRoutes         = require('./routes/index'),
+const   indexRoutes         = require('./routes/frontEnd'),
         bookingRoutes       = require('./routes/booking'),
-        clientRoutes        = require('./routes/client'),
+        // clientRoutes        = require('./routes/client'),
         walkRoutes          = require('./routes/walk'),
         meetingPointRoutes  = require('./routes/meetingPoint')
                 
@@ -79,7 +79,7 @@ new CronJob('0 */1 * * * *', async ()=> {
 }, null, true, 'America/Bogota');
 
 app.use("/", indexRoutes)
-app.use("/booking/:_id/client", clientRoutes)
+// app.use("/booking/:_id/client", clientRoutes)
 app.use("/user/booking", bookingRoutes)
 app.use("/user/walk", walkRoutes)
 app.use("/user/meetingPoint", meetingPointRoutes)

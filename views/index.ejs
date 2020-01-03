@@ -1,14 +1,14 @@
 <%- include("./partials/header") -%>
 
+<h1 class="display-3 text-center bg-info text-white p-4">All walks from today to <%=endDate.toDateString()%></h1>
 <div class="container-fluid">
-    <h1 class="display-3 text-center">All walks from today to <%=endDate.toDateString()%></h1>
     <%let i = 1%>
     <%bookings.forEach(booking=>{%>
         <%if(i%2){%>
             <%i++%>
             <div class="row">
-                <img class="col-lg-6 p-4" src="<%=booking.walk[0].image%>" alt="">
-                <div class="col-lg-6 p-0">
+                <img class="col-lg-6 p-3 p-lg-4" src="<%=booking.walk[0].image%>" alt="">
+                <div class="col-lg-6 pt-0 p-3 pt-lg-4 pr-lg-4 pb-lg-4">
                     <div class="card m-0 h-100">
                         <div class="card-header">
                             <h5 class="display-4"><%=booking.walk[0].name%> <%if(booking.pickup){%>(Pickup)<%}%> <%if(booking.seasonal){%>(Seasonal)<%}%></h5>
@@ -36,7 +36,7 @@
                                     <strong>Sorry This Booking is full!</strong> You can book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
                                 </p>
                             <%}else{%>
-                                <a class="btn btn-info" href="booking/<%=booking._id%>/client/new">Book spot <%=booking.walk[0].name%></a>   
+                                <a class="btn btn-info" href="booking/<%=booking._id%>/new">Book spot <%=booking.walk[0].name%></a>   
                             <%}%>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
         <%}else{%>
             <%i++%>
             <div class="row">
-                <div class="col-lg-6 order-2 order-lg-1 p-0">
+                <div class="col-lg-6 order-2 order-lg-1 p-3 pt-lg-4 pl-lg-4 pb-lg-4">
                     <div class="card m-0 h-100">
                         <div class="card-header">
                             <h5 class="display-4"><%=booking.walk[0].name%> <%if(booking.pickup){%>(Pickup)<%}%> <%if(booking.seasonal){%>(Seasonal)<%}%></h5>
@@ -76,12 +76,12 @@
                                     <strong>Sorry This Booking is full!</strong> You can book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
                                 </p>
                             <%}else{%>
-                                <a class="btn btn-info" href="booking/<%=booking._id%>/client/new">Book spot <%=booking.walk[0].name%></a>   
+                                <a class="btn btn-info" href="booking/<%=booking._id%>/new">Book spot <%=booking.walk[0].name%></a>   
                             <%}%> 
                         </div>
                     </div>
                 </div>
-                <img class="col-lg-6 order-1 order-lg-2 p-4" src="<%=booking.walk[0].image%>" alt="">
+                <img class="col-lg-6 order-1 order-lg-2 p-3 p-lg-4" src="<%=booking.walk[0].image%>" alt="">
             </div>
         <%}%>
     <%})%>

@@ -25,7 +25,7 @@
             <p class="card-text"><%-booking.walk[0].description%></p>
             <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.startTime%> to <%=booking.endTime%></small></p>
             <%if(!booking.closed || booking.closed === false){%>
-                <a class="btn btn-info" href="/booking/<%=booking._id%>/client/new">Book your spot now!</a>
+                <a class="btn btn-info" href="/booking/<%=booking._id%>/new">Book your spot now!</a>
             <%}else{%>
                 <strong>Sorry This Booking is full!</strong> Please  look at <a href="/booking">other bookings</a>, book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
             <%}%>    
