@@ -1,16 +1,20 @@
-const   express         = require('express'),
-        router          = express.Router({mergeParams: true}),
+const   express             = require('express'),
+        router              = express.Router({mergeParams: true}),
         //MODELS
-        Walk            = require("../../../models/walk"),
-        Booking         = require('../../../models/booking'),
-        MeetingPoint    = require('../../../models/meetingPoint'),
-        Client          = require('../../../models/client'),
+        Walk                = require("../../../models/walk"),
+        Booking             = require('../../../models/booking'),
+        MeetingPoint        = require('../../../models/meetingPoint'),
+        Client              = require('../../../models/client'),
         //ROUTES
-        meetingPointRoutes = require('./meetingPoint')
+        meetingPointRoutes  = require('./meetingPoint'),
+        walkRoutes          = require('./walk'),
+        bookingRoutes       = require('./booking')
 
 
 //ROUTE MIDDLEWARE
+router.use("/booking", bookingRoutes)
 router.use("/meetingPoint", meetingPointRoutes)
+router.use("/walk", walkRoutes)
 
 //USER PANEL WORKING CODE
 router.get("/", async(req,res)=>{

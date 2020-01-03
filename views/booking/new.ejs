@@ -4,7 +4,7 @@
 
 <div class="container ">
     <h1 class="display-3 text-center">Create your Booking!</h1>
-    <form action="/user/booking" method="POST">
+    <form action="/user/admin/booking" method="POST">
         <div class="form-group">
             <label>Select a Walk for this Booking</label>
             <select class="form-control" name="booking[walk]" required>
@@ -69,8 +69,8 @@
         </form>
         <div>
             <strong>Special Booking:</strong> &emsp;
-            <a href="/user/booking/new/personalized" class="btn btn-lg btn-success">Personalized</a>
-            <a href="/user/booking/new/seasonal" class="btn btn-lg btn-success">Seasonal</a>
+            <a href="/user/admin/booking/new/personalized" class="btn btn-lg btn-success">Personalized</a>
+            <a href="/user/admin/booking/new/seasonal" class="btn btn-lg btn-success">Seasonal</a>
         </div>
 </div>
 <script>
