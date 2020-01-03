@@ -31,7 +31,7 @@ router.get("/", async(req,res)=>{
             Booking.find({pickup : {$ne: true},personalized:{$ne:true}}).limit(5).populate({path: 'walk',}).populate('meetingPoint').sort({dateCreated: 'desc'})
         ])
         console.log(runningBookings)
-        res.render('user/index',{runningBookings, recentBookings,})
+        res.render('backEnd/admin/index',{runningBookings, recentBookings,})
     } catch (err) {
         console.log(err)
         res.redirect('back')

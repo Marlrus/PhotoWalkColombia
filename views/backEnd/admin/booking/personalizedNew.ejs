@@ -1,4 +1,4 @@
-<%- include("../partials/userHeader") -%>
+<%- include("../../../partials/userHeader") -%>
 
 <div class="container">
     <h1 class="display-3 text-center">Personalized Booking</h1>
@@ -57,4 +57,4 @@
 <!-- converts new Date into ISO String which is what the date input takes, however Date has a Time value T after what we need for date "2019-12-20T13:44:00.839Z " we use .split to split the value a T and make them into an array with [0] as everything before "T" and [1] everythign after "T". We use [0] to get the value we need "2019-12-20" -->
 <script>document.getElementById('datePicker').setAttribute('min', new Date().toISOString().split('T')[0]);</script>
 
-<%- include("../partials/footer") -%>
+<%- include("../../../partials/footer") -%>

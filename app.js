@@ -11,13 +11,8 @@ const   express             = require("express"),
 //ROUTE REQUIRING
 const   frontEndRoutes      = require('./routes/frontEnd'),
         backEndRoutes       = require('./routes/backEnd')
-        // bookingRoutes       = require('./routes/booking'),
-        // clientRoutes        = require('./routes/client'),
-        // walkRoutes          = require('./routes/walk'),
-        // meetingPointRoutes  = require('./routes/meetingPoint')
                 
-
-
+//MODEL REQUIRING
 const   Walk            = require("./models/walk"),
         Booking         = require('./models/booking'),
         MeetingPoint    = require('./models/meetingPoint')
@@ -81,10 +76,6 @@ new CronJob('0 */1 * * * *', async ()=> {
 
 app.use("/", frontEndRoutes)
 app.use("/user", backEndRoutes)
-// app.use("/booking/:_id/client", clientRoutes)
-// app.use("/user/booking", bookingRoutes)
-// app.use("/user/walk", walkRoutes)
-// app.use("/user/meetingPoint", meetingPointRoutes)
 
 const port = process.env.PORT || 3000
 

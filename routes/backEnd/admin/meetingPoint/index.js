@@ -8,7 +8,7 @@ const   express         = require('express'),
 //MEETING POINT Routes
 //NEW Meeting Point
 router.get('/new',(req,res)=>{
-    res.render("meetingPoint/new")
+    res.render("backEnd/admin/meetingPoint/new")
 })
 
 //SHOW
@@ -22,7 +22,7 @@ router.get('/:meetingPoint_id',async(req,res)=>{
         const edits = await MeetingPoint.find({currentVersion : false})
         // console.log('==============REFRESH===========')
         // console.log(edits)
-        res.render('meetingPoint/show', {meetingPoint, bookings, edits,})
+        res.render('backEnd/admin/meetingPoint/show', {meetingPoint, bookings, edits,})
     }
 })
 

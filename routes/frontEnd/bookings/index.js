@@ -22,7 +22,7 @@ router.get("/",async(req,res)=>{
         // console.log(bookings)
         //_id is good
         // res.send('Index Render')
-        res.render("index", {bookings, endDate: new Date(endDate)})
+        res.render("frontEnd/bookings/index", {bookings, endDate: new Date(endDate)})
     } catch (err) {
         console.log(err)
         res.send('Error')
@@ -36,7 +36,7 @@ router.get("/:_id", async(req,res)=>{
         booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
         // console.log(booking)
 
-        res.render("show", {booking,})
+        res.render("frontEnd/bookings/show", {booking,})
     } catch (err) {
         console.log(err || !booking)
         res.redirect("/booking")
@@ -46,7 +46,7 @@ router.get("/:_id", async(req,res)=>{
 //walks bookingcode view
 router.get("/:_id/new",async (req,res)=>{
     booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
-    res.render("client/new",{booking,})
+    res.render("frontEnd/bookings/new",{booking,})
 })
 
 //book post
