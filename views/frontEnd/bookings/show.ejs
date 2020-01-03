@@ -31,7 +31,11 @@
             <%}%>    
             <div class="row mt-4">
                 <div class="col-12">
-                    <h5 class="card-title">Meeting Point: <strong><%=booking.meetingPoint[0].name%>&emsp;</strong><a href="<%=booking.meetingPoint[0].location%>" target="_blank">Location Link</a></h5>
+                    <h5 class="card-title">Meeting Point: <strong><%=booking.meetingPoint[0].name%>&emsp;
+                        <%if(!booking.pickup){%>
+                            </strong><a href="<%=booking.meetingPoint[0].location%>" target="_blank">Location Link for <%=booking.meetingPoint[0].name%></a>
+                        <%}%>
+                    </h5>
                     <p><%=booking.meetingPoint[0].description%></p>
                 </div>
             </div>

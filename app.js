@@ -35,22 +35,11 @@ mongoose.connect(process.env.DB_URI, {
 }).catch(err =>{
     console.log(`ERROR: ${err.message}`)
 })
-//Get Walk names
 
 //Locals
+let bookingDropdown = []
 app.use(async (req,res,next)=>{
-    //finds visible walks and only gets name ;D
-    let date = new Date()
-    let endDate = new Date().setMonth(date.getMonth()+1)
-    const bookingDropdown = await Booking.find({
-        personalized: {$ne: true},
-        date: {
-            $gte: date,
-            $lte: endDate
-        }
-    }).sort({date: 'asc'}).populate('walk')
-    // Being Called Twice
-    // console.log(bookingDropdown)
+    //Now sent through CRON
     res.locals.bookingDropdown = bookingDropdown
     // res.locals.error = req.flash('error')
     // res.locals.error = req.flash('success')
@@ -58,9 +47,9 @@ app.use(async (req,res,next)=>{
 })
 
 //RUN EVERY 1minutes (Future = run at midnight)
-new CronJob('0 */1 * * * *', async ()=> {
+new CronJob('*/30 * * * * *', async ()=> {
     //Find OPEN Bookings, check if they should be closed, close them
-    console.log(`=====Running every minute======== ${new Date(Date.now())}`)
+    console.log(`=====Running every 30s======== ${new Date(Date.now())}`)
     const bookings = await Booking.find({closed : {$ne:true}})
     let today = new Date()
     bookings.forEach(booking=>{
@@ -72,6 +61,17 @@ new CronJob('0 */1 * * * *', async ()=> {
             console.log('Still open')
         }
     })
+    //finds visible walks and only gets name ;D SENDS TO RES.Locals
+    let endDate = new Date().setMonth(today.getMonth()+1)
+    bookingDropdown = await Booking.find({
+        personalized: {$ne: true},
+        date: {
+            $gte: today,
+            $lte: endDate
+        }
+    }).sort({date: 'asc'}).populate('walk')
+    // Being Called Twice
+    console.log('Sent bookings to dropdown')
 }, null, true, 'America/Bogota');
 
 app.use("/", frontEndRoutes)
