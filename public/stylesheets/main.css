@@ -12,6 +12,7 @@ img{
     min-height: 30rem !important;
 }
 .carousel-caption{
+    bottom: auto !important;
     top: 10%;
     color: #FFFFF6 !important;
     background-color: rgba(20, 20, 20, 0.2);
@@ -25,7 +26,11 @@ img{
     background-color: #e5243f !important;
 }
 .dropdown-menu{
-    background-color: #FFFFF6 !important;
+    background-color: #e5243f !important;
+}
+.dropdown-menu > a:hover {
+    background-color: #f65c51 !important;
+    background-image: none !important;
 }
 .navbar a{
     color:#FFFFF6 !important;
@@ -37,6 +42,7 @@ img{
 .jumbotron{
     /* background-color: #f3ddc2 !important; */
     background-color: #f1e8d7 !important;
+    /* height: 35rem; */
 }
 /* My Color Scheme */
 /*  #2F5755 #54C6BE #f7b15c #f65c51 #e5243f* /
