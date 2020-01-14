@@ -1,5 +1,5 @@
 body{
-    background-color:#FFFFF6 !important;
+    background-color:#f1e8d7 !important;
 }
 
 img{
@@ -23,10 +23,10 @@ img{
     background-position: center;
 }
 .navbar{
-    background-color: #e5243f !important;
+    background-color: #f65c51 !important;
 }
 .dropdown-menu{
-    background-color: #e5243f !important;
+    background-color: #f65c51 !important;
 }
 .dropdown-menu > a:hover {
     background-color: #f65c51 !important;
@@ -44,5 +44,18 @@ img{
     background-color: #f1e8d7 !important;
     /* height: 35rem; */
 }
+#landing-gallery{
+    padding: 3rem;
+    color: #FFFFF6;
+    background-color: #f65c51;
+    height: auto;
+}
+#landing-gallery > div > div{
+    border: 3px solid red;
+    height: auto;
+    padding: 1rem;
+    margin: 1rem;
+}
+
 /* My Color Scheme */
 /*  #2F5755 #54C6BE #f7b15c #f65c51 #e5243f* /

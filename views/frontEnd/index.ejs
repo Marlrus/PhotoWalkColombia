@@ -1,5 +1,7 @@
 <%- include("../partials/header") -%>
 
+<!-- ABOUT US LANDING -->
+
 <div class="jumbotron mb-0 text-center">
     <h1 class="display-4">Welcome to Photo Walks Colombia</h1>
     <p class="lead">The best resource for the best photo walks Colombia has to offer.</p>
@@ -7,8 +9,10 @@
     <div class="row justify-content-center">
         <p class="col-lg-8">Photo Walks Colombia is an initiative born from the passion about photography and our interest in improving travel experiences. During our photo walks, out tour guide will take you and your fellow enthusiasts on a journey to experience and capture some of the most vibrant and picturesque locations in Colombia. Anyone interested in the art of taking pictures is welcome, we are always open to improving your skills and providing cultural tips to enhance your experience. We provide photography insights in a cultural and travel ambience so our customers can improve their skills to accomplish unique photographs while enjoying vibrant destinations.</p>
     </div>
-    <a class="btn btn-success btn-lg" href="/about" role="button">Learn more</a>
+    <a class="btn btn-success btn-lg" href="/about" role="button">Learn more!</a>
 </div>
+
+<!-- BOOKING LANDING -->
 
 <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
@@ -29,15 +33,68 @@
                 <img src="" class="d-block w-100 landing-booking" alt="..." style="background-image: url('<%=booking.walk[0].image%>');" data-interval='4000'>
                 <div class="carousel-caption">
                     <h1 class="display-4" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">Book any of our walks!</h1>
-                    <p class="lead" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
-                        We offer a varied pallete of guided photo walks where anyone can capture the most vibrant and pictureseque locations in Colombia while honing their photography skills and learning about Colombian culture. Learn more <u><a href="/about" style="color: white;">about us</a></u> or see our currently running walks!
-                    </p>
+                    <div class="row justify-content-center">
+                        <p class="lead col-lg-10" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
+                            We offer a varied pallete of guided photo walks where anyone can capture the most vibrant and pictureseque locations in Colombia while honing their photography skills and learning about Colombian culture. Learn more <u><a href="/about" style="color: white;">about us</a></u> or see our currently running walks!
+                        </p>
+                    </div>
                     <a class="btn btn-success btn-lg" href="/booking" role="button">See our Walks!</a>
                 </div>
             </div>
         <%}%>
     </div>
 </div>
+
+<!-- FAQ LANDING  -->
+
+<div class="jumbotron mb-0 text-center">
+    <h1 class="display-4">What makes Photo Walks different?</h1>
+    <hr class="my-4">
+    <div class="row justify-content-center">
+        <p class="col-lg-8">A photo walk is an activity in which photography enthusiasts gather in a group to walk around a certain area with the goal of taking pictures of people, places and things that seem interesting to them. Our photo walks begin with a short introductory coffee and end with a critique session so you can share your work and interact with other creative minds, and during the photo walk, our tour guides are open to providing cultural insights and travel tips. All you need for one of our photo walks is any form of camera and we will take care of the rest so you can focus on learning about Colombian culture, having fun and, of course, take great pictures of your trip! </p>
+    </div>
+    <p>
+        If you have more questions about anything related to photo walks visit our FAQ!
+    </p>
+    <a class="btn btn-success btn-lg" href="/faq" role="button">Photo Walks Colombia FAQ</a>
+</div>
+
+<!-- RECENT PW GALLERY  -->
+
+<div id="landing-gallery">
+    <h1 class="text-center">Photos from our most recent walks</h1>
+    <div class="row text-center justify-content-center">
+        <div class="card mb-3 col-lg-3">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+                    This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+        <div class="card mb-3 col-lg-3">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+                    This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+        <div class="card mb-3 col-lg-3">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+                    This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT FORM -->
     
 
 
