@@ -8,16 +8,20 @@
     <link rel="stylesheet" href="/stylesheets/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/c4079020c3.js" crossorigin="anonymous"></script>
+
     <title>Photo Walks Colombia</title>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg ">
         <!-- <div class="container"> -->
         <a class="navbar-brand" href="/">PHOTO WALKS COLOMBIA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fas fa-bars"></i>
+            <!-- <span class="navbar-toggler-icon"></span> -->
         </button>
     
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,12 +38,12 @@
                         BOOKINGS
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/booking">All Walks</a>
+                        <a class="dropdown-item" href="/booking"style="color: #e5243f !important;">All Walks</a>
                         <div class="dropdown-divider"></div>
                         <%for(let booking of bookingDropdown){%>
-                            <a class="dropdown-item" href="/booking/<%=booking._id%>"><%=booking.walk[0].name%> || <em><%=booking.date.toDateString().slice(0, 10)%></em></a>
+                            <a class="dropdown-item" href="/booking/<%=booking._id%>" style="color: #e5243f !important;"><%=booking.walk[0].name%> || <em><%=booking.date.toDateString().slice(0, 10)%></em></a>
                         <%}%>
-                        <a class="dropdown-item" href="#"><strong>Personalized Walk</strong></a>
+                        <a class="dropdown-item" href="#" style="color: #e5243f !important;"><strong>Personalized Walk</strong></a>
                     </div>
                 </li>
                 <li class="nav-item">
