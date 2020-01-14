@@ -1,29 +1,38 @@
 <%- include("../partials/header") -%>
 
-<div class="jumbotron mb-0">
+<div class="jumbotron mb-0 text-center">
     <h1 class="display-4">Welcome to Photo Walks Colombia</h1>
-    <p class="lead">Your only needed resource for the best photo walks Colombia has to offer.</p>
+    <p class="lead">The best resource for the best photo walks Colombia has to offer.</p>
     <hr class="my-4">
-    <p>What are you waiting for! Take a walk with us at any of our experiences!</p>
-    <a class="btn btn-light btn-lg" href="#" role="button">Learn more</a>
+    <div class="row justify-content-center">
+        <p class="col-lg-8">Photo Walks Colombia is an initiative born from the passion about photography and our interest in improving travel experiences. During our photo walks, out tour guide will take you and your fellow enthusiasts on a journey to experience and capture some of the most vibrant and picturesque locations in Colombia. Anyone interested in the art of taking pictures is welcome, we are always open to improving your skills and providing cultural tips to enhance your experience. We provide photography insights in a cultural and travel ambience so our customers can improve their skills to accomplish unique photographs while enjoying vibrant destinations.</p>
+    </div>
+    <a class="btn btn-success btn-lg" href="#" role="button">Learn more</a>
 </div>
 
 <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="" class="d-block w-100" alt="..." style="background-image: url('https://images.unsplash.com/photo-1533699224246-6dc3b3ed3304?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'); height: 40rem; background-size: cover; background-position: center;" data-interval='4000'>
-            <div class="carousel-caption" style="top: 10%; text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
-                <h1 class="display-4">Book any of our walks!</h1>
-                <p class="lead">Your only needed resource for the best photo walks Colombia has to offer.</p>
+            <img src="" class="d-block w-100 landing-booking" alt="..." style="background-image: url('https://images.unsplash.com/photo-1533699224246-6dc3b3ed3304?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');" data-interval='4000'>
+            <div class="carousel-caption">
+                <h1 class="display-4" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">Book any of our walks!</h1>
+                <div class="row justify-content-center">
+                    <p class="lead col-lg-10" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
+                        We offer a varied pallete of guided photo walks where anyone can capture the most vibrant and pictureseque locations in Colombia while honing their photography skills and learning about Colombian culture. Learn more <u><a href="/about" style="color: white;">about us</a></u> or see our currently running walks!
+                    </p>
+                </div>
+                <a class="btn btn-success btn-lg" href="/booking" role="button">See our Walks!</a>
             </div>
         </div>
         <%for(let booking of bookingDropdown){%>
             <div class="carousel-item">
-                <img src="" class="d-block w-100" alt="..." style="background-image: url('<%=booking.walk[0].image%>'); height: 40rem; background-size: cover;
-                background-position: center;" data-interval='4000'>
-                <div class="carousel-caption" style="top: 10%; text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
-                    <h1 class="display-4">Welcome to Photo Walks Colombia</h1>
-                    <p class="lead">Your only needed resource for the best photo walks Colombia has to offer.</p>
+                <img src="" class="d-block w-100 landing-booking" alt="..." style="background-image: url('<%=booking.walk[0].image%>');" data-interval='4000'>
+                <div class="carousel-caption">
+                    <h1 class="display-4" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">Book any of our walks!</h1>
+                    <p class="lead" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
+                        We offer a varied pallete of guided photo walks where anyone can capture the most vibrant and pictureseque locations in Colombia while honing their photography skills and learning about Colombian culture. Learn more <u><a href="/about" style="color: white;">about us</a></u> or see our currently running walks!
+                    </p>
+                    <a class="btn btn-success btn-lg" href="/booking" role="button">See our Walks!</a>
                 </div>
             </div>
         <%}%>

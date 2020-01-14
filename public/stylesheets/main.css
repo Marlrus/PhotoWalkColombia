@@ -11,3 +11,11 @@ img{
     background-position: center;
     min-height: 30rem !important;
 }
+.carousel-caption{
+    top: 10%;
+}
+.landing-booking{
+    height: 40rem; 
+    background-size: cover; 
+    background-position: center;
+}
