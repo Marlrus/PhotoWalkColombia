@@ -95,7 +95,36 @@
 </div>
 
 <!-- CONTACT FORM -->
-    
+<!-- Name, email, subject, message -->
+<div class="container p-5">
+    <div class="container">
+        <h2>Contact Us!</h2>
+        Have any additional questions about Photo Walks? Send us a message! 
+        <br>
+        <em>*This is a mailto form that will open your email client</em>
+    </div>
+    <form class="m-2" action="mailto:julian.franco.f@gmail.com" method="get" enctype="text/plain">
+        <div class="row form-group">
+            <div class="col">
+                <label>Name:</label>
+                <input name="subject" type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="col">
+                <label >Email:</label>
+                <input type="email" class="form-control" placeholder="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Subject:</label>
+            <input name="subject" type="text" class="form-control" value="Photo Walks Colombia Contact form: ">
+        </div>
+        <div class="form-group">
+            <label >Message:</label>
+            <textarea name="body" class="form-control" type="text" cols="30" rows="5" placeholder="You message here!"></textarea>
+        </div>
+        <button class="btn btn-success">Send Message</button>
+    </form>
+</div>
 
 
 <%- include("../partials/footer") -%>
