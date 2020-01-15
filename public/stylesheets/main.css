@@ -1,5 +1,5 @@
 body{
-    background-color:#f1e8d7 !important;
+    background-color:#fafde0 !important;
 }
 
 img{
@@ -11,9 +11,15 @@ img{
     background-position: center;
     min-height: 30rem !important;
 }
-.carousel-caption{
+.top-caption{
     bottom: auto !important;
     top: 10%;
+    color: #FFFFF6 !important;
+    background-color: rgba(20, 20, 20, 0.2);
+}
+.bottom-caption{
+    bottom: auto !important;
+    top: auto;
     color: #FFFFF6 !important;
     background-color: rgba(20, 20, 20, 0.2);
 }
@@ -41,7 +47,7 @@ img{
 }
 .jumbotron{
     /* background-color: #f3ddc2 !important; */
-    background-color: #f1e8d7 !important;
+    background-color: #fafde0 !important;
     /* height: 35rem; */
 }
 #landing-gallery{
