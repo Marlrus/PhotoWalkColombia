@@ -24,7 +24,8 @@ img{
     background-color: rgba(20, 20, 20, 0.2);
 }
 .landing-booking{
-    height: 35rem; 
+    /* make height dymanic */
+    height: 45rem;
     background-size: cover; 
     background-position: center;
 }
