@@ -18,12 +18,12 @@ router.get('/new',async(req,res)=>{
     ])
     // console.log(walks)
     // console.log(meetingPoints)
-    res.render('backEnd/admin/booking/new',{walks,meetingPoints,})
+    res.render('backoffice/admin/booking/new',{walks,meetingPoints,})
 })
 
 //NEW PERSONALIZED
 router.get('/new/personalized',async(req,res)=>{
-    res.render('backEnd/admin/booking/personalizedNew')
+    res.render('backoffice/admin/booking/personalizedNew')
 })
 
 //POST PERSONALIZED
@@ -71,7 +71,7 @@ router.get('/:_id',async(req,res)=>{
         if (!booking){
             res.status(404).send(`Path not found`)
         } else {
-        res.render('backEnd/admin/booking/show', {booking,})
+        res.render('backoffice/admin/booking/show', {booking,})
         }
     } catch (err) {
         console.log(err)

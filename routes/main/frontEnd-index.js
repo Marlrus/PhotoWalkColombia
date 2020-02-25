@@ -14,18 +14,18 @@ router.use("/booking", bookingsRoutes)
 //===================================
 
 router.get("/",(req,res)=>{
-    res.render("frontEnd/index")
+    res.render("main/index")
 })
 
 router.get("/about",(req,res)=>{
-    res.render("frontEnd/about")
+    res.render("main/about")
 })
 
 router.get("/faq",(req,res)=>{
-    res.render("frontEnd/faq")
+    res.render("main/faq")
 })
 router.get("/contact",(req,res)=>{
-    res.render("frontEnd/contact")
+    res.render("main/contact")
 })
 
 

@@ -10,7 +10,7 @@ const   express         = require('express'),
 //NEW WALK
 router.get("/new",async(req,res)=>{
     try {
-        res.render("backEnd/admin/walk/new")
+        res.render("backoffice/admin/walk/new")
     } catch (err) {
         console.log(err)
         res.send('ERROR')
@@ -27,7 +27,7 @@ router.get('/:walk_id',async(req,res)=>{
         const edits = await Walk.find({currentVersion : false})
         // console.log('==============REFRESH===========')
         // console.log(edits)
-        res.render('backEnd/admin/walk/show',{walk, bookings, edits,})
+        res.render('backoffice/admin/walk/show',{walk, bookings, edits,})
     }
 })
 

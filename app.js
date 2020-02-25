@@ -8,8 +8,18 @@ const   express             = require("express"),
         CronJob             = require('cron').CronJob
 
 
+//Locals
+let bookingDropdown = []
+app.use(async (req,res,next)=>{
+    //Now sent through CRON
+    res.locals.bookingDropdown = bookingDropdown
+    // res.locals.error = req.flash('error')
+    // res.locals.error = req.flash('success')
+    next()
+})
+
 //ROUTE REQUIRING
-const   frontEndRoutes      = require('./routes/frontEnd/frontEnd-index'),
+const   frontEndRoutes      = require('./routes/main/frontEnd-index'),
         backEndRoutes       = require('./routes/backoffice/backoffice-index')
 //ROUTE USE
 app.use("/", frontEndRoutes)
@@ -37,16 +47,6 @@ mongoose.connect(process.env.DB_URI, {
     console.log(`Mongoose Connected to: ${mongoose.connection.name}`)
 }).catch(err =>{
     console.log(`ERROR: ${err.message}`)
-})
-
-//Locals
-let bookingDropdown = []
-app.use(async (req,res,next)=>{
-    //Now sent through CRON
-    res.locals.bookingDropdown = bookingDropdown
-    // res.locals.error = req.flash('error')
-    // res.locals.error = req.flash('success')
-    next()
 })
 
 //RUN EVERY 1minutes (Future = run at midnight)
