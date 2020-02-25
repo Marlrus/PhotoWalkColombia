@@ -10,12 +10,14 @@ const meetingPointSchema = new mongoose.Schema({
     },
     //Create dateEdited apart from dateCreated
     currentVersion: Boolean,
-    usedInBooking:[
-        {
+    bookings: [{
+        booking_id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Booking'
         },
-    ] 
+        date: Date,
+        name: String,
+    }],
 })
 
 module.exports = mongoose.model('MeetingPoint', meetingPointSchema)

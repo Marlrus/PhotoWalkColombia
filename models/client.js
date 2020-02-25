@@ -10,12 +10,16 @@ const clientSchema = new mongoose.Schema({
         type: Date, 
         default:Date.now
     },
-    booking: [
-        {
+    booking: [{
+        booking_id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Booking'
-        }
-    ],
+        },
+        date: Date,
+        name: String,
+        price: Number,
+        startTime: String
+    }],
     meetingPoint: [
         {
             type: mongoose.Schema.Types.ObjectId,
