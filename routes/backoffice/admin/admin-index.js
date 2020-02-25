@@ -1,14 +1,15 @@
 const   express             = require('express'),
         router              = express.Router({mergeParams: true}),
         //MODELS
-        Walk                = require("../../../models/walk"),
-        Booking             = require('../../../models/booking'),
-        MeetingPoint        = require('../../../models/meetingPoint'),
-        Client              = require('../../../models/client'),
+        Models          = require('../../../models')
+        Walk            = Models.Walk,
+        Booking         = Models.Booking,
+        MeetingPoint    = Models.MeetingPoint,
+        Client          = Models.Client
         //ROUTES
-        meetingPointRoutes  = require('./meetingPoint'),
-        walkRoutes          = require('./walk'),
-        bookingRoutes       = require('./booking')
+        meetingPointRoutes  = require('./meetingPoint-routes'),
+        walkRoutes          = require('./walk-routes'),
+        bookingRoutes       = require('./booking-routes')
 
 
 //ROUTE MIDDLEWARE

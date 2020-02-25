@@ -4,7 +4,7 @@ const   express         = require('express'),
         Booking         = require('../../models/booking'),
         MeetingPoint    = require('../../models/meetingPoint'),
         //ROUTES
-        bookingsRoutes  = require('./bookings')
+        bookingsRoutes  = require('./bookings-routes')
 
 //ROUTE REQUIRING
 router.use("/booking", bookingsRoutes)

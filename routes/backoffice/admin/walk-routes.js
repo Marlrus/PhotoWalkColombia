@@ -1,9 +1,10 @@
 const   express         = require('express'),
         router          = express.Router({mergeParams: true}),
-        Walk            = require("../../../../models/walk"),
-        Booking         = require('../../../../models/booking'),
-        MeetingPoint    = require('../../../../models/meetingPoint'),
-        Client          = require('../../../../models/client')
+        Models          = require('../../../models')
+        Walk            = Models.Walk,
+        Booking         = Models.Booking,
+        MeetingPoint    = Models.MeetingPoint,
+        Client          = Models.Client
 
 //WALK Routes
 //NEW WALK

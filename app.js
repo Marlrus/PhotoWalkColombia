@@ -9,8 +9,11 @@ const   express             = require("express"),
 
 
 //ROUTE REQUIRING
-const   frontEndRoutes      = require('./routes/frontEnd'),
-        backEndRoutes       = require('./routes/backEnd')
+const   frontEndRoutes      = require('./routes/frontEnd/frontEnd-index'),
+        backEndRoutes       = require('./routes/backoffice/backoffice-index')
+//ROUTE USE
+app.use("/", frontEndRoutes)
+app.use("/user", backEndRoutes)
                 
 //MODEL REQUIRING
 const   Walk            = require("./models/walk"),
@@ -73,9 +76,6 @@ new CronJob('*/30 * * * * *', async ()=> {
     // Being Called Twice
     console.log('Sent bookings to dropdown')
 }, null, true, 'America/Bogota');
-
-app.use("/", frontEndRoutes)
-app.use("/user", backEndRoutes)
 
 const port = process.env.PORT || 3000
 

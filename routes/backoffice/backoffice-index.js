@@ -1,10 +1,12 @@
 const   express         = require('express'),
         router          = express.Router({mergeParams: true}),
-        Walk            = require("../../models/walk"),
-        Booking         = require('../../models/booking'),
-        MeetingPoint    = require('../../models/meetingPoint'),
+        Models          = require('../../models')
+        Walk            = Models.Walk,
+        Booking         = Models.Booking,
+        MeetingPoint    = Models.MeetingPoint,
+        Client          = Models.Client
         //ROUTES
-        adminRoutes  = require('./admin')
+        adminRoutes  = require('./admin/admin-index')
 
 //ROUTE MIDDLEWARE
 router.use("/admin", adminRoutes)
