@@ -5,35 +5,35 @@ const bookingSchema = new mongoose.Schema({
     name: String,
     image: String,
     description: String,
-    shortDescription: String,
+    short_description: String,
     date: Date,
     price: Number,
     spots: Number,
-    bookedSpots: {type: Number, default: 0},
-    startTime: String,
-    endTime: String,
+    booked_spots: {type: Number, default: 0},
+    start_time: String,
+    end_time: String,
     closed: Boolean,
     //create a specialStatus object?
     approved: Boolean,
     personalized: Boolean,
     seasonal: Boolean,
     pickup: Boolean,
-    dateCreated: {
+    date_created: {
         type: Date, 
         default:Date.now
     },
     walk: [{
-        walk_id:{
+        _id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Walk'
         },
         name: String,
         image: String,
-        shortDescription: String,
+        short_description: String,
         description: String
     }],
     meetingPoint: [{
-        meetingPoint_id: {
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "MeetingPoint"
         },
@@ -42,7 +42,7 @@ const bookingSchema = new mongoose.Schema({
         date: Date
     }],
     clients: [{
-        client_id: {
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Client"
         },

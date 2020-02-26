@@ -4,13 +4,13 @@
 <!-- <div class="container p-4">
     <div class="row">
         <div class="col-md-4 p-1">
-            <a href="/user/admin/booking/new" class="btn btn-lg btn-success">New Booking</a>
+            <a href="/admin/booking/new" class="btn btn-lg btn-success">New Booking</a>
         </div>
         <div class="col-md-4 p-1">
-            <a href="/user/admin/walk/new" class="btn btn-lg btn-success">New Walk</a>
+            <a href="/admin/walk/new" class="btn btn-lg btn-success">New Walk</a>
         </div>
         <div class="col-md-4 p-1">
-            <a href="/user/admin/meetingPoint/new" class="btn btn-lg btn-success">New Meeting Point</a>
+            <a href="/admin/meetingPoint/new" class="btn btn-lg btn-success">New Meeting Point</a>
         </div>
     </div>
 </div> -->
@@ -25,21 +25,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/admin/booking/new">New Booking</a>
+                    <a class="nav-link" href="/admin/booking/new">New Booking</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/admin/walk/new">New Walk</a>
+                    <a class="nav-link" href="/admin/walk/new">New Walk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/admin/meetingPoint/new">New Meeting Point</a>
+                    <a class="nav-link" href="/admin/meetingPoint/new">New Meeting Point</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Special Bookings
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/user/admin/booking/new/personalized">Personalized</a>
-                        <a class="dropdown-item disabled" href="/user/admin/booking/new/seasonal">Seasonal</a>
+                        <a class="dropdown-item" href="/admin/booking/new/personalized">Personalized</a>
+                        <a class="dropdown-item disabled" href="/admin/booking/new/seasonal">Seasonal</a>
                     </div>
                 </li>
             </ul>
@@ -48,7 +48,7 @@
     <div class="list-group">
         <h2 class="list-group-item list-group-item-action active">Currently Running Bookings</h2>
         <%runningBookings.forEach(booking=>{%>
-        <a href="/user/admin/booking/<%=booking._id%>" class="list-group-item list-group-item-action">
+        <a href="/admin/booking/<%=booking._id%>" class="list-group-item list-group-item-action">
             <%=booking.date.toDateString()%> <%if(booking.closed){%><strong>[FULL]</strong><%}%> booking for <%=booking.walk[0].name%> <%if(booking.pickup){%><em><strong>*Pickup</strong></em><%}%><%if(booking.personalized){%><em><strong>*Personalized</strong></em><%}%>
         </a>
         <%})%>
@@ -58,8 +58,8 @@
         <%let i = 0%>
         <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
-                <a href="/user/admin/walk/<%=booking.walk[0]._id%>" class="list-group-item list-group-item-action">
-                    <%=booking.walk[0].name%> last used <%=booking.dateCreated.toDateString()%> last edited <%=booking.walk[0].dateCreated.toDateString()%>
+                <a href="/admin/walk/<%=booking.walk[0]._id%>" class="list-group-item list-group-item-action">
+                    <%=booking.walk[0].name%> last used <%=booking.date_created.toDateString()%> last edited <%=booking.walk[0].date_created.toDateString()%>
                 </a>
             <%i++ }%>
         <%})%>
@@ -69,8 +69,8 @@
         <%i = 0%>
         <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
-                <a href="/user/admin/meetingPoint/<%=booking.meetingPoint[0]._id%>" class="list-group-item list-group-item-action">
-                    <%=booking.meetingPoint[0].name%> last used <%=booking.dateCreated.toDateString()%> last edited <%=booking.meetingPoint[0].dateCreated.toDateString()%>
+                <a href="/admin/meetingPoint/<%=booking.meetingPoint[0]._id%>" class="list-group-item list-group-item-action">
+                    <%=booking.meetingPoint[0].name%> last used <%=booking.date_created.toDateString()%> last edited <%=booking.meetingPoint[0].date_created.toDateString()%>
                 </a>
             <%i++ }%>
         <%})%>

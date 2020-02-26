@@ -3,22 +3,22 @@ const mongoose = require('mongoose')
 const clientSchema = new mongoose.Schema({
     name: String,
     email: String,
-    specialNeeds: String,
+    special_needs: String,
     confirmation: Boolean,
-    specialCode: String,
-    dateCreated: {
+    special_code: String,
+    date_created: {
         type: Date, 
         default:Date.now
     },
     booking: [{
-        booking_id:{
+        _id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Booking'
         },
         date: Date,
         name: String,
         price: Number,
-        startTime: String
+        start_time: String
     }],
     meetingPoint: [
         {

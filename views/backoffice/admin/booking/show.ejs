@@ -26,13 +26,13 @@
                     on <%=booking.date.toDateString()%>
                 </h5>
                 <%if(!booking.closed){%>
-                    <strong>Spots left:</strong> <%=booking.spots-booking.bookedSpots%>
+                    <strong>Spots left:</strong> <%=booking.spots-booking.booked_spots%>
                 <%}%>
                 <div class="row">
                     <div class="col-lg-6">
-                        Created on: <%=booking.dateCreated.toDateString()%> 
+                        Created on: <%=booking.date_created.toDateString()%> 
                         <br>Max spots: <%=booking.spots%>
-                        <br>Booked Spots: <%=booking.bookedSpots%>
+                        <br>Booked Spots: <%=booking.booked_spots%>
                         <%if(pending>0){%> 
                             <br>Pending Confirmations: <%=pending%>
                         <%}%>
@@ -40,14 +40,14 @@
                     </div>
                     <div class="col-lg-6">
                         Spot Price: <%=booking.price%> USD
-                        <br>Income: <%=booking.bookedSpots*booking.price%> USD
+                        <br>Income: <%=booking.booked_spots*booking.price%> USD
                         <%if(booking.pickup === false){%>
                             <br>Meeting Point: <a href="/user/meetingPoint/<%=booking.meetingPoint[0]._id%>"><%=booking.meetingPoint[0].name%></a>
                         <%}else{%>
                             <br>Meeting Point: Pickup
                         <%}%>
-                        <br>Walk Start: <%=booking.startTime%>
-                        <br>Walk End: <%=booking.endTime%>
+                        <br>Walk Start: <%=booking.start_time%>
+                        <br>Walk End: <%=booking.end_time%>
                     </div>
                 </div>
             </li>
@@ -73,7 +73,7 @@
                                             <%}else{%>
                                                 Confirmation Pending
                                                 <%pending++ %>
-                                            <%}%> || Booked on <%=client.dateCreated.toDateString()%>
+                                            <%}%> || Booked on <%=client.date_created.toDateString()%>
                                         </p>
                                     <%})%>
                                 <%}else{%>
@@ -84,7 +84,7 @@
                                                 Confirmed
                                             <%}else{%>
                                                 Confirmation Pending
-                                            <%}%> || Pickup point: <a href="https://www.google.com/maps/search/<%=client.meetingPoint[0].name%>/@4.6964071,-74.055839,17z" target="_blank"><%=client.meetingPoint[0].name%></a> : <a href="https://www.google.com/maps/search/<%=client.meetingPoint[0].description.replace(/ /g, '+').replace('#', '%23')%> /@4.6964071,-74.055839,17z" target="_blank"><%=client.meetingPoint[0].description%> </a> || Booked on <%=client.dateCreated.toDateString()%>
+                                            <%}%> || Pickup point: <a href="https://www.google.com/maps/search/<%=client.meetingPoint[0].name%>/@4.6964071,-74.055839,17z" target="_blank"><%=client.meetingPoint[0].name%></a> : <a href="https://www.google.com/maps/search/<%=client.meetingPoint[0].description.replace(/ /g, '+').replace('#', '%23')%> /@4.6964071,-74.055839,17z" target="_blank"><%=client.meetingPoint[0].description%> </a> || Booked on <%=client.date_created.toDateString()%>
                                         </p>
                                     <%})%>    
                                 <%}%>

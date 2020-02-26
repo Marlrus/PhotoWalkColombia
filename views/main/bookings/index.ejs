@@ -17,8 +17,8 @@
                             <%}else{%>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                     <%if(!booking.personalized){%>
-                                        <%if(booking.spots-booking.bookedSpots>1){%>
-                                            <%=booking.spots-booking.bookedSpots%> spots Left! 
+                                        <%if(booking.spots-booking.booked_spots>1){%>
+                                            <%=booking.spots-booking.booked_spots%> spots Left! 
                                         <%}else{%>
                                             1 spot Left!
                                         <%}%>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="card-body h-100">
                             <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
-                            <p class="card-text"><%=booking.walk[0].shortDescription%></p>
+                            <p class="card-text"><%=booking.walk[0].short_description%></p>
                             <a class="btn btn-info" href="booking/<%=booking._id%>">More info on <%=booking.walk[0].name%></a>   
                             <%if(booking.closed){%>
                                 <p>
@@ -57,8 +57,8 @@
                             <%}else{%>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                     <%if(!booking.personalized){%>
-                                        <%if(booking.spots-booking.bookedSpots>1){%>
-                                            <%=booking.spots-booking.bookedSpots%> spots Left! 
+                                        <%if(booking.spots-booking.booked_spots>1){%>
+                                            <%=booking.spots-booking.booked_spots%> spots Left! 
                                         <%}else{%>
                                             1 spot Left!
                                         <%}%>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="card-body h-100">
                             <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
-                            <p class="card-text"><%=booking.walk[0].shortDescription%></p>
+                            <p class="card-text"><%=booking.walk[0].short_description%></p>
                             <a class="btn btn-info" href="booking/<%=booking._id%>">More info on <%=booking.walk[0].name%></a>  
                             <%if(booking.closed){%>
                                 <p>

@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-6 text-right">
                     <%if(!booking.personalized){%>
-                        <%if(booking.spots-booking.bookedSpots>1){%>
-                            <%=booking.spots-booking.bookedSpots%> spots Left! 
+                        <%if(booking.spots-booking.booked_spots>1){%>
+                            <%=booking.spots-booking.booked_spots%> spots Left! 
                         <%}else{%>
                             1 spot Left!
                         <%}%>
@@ -21,9 +21,9 @@
                     &emsp; <strong>Price: $<%=booking.price%></strong>
                 </div>
             </div>
-            <p class="card-text"><%-booking.walk[0].shortDescription%></p>
+            <p class="card-text"><%-booking.walk[0].short_description%></p>
             <p class="card-text"><%-booking.walk[0].description%></p>
-            <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.startTime%> to <%=booking.endTime%></small></p>
+            <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.start_time%> to <%=booking.end_time%></small></p>
             <%if(!booking.closed || booking.closed === false){%>
                 <a class="btn btn-info" href="/booking/<%=booking._id%>/new">Book your spot now!</a>
             <%}else{%>

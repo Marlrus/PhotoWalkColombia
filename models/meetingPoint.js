@@ -4,14 +4,14 @@ const meetingPointSchema = new mongoose.Schema({
     name: String,
     description: String,
     location: String,
-    dateCreated: {
+    date_created: {
         type: Date, 
         default:Date.now
     },
-    //Create dateEdited apart from dateCreated
-    currentVersion: Boolean,
+    //Create dateEdited apart from date_created
+    latest_version: Boolean,
     bookings: [{
-        booking_id:{
+        _id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Booking'
         },

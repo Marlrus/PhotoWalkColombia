@@ -23,8 +23,8 @@ router.get('/:walk_id',async(req,res)=>{
     if (!walk){
         res.status(404).send(`Path not found`)
     } else {
-        const bookings = await Booking.find({_id: walk.usedInBooking}).sort({date: 'asc'})
-        const edits = await Walk.find({currentVersion : false})
+        const bookings = await Booking.find({_id: walk.bookings}).sort({date: 'asc'})
+        const edits = await Walk.find({latest_version : false})
         // console.log('==============REFRESH===========')
         // console.log(edits)
         res.render('backoffice/admin/walk/show',{walk, bookings, edits,})
@@ -34,13 +34,14 @@ router.get('/:walk_id',async(req,res)=>{
 //WALK POST
 router.post("/",async(req,res)=>{
     try {
-        req.body.walk.currentVersion = true
-        req.body.walk.shortDescription = req.sanitize(req.body.walk.shortDescription)
+        console.log(req.body)
+        req.body.walk.latest_version = true
+        req.body.walk.short_description = req.sanitize(req.body.walk.short_description)
         req.body.walk.description = req.sanitize(req.body.walk.description)
         console.log(req.body.walk)
         const walk = await Walk.create(req.body.walk)
         console.log(walk)
-        res.redirect('/user')
+        res.redirect('/admin')
     } catch (err) {
         console.log(err)
         res.redirect('back')

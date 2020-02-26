@@ -13,8 +13,8 @@ const   express         = require('express'),
 //NEW Booking
 router.get('/new',async(req,res)=>{
     const [walks,meetingPoints] = await Promise.all ([
-        Walk.find({currentVersion:true}).sort({dateCreated: 'desc'}),
-        MeetingPoint.find({currentVersion:true, name:{$ne: 'Pickup'}}).sort({dateCreated: 'desc'})
+        Walk.find({latest_version:true}).sort({date_created: 'desc'}),
+        MeetingPoint.find({latest_version:true, name:{$ne: 'Pickup'}}).sort({date_created: 'desc'})
     ])
     // console.log(walks)
     // console.log(meetingPoints)
@@ -29,7 +29,7 @@ router.get('/new/personalized',async(req,res)=>{
 //POST PERSONALIZED
 router.post('/personalized',async(req,res)=>{
     req.body.booking.personalized = true
-    req.body.booking.date=`${req.body.booking.date} ${req.body.booking.endTime}`
+    req.body.booking.date=`${req.body.booking.date} ${req.body.booking.end_time}`
     const [booking,walk,meetingPoint] = await Promise.all([
         Booking.create(req.body.booking),
         Walk.create(req.body.walk),
@@ -38,8 +38,8 @@ router.post('/personalized',async(req,res)=>{
     await Promise.all ([
         booking.walk.push(walk._id),
         booking.meetingPoint.push(meetingPoint._id),
-        walk.usedInBooking.push(booking._id),
-        meetingPoint.usedInBooking.push(booking._id)
+        walk.bookings.push(booking._id),
+        meetingPoint.bookings.push(booking._id)
     ])
     await Promise.all ([
         booking.save(),
@@ -84,12 +84,12 @@ router.post('/',async(req,res)=>{
     try {
         // TEMP APPROVAL ADDED
         req.body.booking.approved = true
-        // Set up for date to be created using endTime hour. For Cron to close properly
-        req.body.booking.date=`${req.body.booking.date} ${req.body.booking.endTime}`
+        // Set up for date to be created using end_time hour. For Cron to close properly
+        req.body.booking.date=`${req.body.booking.date} ${req.body.booking.end_time}`
         let meetingPoint = {}
         if (req.body.booking.pickup === 'true'){
             req.body.booking.pickup = true
-            meetingPoint = await MeetingPoint.findOne({name: 'Pickup', currentVersion: true})
+            meetingPoint = await MeetingPoint.findOne({name: 'Pickup', latest_version: true})
             req.body.booking.meetingPoint = meetingPoint
         } else {
             // req.body.booking.pickup = false
@@ -104,8 +104,8 @@ router.post('/',async(req,res)=>{
             // MeetingPoint.findById(req.body.booking.meetingPoint)
         ])
         await Promise.all([
-            walk.usedInBooking.push(booking._id),
-            meetingPoint.usedInBooking.push(booking._id)
+            walk.bookings.push(booking._id),
+            meetingPoint.bookings.push(booking._id)
         ])
         await Promise.all([
             walk.save(),

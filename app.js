@@ -6,8 +6,9 @@ const   express             = require("express"),
         expSanitizer        = require("express-sanitizer"),
         flash               = require("connect-flash"),
         CronJob             = require('cron').CronJob
-
-
+        
+//Body Parser
+app.use(bodyParser.urlencoded({extended:true}))    
 //Locals
 let bookingDropdown = []
 app.use(async (req,res,next)=>{
@@ -18,26 +19,24 @@ app.use(async (req,res,next)=>{
     next()
 })
 
-//ROUTE REQUIRING
-const   frontEndRoutes      = require('./routes/main/frontEnd-index'),
-        backEndRoutes       = require('./routes/backoffice/backoffice-index')
-//ROUTE USE
-app.use("/", frontEndRoutes)
-app.use("/user", backEndRoutes)
-                
-//MODEL REQUIRING
-const   Walk            = require("./models/walk"),
-        Booking         = require('./models/booking'),
-        MeetingPoint    = require('./models/meetingPoint')
-        
-app.use(bodyParser.urlencoded({extended:true}))    
-
 require("dotenv").config()
 app.set("view engine","ejs")
 app.use(express.static(`${__dirname}/public`))
 app.use(methodOverride("_method"))
 app.use(expSanitizer())
 app.use(flash())
+
+//ROUTE REQUIRING
+const   frontEndRoutes      = require('./routes/main/frontEnd-index'),
+        backEndRoutes       = require('./routes/backoffice/backoffice-index')
+//ROUTE USE
+app.use("/", frontEndRoutes)
+app.use("/", backEndRoutes)
+                
+//MODEL REQUIRING
+const   Walk            = require("./models/walk"),
+        Booking         = require('./models/booking'),
+        MeetingPoint    = require('./models/meetingPoint')
 
 mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,

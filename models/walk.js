@@ -3,23 +3,26 @@ const mongoose = require("mongoose")
 const walkSchema = new mongoose.Schema({
     name: String,
     image: String,
-    shortDescription: String,
+    other_images:[
+        String
+    ],
+    short_description: String,
     description: String,
-    dateCreated: {
+    date_created: {
         type: Date, 
         default:Date.now
     },
-    //Create dateEdited apart from dateCreated
-    currentVersion: Boolean,
-    usedInBooking: [{
-        booking_id:{
+    //Create dateEdited apart from date_created
+    latest_version: Boolean,
+    bookings: [{
+        _id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Booking'
         },
         date: Date,
         price: Number,
         spots: Number,
-        bookedSpots: Number,
+        booked_spots: Number,
     }]
 })
 

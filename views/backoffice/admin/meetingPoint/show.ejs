@@ -11,7 +11,7 @@
                     Details
                 </h5>
                 <p class="card-text">
-                    <%if(meetingPoint.currentVersion===true){%>This is the latest Version of this meetingPoint<%}else{%>This is an older version of this meetingPoint<%}%> created on <%=meetingPoint.dateCreated.toDateString()%> 
+                    <%if(meetingPoint.latest_version===true){%>This is the latest Version of this meetingPoint<%}else{%>This is an older version of this meetingPoint<%}%> created on <%=meetingPoint.date_created.toDateString()%> 
                 </p> 
             </li>
             <li class="list-group-item">

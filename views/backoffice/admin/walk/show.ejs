@@ -12,7 +12,7 @@
                     Details
                 </h5>
                 <p class="card-text">
-                    <%if(walk.currentVersion===true){%>This is the latest Version of this walk<%}else{%>This is an older version of this walk<%}%> created on <%=walk.dateCreated.toDateString()%> 
+                    <%if(walk.latest_version===true){%>This is the latest Version of this walk<%}else{%>This is an older version of this walk<%}%> created on <%=walk.date_created.toDateString()%> 
                 </p> 
             </li>
             <li class="list-group-item">
@@ -20,7 +20,7 @@
                     Short description
                 </h5>
                 <p class="card-text">
-                    <%=walk.shortDescription%>
+                    <%=walk.short_description%>
                 </p> 
             </li>
             <li class="list-group-item">
