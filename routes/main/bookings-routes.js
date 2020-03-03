@@ -19,7 +19,7 @@ router.get("/",async(req,res)=>{
                 $lte: endDate
             },
             personalized : {$ne: true}
-        }).sort({date: 'asc'}).populate('walk')
+        }).sort({date: 'asc'})
         // console.log(bookings)
         //_id is good
         // res.send('Index Render')
@@ -34,9 +34,8 @@ router.get("/",async(req,res)=>{
 //booking show (CLIENT)
 router.get("/:_id", async(req,res)=>{
     try {
-        booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
+        booking = await Booking.findById(req.params._id)
         // console.log(booking)
-
         res.render("main/bookings/show", {booking,})
     } catch (err) {
         console.log(err || !booking)
@@ -46,7 +45,7 @@ router.get("/:_id", async(req,res)=>{
 
 //walks bookingcode view
 router.get("/:_id/new",async (req,res)=>{
-    booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint')
+    booking = await Booking.findById(req.params._id)
     res.render("main/bookings/new",{booking,})
 })
 

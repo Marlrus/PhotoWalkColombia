@@ -2,13 +2,13 @@
 
 <div class="container">
     <div class="card mb-3">
-        <%if(booking.walk[0].image){%>
-            <img class="card-img-top" src="<%=booking.walk[0].image%>" alt="">
+        <%if(booking.image){%>
+            <img class="card-img-top" src="<%=booking.image%>" alt="">
         <%}%>
         <div class="card-body">
             <div class="row">
                 <div class="col-6">
-                    <h3 class="card-title"><%=booking.walk[0].name%> <%if(booking.personalized){%>(Personalized)<%}%></h3>
+                    <h3 class="card-title"><%=booking.name%> <%if(booking.personalized){%>(Personalized)<%}%></h3>
                 </div>
                 <div class="col-6 text-right">
                     <%if(!booking.personalized){%>
@@ -21,8 +21,8 @@
                     &emsp; <strong>Price: $<%=booking.price%></strong>
                 </div>
             </div>
-            <p class="card-text"><%-booking.walk[0].short_description%></p>
-            <p class="card-text"><%-booking.walk[0].description%></p>
+            <p class="card-text" style="white-space: pre-wrap"><%=booking.short_description_%></p>
+            <p class="card-text" style="white-space: pre-wrap"><%-booking.description%></p>
             <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.start_time%> to <%=booking.end_time%></small></p>
             <%if(!booking.closed || booking.closed === false){%>
                 <a class="btn btn-info" href="/booking/<%=booking._id%>/new">Book your spot now!</a>

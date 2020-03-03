@@ -39,7 +39,7 @@
                             <%bookingDropdown.forEach(booking =>{%>
                                 <%if (counter<3){%>
                                     <p class="lead col-lg-10 p-0 m-0" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
-                                        <u><a href="/booking/<%=booking._id%>" style="color: white;"><%=booking.walk[0].name%> on <%=booking.date.toDateString().slice(0, 10)%></a></u> &emsp;
+                                        <u><a href="/booking/<%=booking._id%>" style="color: white;"><%=booking.name%> on <%=booking.date.toDateString().slice(0, 10)%></a></u> &emsp;
                                     <%counter++%>
                                     </p>
                                 <%}%>    
@@ -52,7 +52,7 @@
         </div>
         <%for(let booking of bookingDropdown){%>
             <div class="carousel-item">
-                <img src="" class="d-block w-100 landing-booking" alt="..." style="background-image: url('<%=booking.walk[0].image%>');" data-interval='4000'>
+                <img src="" class="d-block w-100 landing-booking" alt="..." style="background-image: url('<%=booking.image%>');" data-interval='4000'>
                 <div class="container-fluid m-0 p-0 carousel-content">
                 <div class="carousel-caption top-caption">
                     <h1 class="display-4" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">Book any of our walks!</h1>
@@ -73,7 +73,7 @@
                             <%bookingDropdown.forEach(booking =>{%>
                                 <%if (counter<3){%>
                                     <p class="lead col-lg-10 p-0 m-0" style="text-shadow: 2px 3px 5px rgba(0,0,0,0.8);">
-                                        <u><a href="/booking/<%=booking._id%>" style="color: white;"><%=booking.walk[0].name%> on <%=booking.date.toDateString().slice(0, 10)%></a></u> &emsp;
+                                        <u><a href="/booking/<%=booking._id%>" style="color: white;"><%=booking.name%> on <%=booking.date.toDateString().slice(0, 10)%></a></u> &emsp;
                                     <%counter++%>
                                     </p>
                                 <%}%>    

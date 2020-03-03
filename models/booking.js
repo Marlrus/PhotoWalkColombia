@@ -39,7 +39,6 @@ const bookingSchema = new mongoose.Schema({
         },
         name: String,
         location: String,
-        date: Date
     }],
     clients: [{
         _id: {

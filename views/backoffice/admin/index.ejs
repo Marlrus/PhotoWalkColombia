@@ -49,7 +49,7 @@
         <h2 class="list-group-item list-group-item-action active">Currently Running Bookings</h2>
         <%runningBookings.forEach(booking=>{%>
         <a href="/admin/booking/<%=booking._id%>" class="list-group-item list-group-item-action">
-            <%=booking.date.toDateString()%> <%if(booking.closed){%><strong>[FULL]</strong><%}%> booking for <%=booking.walk[0].name%> <%if(booking.pickup){%><em><strong>*Pickup</strong></em><%}%><%if(booking.personalized){%><em><strong>*Personalized</strong></em><%}%>
+            <%=booking.date.toDateString()%> <%if(booking.closed){%><strong>[FULL]</strong><%}%> booking for <%=booking.name%> <%if(booking.pickup){%><em><strong>*Pickup</strong></em><%}%><%if(booking.personalized){%><em><strong>*Personalized</strong></em><%}%>
         </a>
         <%})%>
     </div>
@@ -59,7 +59,7 @@
         <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
                 <a href="/admin/walk/<%=booking.walk[0]._id%>" class="list-group-item list-group-item-action">
-                    <%=booking.walk[0].name%> last used <%=booking.date_created.toDateString()%> last edited <%=booking.walk[0].date_created.toDateString()%>
+                    <%=booking.name%> last used <%=booking.date_created.toDateString()%> 
                 </a>
             <%i++ }%>
         <%})%>
@@ -70,7 +70,7 @@
         <%recentBookings.forEach(booking=>{%>
             <%if (i < 5){%>
                 <a href="/admin/meetingPoint/<%=booking.meetingPoint[0]._id%>" class="list-group-item list-group-item-action">
-                    <%=booking.meetingPoint[0].name%> last used <%=booking.date_created.toDateString()%> last edited <%=booking.meetingPoint[0].date_created.toDateString()%>
+                    <%=booking.meetingPoint[0].name%> last used <%=booking.date_created.toDateString()%>
                 </a>
             <%i++ }%>
         <%})%>

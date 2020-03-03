@@ -9,7 +9,7 @@ const   express             = require('express'),
         //ROUTES
         meetingPointRoutes  = require('./meetingPoint-routes'),
         walkRoutes          = require('./walk-routes'),
-        bookingRoutes       = require('./booking-routes')
+        bookingRoutes       = require('./booking-admin-routes')
 
 
 //ROUTE MIDDLEWARE
@@ -28,8 +28,8 @@ router.get("/", async(req,res)=>{
                     $gte: date,
                     $lte: endDate
                 }
-            }).sort({ date: 'asc' }).populate('walk'),
-            Booking.find({pickup : {$ne: true},personalized:{$ne:true}}).limit(5).populate({path: 'walk',}).populate('meetingPoint').sort({date_created: 'desc'})
+            }).sort({ date: 'asc' }),
+            Booking.find({pickup : {$ne: true},personalized:{$ne:true}}).limit(5).sort({date_created: 'desc'})
         ])
         console.log(runningBookings)
         console.log(recentBookings)

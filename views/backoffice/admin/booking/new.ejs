@@ -4,10 +4,10 @@
 
 <div class="container ">
     <h1 class="display-3 text-center">Create your Booking!</h1>
-    <form action="/user/admin/booking" method="POST">
+    <form action="/admin/booking" method="POST">
         <div class="form-group">
             <label>Select a Walk for this Booking</label>
-            <select class="form-control" name="booking[walk]" required>
+            <select class="form-control" name="walk_id" required>
                 <option value="">-- Please select a Walk --</option>
                 <%walks.forEach(walk=>{%>
                     <option value="<%=walk._id%>"><%=walk.name%></option>
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label>Select a Meeting Point for this Booking</label>
-            <select class="form-control" name="booking[meetingPoint]" required>
+            <select class="form-control" name="meetingPoint_id" required>
                 <option value="">-- Please select a meetingPoint --</option>
                 <%meetingPoints.forEach(meetingPoint=>{%>
                     <option value="<%=meetingPoint._id%>"><%=meetingPoint.name%></option>
