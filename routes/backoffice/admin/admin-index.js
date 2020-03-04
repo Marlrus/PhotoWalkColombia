@@ -33,7 +33,7 @@ router.get("/", async(req,res)=>{
         ])
         console.log(runningBookings)
         console.log(recentBookings)
-        res.render('backoffice/admin/index',{runningBookings, recentBookings,})
+        res.render('backoffice/admin/index-admin',{runningBookings, recentBookings,})
     } catch (err) {
         console.log(err)
         res.redirect('back')

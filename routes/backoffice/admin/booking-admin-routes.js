@@ -13,6 +13,7 @@ const   express         = require('express'),
 //NEW Booking
 router.get('/new',async(req,res)=>{
     const [walks,meetingPoints] = await Promise.all ([
+        //Change query to use date_used instead of date_created
         Walk.find({latest_version:true}).sort({date_created: 'desc'}),
         MeetingPoint.find({latest_version:true, name:{$ne: 'Pickup'}}).sort({date_created: 'desc'})
     ])
@@ -73,27 +74,6 @@ router.get('/:_id',async(req,res)=>{
         res.send(`ERROR: ${err}`)
     }
 })
-// //SHOW OLD ROUTE
-// router.get('/:_id',async(req,res)=>{
-//     try {
-//         //FUCKING MADE ITTT!!!!
-//         const booking = await Booking.findById(req.params._id).populate('walk').populate('meetingPoint').populate({
-//             path: 'clients',
-//             populate: [{
-//                 path: 'meetingPoint',
-//                 model: 'MeetingPoint'
-//             }]
-//         })
-//         if (!booking){
-//             res.status(404).send(`Path not found`)
-//         } else {
-//         res.render('backoffice/admin/booking/show', {booking,})
-//         }
-//     } catch (err) {
-//         console.log(err)
-//         res.send(`ERROR: ${err}`)
-//     }
-// })
 
 //POST Booking
 router.post('/',async(req,res)=>{
@@ -138,6 +118,9 @@ router.post('/',async(req,res)=>{
             name: booking.name
         }
         console.log('===== Before Push Promise =====')
+        //Add latest date used for walk and meetingPoint
+        walk.date_used = booking.date
+        meetingPoint.date_used = booking.date
         //Push everything in
         await Promise.all([
             walk.bookings.push(bookingObj),

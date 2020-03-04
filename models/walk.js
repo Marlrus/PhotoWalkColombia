@@ -12,6 +12,7 @@ const walkSchema = new mongoose.Schema({
         type: Date, 
         default:Date.now
     },
+    date_used: Date,
     //Create dateEdited apart from date_created
     latest_version: Boolean,
     bookings: [{
