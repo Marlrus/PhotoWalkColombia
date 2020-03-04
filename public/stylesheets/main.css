@@ -9,6 +9,15 @@ body{
     -moz-box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.15);
     box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.15);
     border-width: 0px !important;
+    background-color: unset !important;
+}
+.card-header {
+    border-bottom-width: 0px !important;
+    /* background-color: #f65c51 !important; */
+    background-color: #f7b15c !important;
+}
+.card-body{
+    background-color: rgba(255, 255, 255, 0.5) !important;
 }
 .shadow{
     -webkit-box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.15);
@@ -17,6 +26,14 @@ body{
 }
 img{
     align-self: center;
+}
+.page-header{
+    /* background-color:#e5243f ; */
+    background-color: #2F5755;
+}
+.bg-transparency{
+    background-color: rgba(0,0,0,0.55);
+    border-radius: 1rem;
 }
 .fill{
     overflow: hidden;
@@ -67,7 +84,7 @@ img{
 #landing-gallery{
     padding: 3rem;
     color: #FFFFF6;
-    background-color: #f65c51;
+    background-color: #2F5755;
     height: auto;
 }
 #landing-gallery > div > div{
@@ -78,4 +95,4 @@ img{
 }
 
 /* My Color Scheme */
-/*  #2F5755 #54C6BE #f7b15c #f65c51 #e5243f* /
+/*  DARK BLUE #2F5755 LIGHT BLUE #54C6BE DARK YELLOW #f7b15c DARK ORANGE  #f65c51 DARK RED #e5243f * /

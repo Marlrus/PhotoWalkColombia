@@ -7,6 +7,10 @@ const leadSchema = new mongoose.Schema({
     message: String,
     origin: String,
     is_verified: Boolean,
+    date: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports = mongoose.model('lead',leadSchema)

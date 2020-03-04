@@ -1,6 +1,6 @@
 <%- include("../../partials/header") -%>
 
-<h1 class="display-3 text-center bg-info text-white p-4">All walks from today to <%=endDate.toDateString()%></h1>
+<h1 class="display-4 text-center text-white p-4 page-header">All walks from today to <%=endDate.toDateString()%></h1>
 <div class="container-fluid">
     <%let i = 1%>
     <%bookings.forEach(booking=>{%>
@@ -10,12 +10,12 @@
                 <img class="col-lg-6 p-3 p-lg-4 shadow" src="<%=booking.image%>" alt="">
                 <div class="col-lg-6 pt-0 p-3 pt-lg-4 pr-lg-4 pb-lg-4">
                     <div class="card m-0 h-100">
-                        <div class="card-header">
+                        <div class="card-header text-white">
                             <h5 class="display-4"><%=booking.name%> <%if(booking.pickup){%>(Pickup)<%}%> <%if(booking.seasonal){%>(Seasonal)<%}%></h5>
                             <%if(booking.closed){%>
-                                <h6 class="card-subtitle mb-2 text-muted"> Fully booked!</h6>
+                                <h6 class="card-subtitle mb-2"> Fully booked!</h6>
                             <%}else{%>
-                                <h6 class="card-subtitle mb-2 text-muted">
+                                <h6 class="card-subtitle mb-2">
                                     <%if(!booking.personalized){%>
                                         <%if(booking.spots-booking.booked_spots>1){%>
                                             <%=booking.spots-booking.booked_spots%> spots Left! 
@@ -29,14 +29,14 @@
                         <div class="card-body h-100">
                             <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
                             <p class="card-text" style="white-space: pre-wrap"><%=booking.short_description%></p>
-                            <a class="btn btn-info" href="booking/<%=booking._id%>">More info on <%=booking.name%></a>   
+                            <a class="btn btn-info mb-1" href="booking/<%=booking._id%>">More info on <%=booking.name%></a>   
                             <%if(booking.closed){%>
                                 <p>
                                     <br>
                                     <strong>Sorry This Booking is full!</strong> You can book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
                                 </p>
                             <%}else{%>
-                                <a class="btn btn-info" href="booking/<%=booking._id%>/new">Book spot <%=booking.name%></a>   
+                                <a class="btn btn-info mb-1" href="booking/<%=booking._id%>/new">Book spot <%=booking.name%></a>   
                             <%}%>
                         </div>
                     </div>
@@ -50,12 +50,12 @@
             <div class="row">
                 <div class="col-lg-6 order-2 order-lg-1 p-3 pt-lg-4 pl-lg-4 pb-lg-4">
                     <div class="card m-0 h-100">
-                        <div class="card-header">
+                        <div class="card-header text-white">
                             <h5 class="display-4"><%=booking.name%> <%if(booking.pickup){%>(Pickup)<%}%> <%if(booking.seasonal){%>(Seasonal)<%}%></h5>
                             <%if(booking.closed){%>
-                                <h6 class="card-subtitle mb-2 text-muted"> Fully booked!</h6>
+                                <h6 class="card-subtitle mb-2"> Fully booked!</h6>
                             <%}else{%>
-                                <h6 class="card-subtitle mb-2 text-muted">
+                                <h6 class="card-subtitle mb-2">
                                     <%if(!booking.personalized){%>
                                         <%if(booking.spots-booking.booked_spots>1){%>
                                             <%=booking.spots-booking.booked_spots%> spots Left! 
@@ -69,19 +69,19 @@
                         <div class="card-body h-100">
                             <h6 class="card-subtitle mb-2 text-muted">Next Walk <%=booking.date.toDateString()%></h6>
                             <p class="card-text" style="white-space: pre-wrap"><%=booking.short_description%></p>
-                            <a class="btn btn-info" href="booking/<%=booking._id%>">More info on <%=booking.name%></a>  
+                            <a class="btn btn-info mb-1" href="booking/<%=booking._id%>">More info on <%=booking.name%></a>  
                             <%if(booking.closed){%>
                                 <p>
                                     <br>
                                     <strong>Sorry This Booking is full!</strong> You can book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
                                 </p>
                             <%}else{%>
-                                <a class="btn btn-info" href="booking/<%=booking._id%>/new">Book spot <%=booking.name%></a>   
+                                <a class="btn btn-info mb-1" href="booking/<%=booking._id%>/new">Book spot <%=booking.name%></a>   
                             <%}%> 
                         </div>
                     </div>
                 </div>
-                <img class="col-lg-6 order-1 order-lg-2 p-3 p-lg-4" src="<%=booking.image%>" alt="">
+                <img class="col-lg-6 order-1 order-lg-2 p-3 p-lg-4 shadow" src="<%=booking.image%>" alt="">
             </div>
         <%}%>
     <%})%>
