@@ -1,20 +1,37 @@
 <%- include("../partials/header") -%>
 
+
 <!-- ABOUT US LANDING -->
 
 <div class="jumbotron mb-0 text-center my-4">
-    <h1 class="display-4">Welcome to Photo Walks Colombia</h1>
-    <p class="lead">The best resource for the best photo walks Colombia has to offer.</p>
+    <h1 class="display-4" data-aos="fade-right" data-aos-duration="1500">Welcome to Photo Walks Colombia</h1>
+    <p class="lead" data-aos="fade-zoom-in"
+    data-aos-easing="ease-in-back"
+    data-aos-delay="100"
+    data-aos-duration="2000"
+    >The best resource for the best photo walks Colombia has to offer.</p>
     <hr class="my-4">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" data-aos="fade-zoom-in"
+    data-aos-easing="ease-in-back"
+    data-aos-delay="100"
+    data-aos-duration="2000"
+    >
         <p class="col-lg-8">Photo Walks Colombia is an initiative born from the passion for photography and our interest in improving travel experiences. During our photo walks, out tour guide will take you and your fellow enthusiasts on a journey to experience and capture some of the most vibrant and picturesque locations in Colombia. Anyone interested in the art of taking pictures is welcome, we are always open to improving your skills and providing cultural tips to enhance your experience. We provide photography insights in a cultural and travel ambience so our customers can improve their skills to accomplish unique photographs while enjoying vibrant destinations.</p>
     </div>
-    <a class="btn btn-success btn-lg" href="/about" role="button">Learn more!</a>
+    <a class="btn btn-success btn-lg" href="/about" role="button"
+    data-aos="fade-zoom-in"
+    data-aos-easing="ease-in-back"
+    data-aos-delay="100"
+    data-aos-duration="2000"
+    >Learn more!</a>
 </div>
 
 <!-- BOOKING LANDING -->
 
-<div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel" 
+data-aos="fade-zoom-in"
+data-aos-duration="1500"
+>
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="" class="d-block w-100 landing-booking" alt="..." style="background-image: url('https://images.unsplash.com/photo-1533699224246-6dc3b3ed3304?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');" data-interval='4000'>
@@ -90,23 +107,35 @@
 <!-- FAQ LANDING  -->
 
 <div class="jumbotron mb-0 text-center my-4">
-    <h1 class="display-4">What makes Photo Walks different?</h1>
+    <h1 class="display-4" data-aos="fade-right" data-aos-duration="1000">What makes Photo Walks different?</h1>
     <hr class="my-4">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" 
+    data-aos="fade-zoom-in"
+    data-aos-easing="ease-in-back"
+    data-aos-duration="500"
+    >
         <p class="col-lg-8">A photo walk is an activity in which photography enthusiasts gather in a group to walk around a certain area with the goal of taking pictures of people, places and things that seem interesting to them. Our photo walks begin with a short introductory coffee and end with a critique session so you can share your work and interact with other creative minds, and during the photo walk, our tour guides are open to providing cultural insights and travel tips. All you need for one of our photo walks is any form of camera and we will take care of the rest so you can focus on learning about Colombian culture, having fun and, of course, take great pictures of your trip! </p>
     </div>
-    <p>
+    <p
+    data-aos="fade-zoom-in"
+    data-aos-easing="ease-in-back"
+    data-aos-duration="500"
+    >
         If you have more questions about anything related to photo walks visit our FAQ!
     </p>
-    <a class="btn btn-success btn-lg" href="/faq" role="button">Photo Walks Colombia FAQ</a>
+    <a class="btn btn-success btn-lg" href="/faq" role="button"
+    data-aos="fade-zoom-in"
+    data-aos-easing="ease-in-back"
+    data-aos-duration="500"
+    >Photo Walks Colombia FAQ</a>
 </div>
 
 <!-- RECENT PW GALLERY  -->
 
-<div id="landing-gallery">
+<div id="landing-gallery" data-aos="fade-zoom-in">
     <h1 class="text-center">Photos from our most recent walks</h1>
     <div class="row text-center justify-content-center">
-        <div class="card mb-3 col-lg-3">
+        <div class="card mb-3 col-lg-3" data-aos="zoom-out-down">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -115,7 +144,7 @@
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
-        <div class="card mb-3 col-lg-3">
+        <div class="card mb-3 col-lg-3" data-aos="zoom-out-down">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -124,7 +153,7 @@
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
-        <div class="card mb-3 col-lg-3">
+        <div class="card mb-3 col-lg-3" data-aos="zoom-out-down">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -139,7 +168,10 @@
 <!-- CONTACT FORM -->
 <!-- Name, email, subject, message -->
 <div class="container-fluid p-5" style="background-image: url(<%=bookingDropdown[0].image%>); background-position: center; background-size: cover;">
-    <div class="container bg-transparency text-white p-4">
+    <div class="container bg-transparency text-white p-4" 
+    data-aos="zoom-out-up"
+    data-aos-duration="1000"
+    >
         <h2>Contact Us!</h2>
         Have any additional questions about Photo Walks? Send us a message! 
         <br>
@@ -176,6 +208,5 @@
         submitButton.innerHTML = 'Sending!'
     }
 </script>
-
 
 <%- include("../partials/footer") -%>

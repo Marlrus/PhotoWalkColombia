@@ -1,8 +1,14 @@
 <%- include("../../partials/header") -%>
-<h1 class="display-4 page-header text-center text-white py-3">Book <%=booking.walk[0].name%>!</h1>
+<h1 class="display-4 page-header text-center text-white py-3"
+data-aos="fade-zoom-in"
+data-aos-duration="800"
+>Book <%=booking.walk[0].name%>!</h1>
 
 <div class="container-fluid">
-    <div class="row justify-content-center pt-3">
+    <div class="row justify-content-center pt-3"
+    data-aos="fade-bottom"
+    data-aos-duration="800"
+    >
         <%if(booking.walk[0].image){%>
             <div class="col-xl-5 fill" style="background-image: url(<%=booking.walk[0].image%>);"></div>
         <%}%>

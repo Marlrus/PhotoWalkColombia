@@ -9,6 +9,7 @@
   "author": "Marlrus",
   "license": "ISC",
   "dependencies": {
+    "aos": "^2.3.4",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
     "cron": "^1.7.2",

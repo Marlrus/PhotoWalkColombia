@@ -1,12 +1,18 @@
 <%- include("../../partials/header") -%>
 
-<h1 class="display-4 text-center text-white p-4 page-header">All walks from today to <%=endDate.toDateString()%></h1>
+<h1 class="display-4 text-center text-white p-4 page-header" 
+data-aos="fade-zoom-in"
+data-aos-duration="1500"
+>All walks from today to <%=endDate.toDateString()%></h1>
 <div class="container-fluid">
     <%let i = 1%>
     <%bookings.forEach(booking=>{%>
         <%if(i%2){%>
             <%i++%>
-            <div class="row">
+            <div class="row"
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            >
                 <img class="col-lg-6 p-3 p-lg-4 shadow" src="<%=booking.image%>" alt="">
                 <div class="col-lg-6 pt-0 p-3 pt-lg-4 pr-lg-4 pb-lg-4">
                     <div class="card m-0 h-100">
@@ -47,7 +53,10 @@
             </div>
         <%}else{%>
             <%i++%>
-            <div class="row">
+            <div class="row"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+            >
                 <div class="col-lg-6 order-2 order-lg-1 p-3 pt-lg-4 pl-lg-4 pb-lg-4">
                     <div class="card m-0 h-100">
                         <div class="card-header text-white">
