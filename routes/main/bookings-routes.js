@@ -1,5 +1,6 @@
 const   express         = require('express'),
         router          = express.Router({mergeParams: true}),
+        passport        = require('passport')
         Models          = require('../../models')
         Walk            = Models.Walk,
         Booking         = Models.Booking,
@@ -29,6 +30,18 @@ router.get("/",async(req,res)=>{
         res.send('Error')
     }
     
+})
+
+//GO TO CONSENT SCREEN
+router.get('/google',passport.authenticate('google',{
+    scope: ['profile','email']
+}))
+
+//GOOGLE REDIRECT
+router.get('/google/redirect', passport.authenticate('google'),(req,res)=>{
+    // res.send(req.user)
+    // req.flash('success', `Bienvenido devuelta ${req.user.primer_nombre}!`)
+    res.redirect('/')
 })
 
 //booking show (CLIENT)
@@ -77,5 +90,7 @@ router.post("/:_id", async(req,res)=>{
         res.redirect('back')
     }
 })
+
+
 
 module.exports = router

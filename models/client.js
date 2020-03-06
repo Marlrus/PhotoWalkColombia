@@ -2,13 +2,26 @@ const mongoose = require('mongoose')
 
 const clientSchema = new mongoose.Schema({
     name: String,
+    family_name: String,
+    profile_image: String,
     email: String,
     special_needs: String,
     confirmation: Boolean,
     special_code: String,
+    locale: String,
+    auth:{
+        google: Boolean,
+        local: Boolean,
+        external_id: String,
+        verified_email: Boolean,
+    },
     date_created: {
-        type: Date, 
-        default:Date.now
+        full: {
+            type: Date, 
+            default:Date.now
+        },
+        month: Number,
+        year: Number
     },
     booking: [{
         _id:{

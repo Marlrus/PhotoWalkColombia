@@ -5,7 +5,9 @@ const   express             = require("express"),
         mongoose            = require("mongoose"),
         expSanitizer        = require("express-sanitizer"),
         flash               = require("connect-flash"),
-        CronJob             = require('cron').CronJob
+        CronJob             = require('cron').CronJob,
+        passport            = require('passport'),
+        cookieSession       = require('cookie-session')
         
 //Body Parser
 app.use(bodyParser.urlencoded({extended:true}))    
@@ -19,12 +21,31 @@ app.use(async (req,res,next)=>{
     next()
 })
 
+//DOTENV REQUIRE
 require("dotenv").config()
+
+//PASSPORT CONFIG REQUIRE
+require('./config/google-passport-setup')
+
+//COOKIE SESSION CONFIG
+app.use(cookieSession({
+    keys: [process.env.COOKIE_KEY]
+}))
+
+//EJS VIEW ENGINE
 app.set("view engine","ejs")
+//STATIC DIRECTORY
 app.use(express.static(`${__dirname}/public`))
+//METHOD OVERRIDE
 app.use(methodOverride("_method"))
+//SANITIZER
 app.use(expSanitizer())
+//CONNECT FLASH
 app.use(flash())
+
+//PASSPORT INITIALIZE
+app.use(passport.initialize())
+app.use(passport.session())
 
 //ROUTE REQUIRING
 const   frontEndRoutes      = require('./routes/main/frontEnd-index'),

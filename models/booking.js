@@ -18,6 +18,14 @@ const bookingSchema = new mongoose.Schema({
     personalized: Boolean,
     seasonal: Boolean,
     pickup: Boolean,
+    //Who will do the walk
+    guide:{
+        name: String,
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    },
     date_created: {
         type: Date, 
         default:Date.now
@@ -48,7 +56,8 @@ const bookingSchema = new mongoose.Schema({
         name: String,
         email: String,
         date_booked: Date,
-        confirmation: Boolean
+        confirmation: Boolean,
+        special_need: String
     }] 
 })
 
