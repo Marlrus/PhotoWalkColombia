@@ -68,9 +68,20 @@ img{
 .dropdown-menu > a:hover {
     background-color: #e5243f !important;
     background-image: none !important;
+    transition: all ease 0.75s;
+}
+nav div.collapse ul li > a{
+    color:#FFFFF6 !important;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 .navbar a{
     color:#FFFFF6 !important;
+}
+nav div.collapse ul li > a:hover{
+    transition: all ease 0.5s;
+    background-color: #e5243f !important;
+    /* color: #2F5755 !important; */
 }
 .fa-bars{
     color:#FFFFF6 !important;

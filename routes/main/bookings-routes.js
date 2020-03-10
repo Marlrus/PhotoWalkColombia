@@ -41,7 +41,7 @@ router.get('/google',passport.authenticate('google',{
 router.get('/google/redirect', passport.authenticate('google'),(req,res)=>{
     // res.send(req.user)
     // req.flash('success', `Bienvenido devuelta ${req.user.primer_nombre}!`)
-    res.redirect('/')
+    res.redirect('back')
 })
 
 //booking show (CLIENT)

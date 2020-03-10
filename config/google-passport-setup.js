@@ -35,7 +35,7 @@ passport.use(
         //Handle User existance
         if (existingClient){
             // console.log(profile)
-            console.log(`Client Exists: ${existingClient.primer_nombre}`)
+            console.log(`Client Exists: ${existingClient.name}`)
             done(null,existingClient)
         } else {
             console.log('No Client Found')
