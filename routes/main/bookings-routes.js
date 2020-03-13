@@ -61,11 +61,11 @@ router.get("/:_id", async(req,res)=>{
     }
 })
 
-//walks bookingcode view
-router.get("/:_id/new",async (req,res)=>{
-    booking = await Booking.findById(req.params._id)
-    res.render("main/bookings/new",{booking,})
-})
+//walks bookingcode view (REMOVED)
+// router.get("/:_id/new",async (req,res)=>{
+//     booking = await Booking.findById(req.params._id)
+//     res.render("main/bookings/new",{booking,})
+// })
 
 //book post
 router.post("/:_id", async(req,res)=>{
