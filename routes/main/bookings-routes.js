@@ -44,6 +44,11 @@ router.get('/google/redirect', passport.authenticate('google'),(req,res)=>{
     res.redirect('back')
 })
 
+//BOOKING CART
+router.get('/cart',(req,res)=>{
+    res.render('main/bookings/cart')
+})
+
 //booking show (CLIENT)
 router.get("/:_id", async(req,res)=>{
     try {
@@ -90,7 +95,6 @@ router.post("/:_id", async(req,res)=>{
         res.redirect('back')
     }
 })
-
 
 
 module.exports = router

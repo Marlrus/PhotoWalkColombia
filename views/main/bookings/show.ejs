@@ -5,8 +5,9 @@
     data-aos="fade-bottom"
     data-aos-duration="1200"
     >
-        <%if(booking.image){%>
-            <img class="card-img-top" src="<%=booking.image%>" alt="">
+    <%let spotsLeft = booking.spots-booking.booked_spots%>
+    <%if(booking.image){%>
+        <img class="card-img-top" src="<%=booking.image%>" alt="">
         <%}%>
         <div class="card-body">
             <div class="row">
@@ -15,8 +16,8 @@
                 </div>
                 <div class="col-6 text-right">
                     <%if(!booking.personalized){%>
-                        <%if(booking.spots-booking.booked_spots>1){%>
-                            <%=booking.spots-booking.booked_spots%> spots Left! 
+                        <%if(spotsLeft>1){%>
+                            <%=spotsLeft%> spots Left! 
                         <%}else{%>
                             1 spot Left!
                         <%}%>
@@ -28,7 +29,32 @@
             <p class="card-text" style="white-space: pre-wrap"><%-booking.description%></p>
             <p class="card-text"><small class="text-muted">Walk date: <%=booking.date.toDateString()%> starting at <%=booking.start_time%> to <%=booking.end_time%></small></p>
             <%if(!booking.closed || booking.closed === false){%>
-                <a class="btn btn-info" href="/booking/<%=booking._id%>/new">Book your spot now!</a>
+                <!-- <form id="booking-form"> -->
+                <form id="booking-form" action="/booking/cart" method="get">
+                    <label class="my-1 mr-2"><strong>Spots</strong></label>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <select name="booked_spots" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
+                                <option value="" selected>Choose...</option>
+                                <%let i = 1%>
+                                <%while(i<=spotsLeft){%>
+                                    <option value="<%=i%>"><%=i%></option>
+                                    <%i++%>
+                                <%}%>
+                            </select>
+                        </div>
+                        <input name="_id" type="text" value="<%=booking._id%>" required hidden>
+                        <input name="name" type="text" value="<%=booking.name%>" required hidden>
+                        <input name="image" type="text" value="<%=booking.image%>" required hidden>
+                        <input name="spots" type="text" value="<%=booking.spots%>" required hidden>
+                        <input name="date" type="text" value="<%=Date.parse(booking.date)%>" required hidden>
+                        <input name="price" type="text" value="<%=booking.price%>" required hidden>
+                        <input name="spots_left" type="text" value="<%=spotsLeft%>" required hidden>
+                        <div class="col-lg-3">
+                            <button id="booking-details" type="submit" class="btn btn-info mt-1">Book now!</button>
+                        </div>
+                    </div>
+                </form>
             <%}else{%>
                 <strong>Sorry This Booking is full!</strong> Please  look at <a href="/booking">other bookings</a>, book a <a href="">personal booking</a>, or <a href="/contact">contact</a> us for more information!
             <%}%>    
@@ -46,6 +72,32 @@
     </div>
 </div>
 
-
+<script>
+    let form = document.getElementById('booking-form')
+    let submitButton = document.getElementById('booking-details');
+    let booked_spots = document.querySelector('[name=booked_spots]')
+    let _id = document.querySelector('[name=_id]')
+    let name = document.querySelector('[name=name]')
+    let image = document.querySelector('[name=image]')
+    let spots = document.querySelector('[name=spots]')
+    let date = document.querySelector('[name=date]')
+    let price = document.querySelector('[name=price]')
+    let spots_left = document.querySelector('[name=spots_left]')
+    form.addEventListener('submit',()=>{
+    // submitButton.addEventListener('click',()=>{
+        submitButton.disabled = true
+        let booking = {
+            spots: spots.value,
+            booked_spots: booked_spots.value,
+            _id: _id.value,
+            name: name.value,
+            image: image.value,
+            date: date.value,
+            price: price.value,
+            spots_left: spots_left.value
+        }
+        sessionStorage.setItem('booking', JSON.stringify(booking))
+    });
+</script>
 
 <%- include("../../partials/footer") -%>

@@ -1,0 +1,110 @@
+<%- include("../../partials/header") -%>
+
+<h1 class="display-4 page-header text-center text-white py-3"
+data-aos="fade-zoom-in"
+data-aos-duration="800"
+>Booking Cart</h1>
+<div class="card mb-3 mx-3">
+    <div class="card-header text-white"><h3>Booking Details</h3></div>
+    <div class="row no-gutters">
+        <!-- <div id="booking-image" class="col-lg-3"></div> -->
+        <div class="col-lg-3">
+            <img class="card-img" id="booking-image" alt="Walk image">
+        </div>
+        <div class="col-lg-9">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="ml-3 card-title"><strong id="name"></strong></h3>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                <strong>Date:</strong> <span id="date"></span>
+                            </li>
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                <strong>Price:</strong> $<span id="price"></span>
+                            </li>
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                <strong>Your Spots:</strong> <span id="booked_spots"></span>
+                            </li>
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                <strong>Total:</strong> $<span id="total"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 class="ml-3 card-title"><strong>Change Booking</strong></h3>
+                        <hr>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                Cancelations will have a $10 USD fee per spot
+                            </li>
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                <strong>Spots Left:</strong> <span id="spots_left"></span>
+                            </li>
+                            <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
+                                <strong>Change Spots </strong>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <select id="spots-dropdown" name="spots" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <a id="edit-booking" class="btn btn-warning text-white" href="/booking/cart">Change Booking</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="" class="btn btn-info mt-3 ml-3">Proceed to Payment</a>
+
+<script>
+    const booking = JSON.parse(sessionStorage.getItem('booking'))
+    let image = document.getElementById('booking-image')
+    let name = document.getElementById('name')
+    let date = document.getElementById('date')
+    let price = document.getElementById('price')
+    let booked_spots = document.getElementById('booked_spots')
+    let spots_left = document.getElementById('spots_left')
+    let total = document.getElementById('total')
+    let spotsDropdown = document.getElementById('spots-dropdown')
+    console.log(booking)
+    // image.style = `background-image: url(${booking.image}); background-position: center center; background-size: cover;`;
+    image.src = booking.image
+    name.innerHTML = booking.name
+    date.innerHTML = new Date(Number(booking.date)).toLocaleString('en-US',{dateStyle: 'long'})
+    price.innerHTML = booking.price.toLocaleString()
+    booked_spots.innerHTML = booking.booked_spots
+    total.innerHTML = booking.price*booking.spots
+    spots_left.innerHTML = booking.spots_left + ' / ' + booking.spots
+    for (let i = 0; i <= booking.spots_left; i++) {
+        // Create Option ELement
+        let option = document.createElement('option')
+        // create text node for option
+        option.appendChild( document.createTextNode(i))
+        option.value = i
+        spotsDropdown.appendChild(option)
+        if(booking.booked_spots==i){
+            option.selected = true
+        }
+    }
+
+    //Edit Booking throuhg button
+    let editBooking = document.getElementById('edit-booking')
+    editBooking.addEventListener('click',()=>{
+        if(spotsDropdown.value == 0){
+            sessionStorage.removeItem('booking')
+            editBooking.href = '/'
+        }else{
+            booking.booked_spots = spotsDropdown.value
+            sessionStorage.setItem('booking', JSON.stringify(booking))
+        }
+    });
+</script>
+
+<%- include("../../partials/footer") -%>
