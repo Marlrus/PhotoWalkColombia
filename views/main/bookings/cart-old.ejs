@@ -13,50 +13,34 @@ data-aos-duration="1200"
     </div>
     <a class="btn btn-info" href="/booking">Go to bookings</a>
 </div>
-<a id="payment-button" href="" class="btn btn-info mt-3 ml-3"
-data-aos="fade-zoom-in"
-data-aos-duration="1200"
->Proceed to Payment</a>
-
-<script>
-    
-    let paymentButton = document.getElementById('payment-button')
-    // const cart = JSON.parse(sessionStorage.getItem('cart'))
-    console.log(cart)
-    //Iterate over cart array
-    cart.forEach((item,i) => {
-        //Create a div for each card
-        let itemCard = document.createElement('div')
-        //card content
-        itemCard.innerHTML = `
-<div class="card mb-3 mx-3" 
+<div id="cart-item" class="card mb-3 mx-3" hidden
 data-aos="fade-zoom-in"
 data-aos-duration="1200"
 >
-    <div class="card-header text-white"><h3><strong>${i+1}</strong> Booking Details</h3></div>
+    <div class="card-header text-white"><h3>Booking Details</h3></div>
     <div class="row no-gutters">
         <!-- <div id="booking-image" class="col-lg-3"></div> -->
         <div class="col-lg-3">
-            <img src="${item.image}" class="card-img" alt="Walk image">
+            <img class="card-img" id="booking-image" alt="Walk image">
         </div>
         <div class="col-lg-9">
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h3 class="ml-3 card-title"><strong>${item.name}</strong></h3>
+                        <h3 class="ml-3 card-title"><strong id="name"></strong></h3>
                         <hr>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
-                                <strong>Date:</strong> ${new Date(Number(item.date)).toLocaleString('en-US',{dateStyle: 'long'})}
+                                <strong>Date:</strong> <span id="date"></span>
                             </li>
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
-                                <strong>Price per Spot:</strong> $${item.price.toLocaleString()}
+                                <strong>Price per Spot:</strong> $<span id="price"></span>
                             </li>
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
-                                <strong>Your Spots:</strong> ${item.booked_spots}
+                                <strong>Your Spots:</strong> <span id="booked_spots"></span>
                             </li>
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
-                                <strong>Total:</strong> $${item.price*item.booked_spots}
+                                <strong>Total:</strong> $<span id="total"></span>
                             </li>
                         </ul>
                     </div>
@@ -70,17 +54,17 @@ data-aos-duration="1200"
                                 <span class="text-muted">*Paid bookings will have a $10 USD cancellation fee per spot</span> 
                             </li>
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
-                                <strong>Spots Left:</strong> ${item.spots_left}
+                                <strong>Spots Left:</strong> <span id="spots_left"></span>
                             </li>
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
                                 <strong>Change Spots </strong>
                                 <div class="row">
                                     <div class="col-6">
-                                        <select name="spots" class="custom-select my-1 mr-sm-2 spots-dropdown" id="inlineFormCustomSelectPref" required>
+                                        <select id="spots-dropdown" name="spots" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <a class="btn btn-warning text-white edit-button" href="/booking/cart">Change Booking</a>
+                                        <a id="edit-booking" class="btn btn-warning text-white" href="/booking/cart">Change Booking</a>
                                     </div>
                                 </div>
                             </li>
@@ -91,39 +75,68 @@ data-aos-duration="1200"
         </div>
     </div>
 </div>
-        `
-        //Insert created div before payment button
-        document.body.insertBefore(itemCard, paymentButton)
-    });
-    //Select create options and select
-    let spotsDropdown = document.getElementsByClassName('spots-dropdown')
-    //iterate over each cart item
-    cart.forEach((item,itemNumber)=>{
-        for (let i = 0; i <= item.spots_left; i++) {
+<a id="payment-button" href="" class="btn btn-info mt-3 ml-3"
+data-aos="fade-zoom-in"
+data-aos-duration="1200"
+>Proceed to Payment</a>
+
+<script>
+    
+    let image = document.getElementById('booking-image')
+    let name = document.getElementById('name')
+    let date = document.getElementById('date')
+    let price = document.getElementById('price')
+    let booked_spots = document.getElementById('booked_spots')
+    let spots_left = document.getElementById('spots_left')
+    let total = document.getElementById('total')
+    let spotsDropdown = document.getElementById('spots-dropdown')
+     //display html if booking exists
+    let cartItem = document.getElementById('cart-item')
+    let paymentButton = document.getElementById('payment-button')
+    let noBookings = document.getElementById('no-bookings')
+    // console.log(booking)
+    // image.style = `background-image: url(${booking.image}); background-position: center center; background-size: cover;`;
+    if(booking){
+        //display properties
+        noBookings.hidden = true
+        paymentButton.hidden = false
+        cartItem.hidden = false
+        //Logic
+        image.src = booking.image
+        name.innerHTML = booking.name
+        date.innerHTML = new Date(Number(booking.date)).toLocaleString('en-US',{dateStyle: 'long'})
+        price.innerHTML = booking.price.toLocaleString()
+        booked_spots.innerHTML = booking.booked_spots
+        total.innerHTML = booking.price*booking.booked_spots
+        spots_left.innerHTML = booking.spots_left + ' / ' + booking.spots
+        for (let i = 0; i <= booking.spots_left; i++) {
             // Create Option ELement
             let option = document.createElement('option')
             // create text node for option
             option.appendChild( document.createTextNode(i))
             option.value = i
-            //Select dropdown using cart item number
-            spotsDropdown[itemNumber].appendChild(option)
-            if(item.booked_spots==i){
+            spotsDropdown.appendChild(option)
+            if(booking.booked_spots==i){
                 option.selected = true
             }
         }
-    })
-
+    }else{
+        noBookings.hidden = false
+        paymentButton.hidden = true
+        cartItem.hidden = true
+    }
+   
     //Edit Booking throuhg button
-    // let editBooking = document.getElementById('edit-booking')
-    // editBooking.addEventListener('click',()=>{
-    //     if(spotsDropdown.value == 0){
-    //         sessionStorage.removeItem('booking')
-    //         editBooking.href = '/booking'
-    //     }else{
-    //         booking.booked_spots = spotsDropdown.value
-    //         sessionStorage.setItem('booking', JSON.stringify(booking))
-    //     }
-    // });
+    let editBooking = document.getElementById('edit-booking')
+    editBooking.addEventListener('click',()=>{
+        if(spotsDropdown.value == 0){
+            sessionStorage.removeItem('booking')
+            editBooking.href = '/booking'
+        }else{
+            booking.booked_spots = spotsDropdown.value
+            sessionStorage.setItem('booking', JSON.stringify(booking))
+        }
+    });
     
 </script>
 
