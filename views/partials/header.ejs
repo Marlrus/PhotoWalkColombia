@@ -67,10 +67,10 @@
     </nav>
 
     <script>
-        const cart = JSON.parse(sessionStorage.getItem('cart'))
+        let cart = JSON.parse(sessionStorage.getItem('cart'))
         let cartBadge = document.getElementById('cart-badge')
-        cartBadge.innerHTML = cart.length
         if(cart){
+            cartBadge.innerHTML = cart.length
             cartBadge.hidden = false
         }
     </script>

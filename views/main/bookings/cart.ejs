@@ -1,6 +1,6 @@
 <%- include("../../partials/header") -%>
 
-<h1 class="display-4 page-header text-center text-white py-3"
+<h1 class="display-4 page-header text-center text-white py-3 mb-3"
 data-aos="fade-zoom-in"
 data-aos-duration="800"
 >Shopping Cart <span id="header-badge" class="badge badge-danger"></span></h1>
@@ -14,18 +14,19 @@ data-aos-duration="1200"
     <a class="btn btn-info" href="/booking">Go to bookings</a>
 </div>
 <div id="body-bottom"></div>
-<a id="payment-button" href="" class="btn btn-info mb-3 ml-3"
-
->Proceed to Payment</a>
 
 
 <script>
     //Cart header badge create
     let headerBadge = document.getElementById('header-badge')
-    headerBadge.innerHTML = cart.length
+    //No Bookings Div
+    let noBoookings = document.getElementById('no-bookings')
     //Create Cart Item Cards
     let bodyBottom = document.getElementById('body-bottom')
     let paymentButton = document.getElementById('payment-button')
+
+//EVERYTHING DEPENDS ON CART EXISTING
+if(cart){
     // const cart = JSON.parse(sessionStorage.getItem('cart'))
     console.log(cart)
     //Iterate over cart array
@@ -40,7 +41,7 @@ data-aos="fade-zoom-in"
 data-aos-duration="1200"
 data-aos-delay="150"
 >
-    <div class="card-header text-white"><h3><strong>${i+1}</strong> Booking Details</h3></div>
+    <div class="card-header text-white"><h3><span class="badge badge-success">${i+1}</span> Booking Details</h3></div>
     <div class="row no-gutters">
         <!-- <div id="booking-image" class="col-lg-3"></div> -->
         <div class="col-lg-3">
@@ -87,7 +88,9 @@ data-aos-delay="150"
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <a class="btn btn-warning text-white edit-button" href="/booking/cart">Change Booking</a>
+                                        <a href="/booking/cart">
+                                            <button class="btn btn-warning text-white edit-button" >Change Booking</button>
+                                        </a>
                                     </div>
                                 </div>
                             </li>
@@ -105,6 +108,8 @@ data-aos-delay="150"
     //Select create options and select
     let spotsDropdown = document.getElementsByClassName('spots-dropdown')
     //iterate over each cart item
+    //Show or hide depending on sessionStorage
+    headerBadge.innerHTML = cart.length
     cart.forEach((item,itemNumber)=>{
         for (let i = 0; i <= item.spots_left; i++) {
             // Create Option ELement
@@ -120,17 +125,68 @@ data-aos-delay="150"
         }
     });
 
+    //Show a total in the bottom
+    //Create variables
+    let total = 0
+    //Iterate over the array
+    cart.forEach(item=>{
+        total += (item.price*item.booked_spots)
+    })
+    //Create totals div
+    let totalDiv = document.createElement('div')
+    totalDiv.innerHTML = `
+<div class="row mx-3"
+data-aos="fade-zoom-in"
+data-aos-duration="1200"
+data-aos-delay="150"
+>
+    <div class="card mb-3 p-0 col-lg-6">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Shopping Cart Totals </strong></li>
+                <li class="list-group-item"><strong>Items: </strong>${cart.length}</li>
+                <li class="list-group-item"><strong>Total: </strong>USD $${total.toLocaleString()}</li>
+            </ul>
+            <a id="payment-button" href="" class="btn btn-info mt-3 ml-3" >Proceed to Payment</a>
+        </div>
+    </div>
+</div>
+    `
+    //Insert into body
+    document.body.insertBefore(totalDiv, bodyBottom);
+
     //Edit Booking throuhg button
-    // let editBooking = document.getElementById('edit-booking')
-    // editBooking.addEventListener('click',()=>{
-    //     if(spotsDropdown.value == 0){
-    //         sessionStorage.removeItem('booking')
-    //     }else{
-    //         booking.booked_spots = spotsDropdown.value
-    //         sessionStorage.setItem('booking', JSON.stringify(booking))
-    //     }
-    // });
-    
+    //Select Booking Buttons and Dropdowns
+    editButton = document.getElementsByClassName('edit-button')
+    spotsDropdown = document.getElementsByClassName('spots-dropdown')
+    //iterate over buttons
+    Array.prototype.forEach.call(editButton, (button,i)=>{
+        //add event listener
+        button.addEventListener('click',()=>{
+            button.disabled = true
+            //verify spots dropdown value
+            let spots = spotsDropdown[i].value
+            if(spots == 0){
+                //remove item from cart
+                cart.splice(i,1)
+            }else{
+                //change booked_spots to spots
+                cart[i].booked_spots = spots
+            }
+            if(cart[0]){
+                //Update session Storage
+                sessionStorage.setItem('cart', JSON.stringify(cart))
+            }else{
+                //Remove if no items
+                sessionStorage.removeItem('cart')
+            }
+        })
+    })
+}else{
+    //If no cart
+    noBoookings.hidden = false
+}
+
 </script>
 
 <%- include("../../partials/footer") -%>
