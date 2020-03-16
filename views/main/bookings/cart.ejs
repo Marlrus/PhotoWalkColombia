@@ -15,7 +15,6 @@ data-aos-duration="1200"
 </div>
 <div id="body-bottom"></div>
 
-
 <script>
     //Cart header badge create
     let headerBadge = document.getElementById('header-badge')
@@ -23,7 +22,6 @@ data-aos-duration="1200"
     let noBoookings = document.getElementById('no-bookings')
     //Create Cart Item Cards
     let bodyBottom = document.getElementById('body-bottom')
-    let paymentButton = document.getElementById('payment-button')
 
 //EVERYTHING DEPENDS ON CART EXISTING
 if(cart){
@@ -147,7 +145,9 @@ data-aos-delay="150"
                 <li class="list-group-item"><strong>Items: </strong>${cart.length}</li>
                 <li class="list-group-item"><strong>Total: </strong>USD $${total.toLocaleString()}</li>
             </ul>
-            <a id="payment-button" href="" class="btn btn-info mt-3 ml-3" >Proceed to Payment</a>
+            <form action="/booking/cart" id="booking-form" method="POST">
+                <button type="submit" id="payment-button" class="btn btn-info mt-3 ml-3" >Proceed to Payment</button>
+            </form>
         </div>
     </div>
 </div>
@@ -181,6 +181,42 @@ data-aos-delay="150"
                 sessionStorage.removeItem('cart')
             }
         })
+    })
+    //Form create
+    let bookingForm = document.getElementById('booking-form')
+    console.log(bookingForm)
+
+    //NEW WAY, create array with cart, strigify into input, parse in route
+    const   _id = [],
+            spots = []
+    cart.forEach(item=>{
+        _id.push(item._id)
+        spots.push(item.booked_spots)
+    })
+    //create _id input
+    let _idInput = document.createElement('input')
+    _idInput.hidden = true
+    _idInput.type = 'text'
+    _idInput.name = '_id'
+    //stringify value and add it
+    _idInput.value = JSON.stringify(_id)
+    //Add input to Form
+    bookingForm.appendChild(_idInput)
+    //create _id input
+    let quantityInput = document.createElement('input')
+    quantityInput.hidden = true
+    quantityInput.type = 'text'
+    quantityInput.name = 'quantity'
+    //stringify value and add it
+    quantityInput.value = JSON.stringify(spots)
+    //Add input to Form
+    bookingForm.appendChild(quantityInput)
+    
+    
+    //Submit form using payment button
+    let paymentButton = document.getElementById('payment-button')
+    paymentButton.addEventListener('click',()=>{
+        bookingForm.submit()
     })
 }else{
     //If no cart

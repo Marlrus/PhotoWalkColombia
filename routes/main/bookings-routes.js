@@ -49,6 +49,18 @@ router.get('/cart',(req,res)=>{
     res.render('main/bookings/cart')
 })
 
+//CART POST
+router.post('/cart',async(req,res)=>{
+    console.log('===== Booking Cart Post =====')
+    //convert to usable data
+    _id = JSON.parse(req.body._id)
+    quantity = JSON.parse(req.body.quantity)
+    //Find using _id Array
+    const bookings = await Booking.find({_id: {$in:_id}})
+    console.log(bookings)
+    res.redirect('back')
+})
+
 //booking show (CLIENT)
 router.get("/:_id", async(req,res)=>{
     try {
