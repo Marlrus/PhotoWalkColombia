@@ -49,8 +49,8 @@
                     <input name="price" type="text" value="<%=booking.price%>" required hidden>
                     <input name="spots_left" type="text" value="<%=spotsLeft%>" required hidden>
                     <div class="col-lg-3">
-                        <!-- <a id="booking-details" href="/booking/cart" class="btn btn-info mt-1">Book now!</a> -->
-                        <a id="booking-details" href="#" class="btn btn-info mt-1">TEST</a>
+                        <a id="booking-details" href="/booking/cart" class="btn btn-info mt-1">Book now!</a>
+                        <!-- <a id="booking-details" href="#" class="btn btn-info mt-1">TEST</a> -->
                     </div>
                 </div>
             <%}else{%>
@@ -72,7 +72,7 @@
 
 <script>
     // If there is already a cart
-    let cart = JSON.parse(sessionStorage.getItem('cart'))
+    // let cart = JSON.parse(sessionStorage.getItem('cart'))
     if (!cart){
         cart = []
     }

@@ -3,7 +3,7 @@
 <h1 class="display-4 page-header text-center text-white py-3"
 data-aos="fade-zoom-in"
 data-aos-duration="800"
->Booking Cart</h1>
+>Shopping Cart <span id="header-badge" class="badge badge-danger"></span></h1>
 <div id="no-bookings" class="container" hidden
 data-aos="fade-zoom-in"
 data-aos-duration="1200"
@@ -13,13 +13,18 @@ data-aos-duration="1200"
     </div>
     <a class="btn btn-info" href="/booking">Go to bookings</a>
 </div>
-<a id="payment-button" href="" class="btn btn-info mt-3 ml-3"
-data-aos="fade-zoom-in"
-data-aos-duration="1200"
+<div id="body-bottom"></div>
+<a id="payment-button" href="" class="btn btn-info mb-3 ml-3"
+
 >Proceed to Payment</a>
 
+
 <script>
-    
+    //Cart header badge create
+    let headerBadge = document.getElementById('header-badge')
+    headerBadge.innerHTML = cart.length
+    //Create Cart Item Cards
+    let bodyBottom = document.getElementById('body-bottom')
     let paymentButton = document.getElementById('payment-button')
     // const cart = JSON.parse(sessionStorage.getItem('cart'))
     console.log(cart)
@@ -27,11 +32,13 @@ data-aos-duration="1200"
     cart.forEach((item,i) => {
         //Create a div for each card
         let itemCard = document.createElement('div')
+        itemCard.id = `card-${i}`
         //card content
         itemCard.innerHTML = `
 <div class="card mb-3 mx-3" 
 data-aos="fade-zoom-in"
 data-aos-duration="1200"
+data-aos-delay="150"
 >
     <div class="card-header text-white"><h3><strong>${i+1}</strong> Booking Details</h3></div>
     <div class="row no-gutters">
@@ -92,8 +99,8 @@ data-aos-duration="1200"
     </div>
 </div>
         `
-        //Insert created div before payment button
-        document.body.insertBefore(itemCard, paymentButton)
+        //Insert created div after cart title
+        document.body.insertBefore(itemCard, bodyBottom)
     });
     //Select create options and select
     let spotsDropdown = document.getElementsByClassName('spots-dropdown')
@@ -111,14 +118,13 @@ data-aos-duration="1200"
                 option.selected = true
             }
         }
-    })
+    });
 
     //Edit Booking throuhg button
     // let editBooking = document.getElementById('edit-booking')
     // editBooking.addEventListener('click',()=>{
     //     if(spotsDropdown.value == 0){
     //         sessionStorage.removeItem('booking')
-    //         editBooking.href = '/booking'
     //     }else{
     //         booking.booked_spots = spotsDropdown.value
     //         sessionStorage.setItem('booking', JSON.stringify(booking))
