@@ -1,6 +1,14 @@
 <%- include("../../partials/header") -%>
 
 <div class="container mt-3">
+    <div id="booking-message"
+    data-aos="fade-zoom-in"
+    data-aos-duration="1200"
+    hidden>
+        <div class="alert alert-success" role="alert">
+            A Booking for <%=booking.name%> is in your Cart! <a href="/booking/cart" style="float: right;">Go to Cart!</a>
+        </div>
+</div>
     <div class="card mb-3"
     data-aos="fade-bottom"
     data-aos-duration="1200"
@@ -33,10 +41,10 @@
                 <div class="form-group row">
                     <div class="col-lg-3">
                         <select name="booked_spots" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" required>
-                            <option value="" selected>Choose...</option>
+                            <!-- <option value="" selected>Choose...</option> -->
                             <%let i = 1%>
                             <%while(i<=spotsLeft){%>
-                                <option value="<%=i%>"><%=i%></option>
+                                <option class='dropdown-options' value="<%=i%>"><%=i%></option>
                                 <%i++%>
                             <%}%>
                         </select>
@@ -49,7 +57,7 @@
                     <input name="price" type="text" value="<%=booking.price%>" required hidden>
                     <input name="spots_left" type="text" value="<%=spotsLeft%>" required hidden>
                     <div class="col-lg-3">
-                        <a id="booking-details" href="/booking/cart" class="btn btn-info mt-1">Book now!</a>
+                        <a id="booking-details" href="#" class="btn btn-info mt-1">Book now!</a>
                         <!-- <a id="booking-details" href="#" class="btn btn-info mt-1">TEST</a> -->
                     </div>
                 </div>
@@ -87,8 +95,12 @@
     let date = document.querySelector('[name=date]')
     let price = document.querySelector('[name=price]')
     let spots_left = document.querySelector('[name=spots_left]')
+    let bookingMessage = document.getElementById('booking-message')
     submitButton.addEventListener('click',()=>{
     // submitButton.addEventListener('click',()=>{
+        //Message for booking
+        bookingMessage.hidden = false
+        //Disable submit
         submitButton.disabled = true
         let booking = {
             spots: spots.value,
@@ -113,8 +125,27 @@
         if (!sameItem){
             cart.push(booking)
         }
+        //Create badge in cart
+        cartBadge.innerHTML = cart.length
+        cartBadge.hidden = false
         sessionStorage.setItem('cart', JSON.stringify(cart))
     });
+    // display alert if item is in cart
+    let itemInCart = cart.find(item=>{
+        return item._id === '<%=booking._id%>';
+    })
+    if(itemInCart){
+        bookingMessage.hidden = false
+    }
+    //Select current booking value
+    let dropdownOptions = document.getElementsByClassName('dropdown-options');
+    //select option that matches item value
+    Array.prototype.forEach.call(dropdownOptions, (option)=>{
+        if (option.value === itemInCart.booked_spots){
+            return option.selected = true
+        }
+    })
+    
 </script>
 
 <%- include("../../partials/footer") -%>

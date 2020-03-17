@@ -26,7 +26,7 @@ data-aos-duration="1200"
 //EVERYTHING DEPENDS ON CART EXISTING
 if(cart){
     // const cart = JSON.parse(sessionStorage.getItem('cart'))
-    console.log(cart)
+    // console.log(cart)
     //Iterate over cart array
     cart.forEach((item,i) => {
         //Create a div for each card
@@ -48,7 +48,7 @@ data-aos-delay="150"
         <div class="col-lg-9">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 mb-2">
                         <h3 class="ml-3 card-title"><strong>${item.name}</strong></h3>
                         <hr>
                         <ul class="list-group list-group-flush">
@@ -67,7 +67,7 @@ data-aos-delay="150"
                         </ul>
                     </div>
                     <div class="col-lg-6">
-                        <h3 class="ml-3 card-title"><strong>Alter Booking</strong></h3>
+                        <h3 class="ml-3 card-title"><strong>Edit Booking</strong></h3>
                         <hr>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" style="background-color: transparent; border-color: rgba(255, 255, 255, 0.3);">
@@ -135,18 +135,19 @@ data-aos-delay="150"
     totalDiv.innerHTML = `
 <div class="row mx-3"
 data-aos="fade-zoom-in"
-data-aos-duration="1200"
-data-aos-delay="150"
+data-aos-duration="1000"
 >
     <div class="card mb-3 p-0 col-lg-6">
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Shopping Cart Totals </strong></li>
+                <li class="list-group-item" style="font-size:1.75rem;"><strong>Shopping Cart Totals </strong></li>
                 <li class="list-group-item"><strong>Items: </strong>${cart.length}</li>
                 <li class="list-group-item"><strong>Total: </strong>USD $${total.toLocaleString()}</li>
             </ul>
             <form action="/booking/cart" id="booking-form" method="POST">
-                <button type="submit" id="payment-button" class="btn btn-info mt-3 ml-3" >Proceed to Payment</button>
+                <button type="submit" id="payment-button" class="btn btn-primary mt-4 p-3" style="font-size:1.25rem;"><strong>Proceed to Payment</strong></button> 
+                &emsp;
+                <a class="btn btn-success text-white mt-4 p-3" href="/booking" style="font-size:1.25rem;"><strong>Look for more!</strong></a>
             </form>
         </div>
     </div>
@@ -184,7 +185,7 @@ data-aos-delay="150"
     })
     //Form create
     let bookingForm = document.getElementById('booking-form')
-    console.log(bookingForm)
+    // console.log(bookingForm)
 
     //NEW WAY, create array with cart, strigify into input, parse in route
     const   _id = [],
@@ -216,6 +217,7 @@ data-aos-delay="150"
     //Submit form using payment button
     let paymentButton = document.getElementById('payment-button')
     paymentButton.addEventListener('click',()=>{
+        paymentButton.disabled = true
         bookingForm.submit()
     })
 }else{

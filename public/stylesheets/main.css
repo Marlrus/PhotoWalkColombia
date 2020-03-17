@@ -2,6 +2,9 @@ body{
     background-color:#fafde0 !important;
     /* background-color:#fdffee !important; */
 }
+html{
+    scroll-behavior: smooth;
+}
 .card {
     /* background-color: rgba(30,30,30,0.7)!important; */
     /* background-color: rgba(0, 0, 0, 0.65)!important; */
@@ -11,6 +14,11 @@ body{
     border-width: 0px !important;
     background-color: unset !important;
 }
+/* .card:hover{
+    -webkit-box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.3);
+    box-shadow: 4px 4px 8px 2px rgba(0,0,0,0.3);
+} */
 .card-header {
     border-bottom-width: 0px !important;
     /* background-color: #f65c51 !important; */

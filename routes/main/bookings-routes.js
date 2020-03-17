@@ -57,7 +57,7 @@ router.post('/cart',async(req,res)=>{
     quantity = JSON.parse(req.body.quantity)
     //Find using _id Array
     const bookings = await Booking.find({_id: {$in:_id}})
-    console.log(bookings)
+    console.log(_id)
     res.redirect('back')
 })
 
